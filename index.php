@@ -1,3 +1,3 @@
 <?php
-	echo "<script>window.location='users/login.php';</script>";
+	echo "<script>window.location='home/homepage.php';</script>";
 ?>

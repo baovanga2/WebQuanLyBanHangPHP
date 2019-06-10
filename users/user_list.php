@@ -55,7 +55,7 @@
 				                      	<th>Email</th>
 				                      	<th>Phone</th>
 					                    <th>Gender</th>
-					                    <th>Vai trò</th>
+					                    <th>Roles</th>
 			                    	</tr>
 				                </thead>
 				                <tfoot>
@@ -65,7 +65,7 @@
 				                      	<th>Email</th>
 				                      	<th>Phone</th>
 					                    <th>Gender</th>
-					                    <th>Vai trò</th>
+					                    <th>Roles</th>
 			                    	</tr>
 				                </tfoot>
 				                <tbody>

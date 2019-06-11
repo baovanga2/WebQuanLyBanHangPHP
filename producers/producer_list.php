@@ -30,20 +30,20 @@
       			<!-- End of Topbar -->
       			<!-- Begin Page Content -->
       			<?php
-      				include("users.php");
-      				$users = get_all_users();
+      				include("producers.php");
+      				$producers = get_all_producers();
       				disconnect_db();
       			?>
       			<div class="container-fluid">
       				<a href="#" class="btn btn-success btn-icon-split">
-                    	<span class="text">Add user</span>
+                    	<span class="text">Add producer</span>
                   	</a>
       			</div>
       			<br>
       			<!-- DataTales Users -->
       			<div class="card shadow mb-4">
       				<div class="card-header py-3">
-      					<h6 class="m-0 font-weight-bold text-primary">Users List</h6>
+      					<h6 class="m-0 font-weight-bold text-primary">Producers List</h6>
       				</div>
       				<div class="card-body">
       					<div class="table-responsive">
@@ -51,37 +51,25 @@
       							<thead>
 			                    	<tr>
 				                      	<th>ID</th>
-				                      	<th>Full name</th>
-				                      	<th>Email</th>
-				                      	<th>Phone</th>
-					                    <th>Gender</th>
-					                    <th>Vai trò</th>
-					                    <th>Actions</th>
+				                      	<th>Name</th>
+				                      	<th>Actions</th>
 			                    	</tr>
 				                </thead>
 				                <tfoot>
 				                    <tr>
 				                      	<th>ID</th>
-				                      	<th>Full name</th>
-				                      	<th>Email</th>
-				                      	<th>Phone</th>
-					                    <th>Gender</th>
-					                    <th>Vai trò</th>
-					                    <th>Actions</th>
+				                      	<th>Name</th>
+				                      	<th>Actions</th>
 			                    	</tr>
 				                </tfoot>
 				                <tbody>
 				                	<?php
-				                		foreach ($users as $user)
+				                		foreach ($producers as $producer)
 				                		{
 				                	?>
 				                	<tr>
-				                		<td><?php echo $user['u_id']; ?></td>
-				                		<td><?php echo $user['u_fullname']; ?></td>
-				                		<td><?php echo $user['u_email']; ?></td>
-				                		<td><?php echo $user['u_phone']; ?></td>
-				                		<td><?php echo $user['u_gender']; ?></td>
-				                		<td><?php echo $user['r_name']; ?></td>
+				                		<td><?php echo $producer['pr_id']; ?></td>
+				                		<td><?php echo $producer['pr_name']; ?></td>
 				                		<td>
 				                			<a href="#" class="btn btn-info btn-circle">
                     							<i class="fas fa-info-circle"></i>

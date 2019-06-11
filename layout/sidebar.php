@@ -32,7 +32,7 @@
   <hr class="sidebar-divider">
 
   <li class="nav-item">
-    <a class="nav-link" href="#"><span>Customers</span></a>
+    <a class="nav-link" href="../customers/customer_list.php"><span>Customers</span></a>
   </li>
 
   <!-- Divider -->
@@ -44,6 +44,8 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" href="#">Page1</a>
         <a class="collapse-item" href="#">Page2</a>
+        <a class="collapse-item" href="../categories/category_list.php">Categories</a>
+        <a class="collapse-item" href="../producers/producer_list.php">Producers</a>
       </div>
     </div>
   </li>

@@ -1,20 +1,38 @@
 <?php
 	include_once("../database.php");
 
-	function user_exist($username, $password)
+	function loginname_exist($loginname)
   	{
     	global $conn;
     	connect_db();
-    	$sql="select * from users where u_loginname='$username' and u_password='$password'";
+    	$sql="select * from users where u_loginname='$loginname'";
     	$query=mysqli_query($conn, $sql);
     	if (mysqli_num_rows($query)==0)
     	{
-      	return false;
+      		$bool=false;
     	}
     	else
     	{
-      	return true;
+      		$bool=true;
     	}
+    	return $bool;
+	}
+
+	function password_true($loginname, $password)
+	{
+		global $conn;
+		connect_db();
+		$sql="select * from users where u_loginname='$loginname' and u_password='$password'";
+		$query=mysqli_query($conn, $sql);
+		if (mysqli_num_rows($query)==0)
+    	{
+      		$bool=false;
+    	}
+    	else
+    	{
+      		$bool=true;
+    	}
+    	return $bool;
 	}
 
 	function get_all_users()

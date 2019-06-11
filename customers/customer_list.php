@@ -30,20 +30,20 @@
       			<!-- End of Topbar -->
       			<!-- Begin Page Content -->
       			<?php
-      				include("users.php");
-      				$users = get_all_users();
+      				include("customers.php");
+      				$users = get_all_customers();
       				disconnect_db();
       			?>
       			<div class="container-fluid">
       				<a href="#" class="btn btn-success btn-icon-split">
-                    	<span class="text">Add user</span>
+                    	<span class="text">Add customer</span>
                   	</a>
       			</div>
       			<br>
       			<!-- DataTales Users -->
       			<div class="card shadow mb-4">
       				<div class="card-header py-3">
-      					<h6 class="m-0 font-weight-bold text-primary">Users List</h6>
+      					<h6 class="m-0 font-weight-bold text-primary">Customers List</h6>
       				</div>
       				<div class="card-body">
       					<div class="table-responsive">
@@ -55,7 +55,6 @@
 				                      	<th>Email</th>
 				                      	<th>Phone</th>
 					                    <th>Gender</th>
-					                    <th>Vai trò</th>
 					                    <th>Actions</th>
 			                    	</tr>
 				                </thead>
@@ -66,7 +65,6 @@
 				                      	<th>Email</th>
 				                      	<th>Phone</th>
 					                    <th>Gender</th>
-					                    <th>Vai trò</th>
 					                    <th>Actions</th>
 			                    	</tr>
 				                </tfoot>
@@ -76,12 +74,11 @@
 				                		{
 				                	?>
 				                	<tr>
-				                		<td><?php echo $user['u_id']; ?></td>
-				                		<td><?php echo $user['u_fullname']; ?></td>
-				                		<td><?php echo $user['u_email']; ?></td>
-				                		<td><?php echo $user['u_phone']; ?></td>
-				                		<td><?php echo $user['u_gender']; ?></td>
-				                		<td><?php echo $user['r_name']; ?></td>
+				                		<td><?php echo $user['cus_id']; ?></td>
+				                		<td><?php echo $user['cus_fullname']; ?></td>
+				                		<td><?php echo $user['cus_email']; ?></td>
+				                		<td><?php echo $user['cus_phone']; ?></td>
+				                		<td><?php echo $user['cus_gender']; ?></td>
 				                		<td>
 				                			<a href="#" class="btn btn-info btn-circle">
                     							<i class="fas fa-info-circle"></i>

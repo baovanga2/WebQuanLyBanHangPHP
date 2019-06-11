@@ -4,19 +4,26 @@
     include_once("users.php");
     $username=$_POST['username'];
     $password=md5($_POST['password']);
-    if (user_exist($username, $password))
+    if (loginname_exist($username))
     {
-      echo "<script>alert('Đăng nhập thành công!');</script>";
-      if (!isset($_SESSION))
+      if (password_true($username, $password))
       {
-        session_start();
-        $_SESSION["username"]=$username;
+        echo "<script>alert('Logged in successfully!');</script>";
+        if (!isset($_SESSION))
+        {
+          session_start();
+          $_SESSION["username"]=$username;
+        }
+        echo "<script>window.location='user_list.php';</script>";
       }
-      echo "<script>window.location='user_list.php';</script>";
+      else
+      {
+        echo "<script>alert('Incorrect password!');</script>";
+      }
     }
     else
     {
-      echo "<script>alert('Sai tên tài khoản hoặc mật khẩu!');</script>";
+      echo "<script>alert('User name does not exist!');</script>";
     }
     disconnect_db();
   }

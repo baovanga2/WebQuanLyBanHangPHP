@@ -1,3 +1,6 @@
+<?php
+	include_once("../session.php");
+?>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -83,7 +86,7 @@
 				                		<td><?php echo $user['u_gender']; ?></td>
 				                		<td><?php echo $user['r_name']; ?></td>
 				                		<td>
-				                			<a href="#" class="btn btn-info btn-circle">
+				                			<a href="#" class="btn btn-info btn-circle" data-toggle="modal" <?php echo"data-target='#edituser" .$user['u_id']. "Modal'"; ?>>
                     							<i class="fas fa-info-circle"></i>
                   							</a>
                   							<a href="#" class="btn btn-warning btn-circle">
@@ -115,6 +118,100 @@
 	</div>
 	<!-- End of Page Wrapper -->
 	<!-- Scroll to Top Button-->
+
+	<!-- Infor User Modal-->
+	<?php
+		foreach ($users as $user)
+		{
+	?>
+	<div class="modal fade" <?php echo "id='edituser" .$user['u_id']. "Modal'"; ?> tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  	<div class="modal-dialog" role="document">
+	  		<form method="post">
+		    	<div class="modal-content">
+		      		<div class="modal-header">
+		        		<h5 class="modal-title" id="exampleModalLabel">User Information</h5>
+		        		<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+		          			<span aria-hidden="true">×</span>
+		        		</button>
+		      		</div>
+		      		<div class="modal-body">
+		      			<div class="table-responsive">
+		      				<table class="table">
+		      					<tr>
+				      				<td>ID</td>
+				      				<td>
+				      					<input type="text" class="form-control" readonly="readonly" name="id" value="<?php echo $user['u_id']; ?>">
+				      				</td>
+		      					</tr>
+		      					<tr>
+			      					<td>Full name</td>
+			      					<td>
+			      						<input type="text" class="form-control" name="fullname" value="<?php echo $user['u_fullname']; ?>">
+			      					</td>
+		      					</tr>
+		      					<tr>
+		      						<td>Gender&emsp;</td>
+		      						<td>
+		      							<select class="form-control" name="gender">
+                            				<option value="Nam">Nam</option>
+                            				<option value="Nữ" <?php if ($user['u_gender'] == 'Nữ') echo 'selected'; ?> >Nữ</option>
+                        				</select>
+                    				</td>
+		      					</tr>
+		      					<tr>
+		      						<td>Email</td>
+		      						<td>
+		      							<input type="text" class="form-control" name="email" value="<?php echo $user['u_email']; ?>">
+		      						</td>
+		      					</tr>
+		      					<tr>
+		      						<td>Phone</td>
+		      						<td>
+		      							<input type="text" class="form-control" name="phone" value="<?php echo $user['u_phone']; ?>">
+		      						</td>
+		      					</tr>
+		      					<tr>
+		      						<td>Address</td>
+		      						<td>
+		      							<input type="text" class="form-control" name="address" value="<?php echo $user['u_address']; ?>">
+		      						</td>
+		      					</tr>
+		      					<tr>
+		      						<td>Hometown</td>
+		      						<td>
+		      							<input type="text" class="form-control" name="hometown" value="<?php echo $user['u_hometown']; ?>">
+		      						</td>
+		      					</tr>
+		      					<tr>
+		      						<td>Login name</td>
+		      						<td>
+		      							<input type="text" class="form-control" name="loginname" value="<?php echo $user['u_loginname']; ?>" readonly>
+		      						</td>
+		      					</tr>
+		      					<tr>
+		      						<td>&emsp;Role</td>
+		      						<td>
+		      							<select class="form-control" name="role">
+		      								<option value="1">Quản trị viên</option>
+                            				<option value="2" <?php if ($user['r_id'] == 2) echo 'selected'; ?> >Nhân viên</option>
+                        				</select>
+		      						</td>
+		      					</tr>
+		      				</table>
+		      			</div>
+		      		</div>
+		      		<div class="modal-footer">
+		      			<input type="submit" class="btn btn-primary" name="edituser" value="Edit">
+		        		<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+		      		</div>
+		      	</div>
+		    </form> 
+		</div>
+	</div>
+	<?php
+		}
+	?>
+
 	<?php
 		include_once("../layout/topbutton.php");
 	?>

@@ -1,4 +1,9 @@
 <?php
+  session_start();
+  if (isset($_SESSION['username']))
+  {
+    echo "<script>window.location='../home/homepage.php';</script>";
+  }
   if(isset($_POST['login']))
   {
     include_once("users.php");
@@ -9,12 +14,11 @@
       if (password_true($username, $password))
       {
         echo "<script>alert('Logged in successfully!');</script>";
-        if (!isset($_SESSION))
-        {
-          session_start();
-          $_SESSION["username"]=$username;
-        }
-        echo "<script>window.location='user_list.php';</script>";
+        $_SESSION["username"]=$username;
+        $role=get_role($username);
+        $_SESSION['role_id']=$role['r_id'];
+        $_SESSION["role_name"]=$role['r_name'];
+        echo "<script>window.location='../home/homepage.php';</script>";
       }
       else
       {

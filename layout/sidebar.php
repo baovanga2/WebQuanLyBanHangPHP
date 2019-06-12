@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../home/homepage.php">
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
@@ -12,7 +12,7 @@
   <hr class="sidebar-divider my-0">
 
   <li class="nav-item active">
-    <a class="nav-link" href="../home/index.php"><span>Home</span></a>
+    <a class="nav-link" href="../home/homepage.php"><span>Home</span></a>
   </li>
 
   <!-- Divider -->

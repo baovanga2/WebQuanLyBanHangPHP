@@ -35,11 +35,26 @@
     	return $bool;
 	}
 
+	function get_role($loginname)
+	{
+		global $conn;
+		connect_db();
+		$sql="select users.r_id, r_name from users, roles where users.r_id=roles.r_id and u_loginname='$loginname'";
+		$query=mysqli_query($conn, $sql);
+		$result = array();
+		if (mysqli_num_rows($query) > 0)
+		{
+	        $row = mysqli_fetch_assoc($query);
+	        $result = $row;
+    	}
+    	return $result;
+	}
+
 	function get_all_users()
 	{
 		global $conn;
 		connect_db();
-		$sql="select u_id, u_fullname, u_email, u_phone, u_gender, r_name from users, roles where users.r_id = roles.r_id";
+		$sql="select u_id, u_fullname, u_email, u_phone, u_address, u_hometown, u_loginname, u_gender, users.r_id,r_name from users, roles where users.r_id = roles.r_id";
 		$query=mysqli_query($conn, $sql);
 		$result=array();
 		if ($query)
@@ -52,4 +67,20 @@
 		return $result;
 	}
 
+	function get_all_roles()
+	{
+		global $conn;
+		connect_db();
+		$sql="select r_id, r_name from roles";
+		$query=mysqli_query($conn, $sql);
+		$result=array();
+		if ($query)
+		{
+			while ($row=mysqli_fetch_assoc($query))
+			{
+				$result[]=$row;
+			}
+		}
+		return $result;
+	}
 ?>

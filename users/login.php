@@ -6,6 +6,7 @@
   }
   if(isset($_POST['login']))
   {
+    $errors = array();
     include_once("users.php");
     $username=$_POST['username'];
     $password=md5($_POST['password']);
@@ -13,7 +14,6 @@
     {
       if (password_true($username, $password))
       {
-        echo "<script>alert('Logged in successfully!');</script>";
         $_SESSION["username"]=$username;
         $role=get_role($username);
         $_SESSION['role_id']=$role['r_id'];
@@ -22,12 +22,12 @@
       }
       else
       {
-        echo "<script>alert('Incorrect password!');</script>";
+        $errors['password'] = "Incorrect password!";
       }
     }
     else
     {
-      echo "<script>alert('User name does not exist!');</script>";
+      $errors['username']="User name does not exist!";
     }
     disconnect_db();
   }
@@ -65,9 +65,11 @@
                   <form class="user" method="post">
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" name="username" placeholder="Enter Username">
+                      <?php if (!empty($errors['username'])) echo "<span style='color:#FF0000;'>&nbsp&nbsp{$errors['username']}</span>"; ?>
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
+                      <?php if (!empty($errors['password'])) echo "<span style='color:#FF0000;'>&nbsp&nbsp{$errors['password']}</span>"; ?>
                     </div>
 
                     <input type="submit" class="btn btn-primary btn-user btn-block" name="login" value="Log in">

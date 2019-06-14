@@ -6,29 +6,22 @@
     echo "<script>window.location='../home/homepage.php';</script>";
   }
   if(isset($_POST['login']))
-  {
-    $errors = array();
+  {   
     $username=$_POST['username'];
     $password=md5($_POST['password']);
-    $user=loginname_exist($username);
+    $user=logininfor_true($username, $password);
     if ($user)
-    {
-      if (password_true($username, $password))
-      {
+    {    
         $_SESSION['u_loginname']=$user['u_loginname'];
         $_SESSION['u_id']=$user['u_id'];
         $_SESSION['r_id']=$user['r_id'];
         $_SESSION["r_name"]=$user['r_name'];
         echo "<script>window.location='../home/homepage.php';</script>";
-      }
-      else
-      {
-        $errors['password'] = "Incorrect password!";
-      }
     }
     else
     {
-      $errors['username']="User name does not exist!";
+      echo "<script>alert('Username or password is incorrect!')</script>";
+      echo "<script>window.history.back();</script>";
     }
     disconnect_db();
   }
@@ -65,16 +58,12 @@
                   </div>
                   <form class="user" method="post">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" name="username" placeholder="Enter Username">
-                      <?php if (!empty($errors['username'])) echo "<span style='color:#FF0000;'>&nbsp&nbsp{$errors['username']}</span>"; ?>
+                      <input type="text" class="form-control form-control-user" name="username" placeholder="Enter Username" required >
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
-                      <?php if (!empty($errors['password'])) echo "<span style='color:#FF0000;'>&nbsp&nbsp{$errors['password']}</span>"; ?>
+                      <input type="password" class="form-control form-control-user" name="password" placeholder="Password" required>
                     </div>
-
                     <input type="submit" class="btn btn-primary btn-user btn-block" name="login" value="Log in">
-
                   </form>
                 </div>
               </div>

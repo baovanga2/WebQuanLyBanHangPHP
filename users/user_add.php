@@ -13,9 +13,9 @@
 		$address=$_POST['address'];
 		$hometown=$_POST['hometown'];
 		$password=md5($_POST['password']);
-
+		$errors=false;
 		if (loginname_exist($_POST['loginname']))
-			$errors['loginname']="Login name exists!";
+			$errors=true;
 		else
 			$loginname=$_POST['loginname'];
 
@@ -25,6 +25,11 @@
 			disconnect_db();
 			echo "<script>alert('Add user successfully!')</script>";
 			echo "<script>window.location='user_list.php';</script>";
+		}
+		if ($errors)
+		{		
+			echo "<script>alert('Login name exists!')</script>";
+			echo "<script>window.history.back();</script>";
 		}
 	}
 ?>
@@ -112,7 +117,6 @@
 					      					<td>Login name</td>
 					      					<td>
 					      						<input type="text" class="form-control" name="loginname" maxlength="20" pattern="^[a-zA-Z0-9_.-]*$" required>
-					      						<?php if (!empty($errors['loginname'])) echo "<span style='color:#FF0000;'>{$errors['loginname']}</span>"; ?>
 					      					</td>
 					      				</tr>
 					      				<tr>
@@ -131,7 +135,7 @@
 					      					</td>
 					      				</tr>
       								</table>
-      								<a href="user_list.php" style="float: right;" class="btn btn-secondary">Cancel</a>
+      								<button style="float: right;" class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
       								<input type="submit" style="float: right; margin-right: 10px" class="btn btn-primary" name="adduser" value="Add">
       							</div>
       						</div>

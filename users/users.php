@@ -1,15 +1,15 @@
 <?php
 	include_once("../database.php");
 
-	function loginname_exist($loginname)
+	function logininfor_true($loginname, $password)
   	{
     	global $conn;
     	connect_db();
 
     	// Chống SQL Injection
     	$loginname=addslashes($loginname);
-    	
-    	$sql="select u_id, u_fullname, u_loginname, roles.r_id, roles.r_name from users, roles where users.r_id=roles.r_id and u_loginname='$loginname'";
+    	$password=$password;
+    	$sql="select u_id, u_fullname, u_loginname, roles.r_id, roles.r_name from users, roles where users.r_id=roles.r_id and u_loginname='$loginname' and u_password='$password'";
     	$query=mysqli_query($conn, $sql);
     	$result = array();
     	if (mysqli_num_rows($query) > 0)
@@ -20,39 +20,23 @@
     	return $result;
 	}
 
-	function password_true($loginname, $password)
-	{
-		global $conn;
-		connect_db();
-		$loginname=addslashes($loginname);
-		$password=addslashes($password);
-		$sql="select * from users where u_loginname='$loginname' and u_password='$password'";
-		$query=mysqli_query($conn, $sql);
-		if (mysqli_num_rows($query)==0)
-    	{
-      		$bool=false;
-    	}
-    	else
-    	{
-      		$bool=true;
-    	}
-    	return $bool;
-	}
+	function loginname_exist($loginname)
+  	{
+    	global $conn;
+    	connect_db();
 
-	// function get_role($loginname)
-	// {
-	// 	global $conn;
-	// 	connect_db();
-	// 	$sql="select users.r_id, r_name from users, roles where users.r_id=roles.r_id and u_loginname='$loginname'";
-	// 	$query=mysqli_query($conn, $sql);
-	// 	$result = array();
-	// 	if (mysqli_num_rows($query) > 0)
-	// 	{
-	//         $row = mysqli_fetch_assoc($query);
-	//         $result = $row;
- //    	}
- //    	return $result;
-	// }
+    	// Chống SQL Injection
+    	$loginname=addslashes($loginname);
+    	$sql="select u_id, u_fullname, u_loginname, roles.r_id, roles.r_name from users, roles where users.r_id=roles.r_id and u_loginname='$loginname'";
+    	$query=mysqli_query($conn, $sql);
+    	$result = array();
+    	if (mysqli_num_rows($query) > 0)
+		{
+        	$row = mysqli_fetch_assoc($query);
+        	$result = $row;
+    	}
+    	return $result;
+	}
 
 	function get_all_users()
 	{

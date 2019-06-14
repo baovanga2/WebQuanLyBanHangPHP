@@ -132,7 +132,7 @@
 					      					</td>
 					      				</tr>
       								</table>
-      								<a href="user_list.php" style="float: right;" class="btn btn-secondary">Cancel</a>
+      								<button style="float: right;" class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
       								<input type="submit" style="float: right; margin-right: 10px" class="btn btn-primary" name="edituser" value="Edit">
       							</div>
       						</div>

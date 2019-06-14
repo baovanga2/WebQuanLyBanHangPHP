@@ -12,18 +12,18 @@
   <hr class="sidebar-divider my-0">
 
   <li class="nav-item active">
-    <a class="nav-link" href="../home/index.php"><span>Home</span></a>
+    <a class="nav-link" href="../home/homepage.php"><span>Home</span></a>
   </li>
 
   <!-- Divider -->
   <hr class="sidebar-divider">
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="true" aria-controls="collapseOrders"><span>Orders</span></a>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="true" aria-controls="collapseOrders"><span>Order Management</span></a>
     <div id="collapseOrders" class="collapse" aria-labelledby="headingOrders" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="#">Page1</a>
-        <a class="collapse-item" href="#">Page2</a>
+        <a class="collapse-item" href="../order/add_order.php">Order Products</a>
+        <a class="collapse-item" href="../order/show_order.php">View Orders</a>
       </div>
     </div>
   </li>

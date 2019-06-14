@@ -7,24 +7,12 @@
 		$birthday=$_POST['birthday'];
 		$email=$_POST['email'];
 		$address=$_POST['address'];
-		$errors = array();
-		if ($_POST['fullname']=="")
-			$errors['fullname']="Full name not entered!";
-		else
-			$fullname=$_POST['fullname'];
-
-		if ($_POST['phone']=="")
-			$errors['phone']="Phone number not entered!";
-		else
-			$phone=$_POST['phone'];
-
-		if (!$errors)
-		{
-			add_customer($fullname, $gender, $email, $phone, $address, $birthday);
-			disconnect_db();
-			echo "<script>alert('Add customer successfully!')</script>";
-			echo "<script>window.location='customer_list.php';</script>";
-		}
+		$fullname=$_POST['fullname'];
+		$phone=$_POST['phone'];
+		add_customer($fullname, $gender, $email, $phone, $address, $birthday);
+		disconnect_db();
+		echo "<script>alert('Add customer successfully!')</script>";
+		echo "<script>window.location='customer_list.php';</script>";
 	}
 ?>
 <!DOCTYPE html>
@@ -65,8 +53,7 @@
 					      				<tr>
 						      				<td>Full name</td>
 						      				<td>
-						      					<input type="text" class="form-control" name="fullname">
-						      					<?php if (!empty($errors['fullname'])) echo "<span style='color:#FF0000;'>{$errors['fullname']}</span>"; ?>
+						      					<input type="text" class="form-control" name="fullname" maxlength="50" required>
 						      				</td>
 					      				</tr>
 					      				<tr>
@@ -79,21 +66,15 @@
 			                    			</td>
 					      				</tr>
 					      				<tr>
-					      					<td>Email</td>
-					      					<td>
-					      						<input type="text" class="form-control" name="email">
-					      					</td>
-					      				</tr>
-					      				<tr>
 					      					<td>Phone</td>
 					      					<td>
-					      						<input type="text" class="form-control" name="phone" pattern="[0-9]{10,11}" id='phone'>
+					      						<input type="text" class="form-control" name="phone" pattern="[0-9]{10,11}" title="Số điện thoại gồm 10 hoặc 11 chữ số!" required>
 					      					</td>
-					      				</tr>
+					      				</tr>					      									      				
 					      				<tr>
-					      					<td>Address</td>
+					      					<td>Email</td>
 					      					<td>
-					      						<input type="text" class="form-control" name="address">
+					      						<input type="email" class="form-control" name="email" maxlength="50">
 					      					</td>
 					      				</tr>
 					      				<tr>
@@ -101,7 +82,13 @@
 					      					<td>
 					      						<input type="date" class="form-control" name="birthday">
 					      					</td>
-					      				</tr>
+					      				</tr>				      				
+					      				<tr>
+					      					<td>Address</td>
+					      					<td>
+					      						<input type="text" class="form-control" name="address">
+					      					</td>
+					      				</tr>				      				
       								</table>
       								<a href="customer_list.php" style="float: right;" class="btn btn-secondary">Cancel</a>
       								<input type="submit" style="float: right; margin-right: 10px" class="btn btn-primary" name="addcustomer" value="Add">
@@ -132,12 +119,5 @@
 		// Logout Modal
 		include_once("../layout/logout.php");
 	?>
-	<script type="text/javascript">
-		var input = document.getElementById('phone');
-		input.oninvalid = function(event)
-		{
-    		event.target.setCustomValidity('Số điện thoại không hợp lệ!');
-		}
-	</script>
 </body>
 </html>

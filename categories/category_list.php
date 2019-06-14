@@ -69,15 +69,18 @@
 					                		<td><?php echo $category['ca_id']; ?></td>
 					                		<td><?php echo $category['ca_name']; ?></td>
 					                		<td>
-					                			<a href="category_edit.php?id=<?php echo $category['ca_id'] ?>" class="btn btn-info btn-circle">
-	                    							<i class="fas fa-info-circle"></i>
-	                  							</a>
-	                  							<a href="#" class="btn btn-warning btn-circle">
-	                    							<i class="fas fa-exclamation-triangle"></i>
-	                  							</a>
-	                  							<a href="#" class="btn btn-danger btn-circle">
-	                    							<i class="fas fa-trash"></i>
-	                  							</a>
+					                			<form method="post" action="category_delete.php">
+						                			<a href="category_edit.php?id=<?php echo $category['ca_id'] ?>" class="btn btn-info btn-circle">
+		                    							<i class="fas fa-info-circle"></i>
+		                  							</a>
+		                  							<a href="#" class="btn btn-warning btn-circle">
+		                    							<i class="fas fa-exclamation-triangle"></i>
+		                  							</a>
+		                  							<input type="hidden" name="id" value="<?php echo $category['ca_id']; ?>">
+	                  								<button type="submit" name="deletecategory" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete category <?php echo $category['ca_id']; ?> ?');">
+	                  									<i class="fas fa-trash"></i>
+	                  								</button>
+		                  						</form>
 					                		</td>
 					                	</tr>
 					                	<?php

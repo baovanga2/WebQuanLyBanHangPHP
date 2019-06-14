@@ -56,4 +56,14 @@
 		$query = mysqli_query($conn, $sql);
 		return $query;
 	}
+
+	function delete_producer($id)
+	{
+		global $conn;
+		connect_db();
+		$sql="delete from producers where pr_id=$id";
+		$query = mysqli_query($conn, $sql);
+		return $query;
+	}
+
 ?>

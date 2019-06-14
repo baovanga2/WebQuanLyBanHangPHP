@@ -1,5 +1,6 @@
 <?php
   session_start();
+  include_once("users.php");
   if (isset($_SESSION['username']))
   {
     echo "<script>window.location='../home/homepage.php';</script>";
@@ -7,17 +8,17 @@
   if(isset($_POST['login']))
   {
     $errors = array();
-    include_once("users.php");
     $username=$_POST['username'];
     $password=md5($_POST['password']);
-    if (loginname_exist($username))
+    $user=loginname_exist($username);
+    if ($user)
     {
       if (password_true($username, $password))
       {
-        $_SESSION["username"]=$username;
-        $role=get_role($username);
-        $_SESSION['role_id']=$role['r_id'];
-        $_SESSION["role_name"]=$role['r_name'];
+        $_SESSION['u_loginname']=$user['u_loginname'];
+        $_SESSION['u_id']=$user['u_id'];
+        $_SESSION['r_id']=$user['r_id'];
+        $_SESSION["r_name"]=$user['r_name'];
         echo "<script>window.location='../home/homepage.php';</script>";
       }
       else

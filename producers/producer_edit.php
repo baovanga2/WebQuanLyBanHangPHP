@@ -5,19 +5,11 @@
 	{
 		$id=$_POST['id'];
 		$description=$_POST['description'];
-		$errors = array();
-		if ($_POST['name']=="")
-			$errors['name']="Name not entered";
-		else
-			$name=$_POST['name'];
-
-		if (!$errors)
-		{
-			edit_producer($id, $name, $description);
-			disconnect_db();
-			echo "<script>alert('Edit producers information successfully!')</script>";
-			echo "<script>window.location='producer_list.php';</script>";
-		}
+		$name=$_POST['name'];
+		edit_producer($id, $name, $description);
+		disconnect_db();
+		echo "<script>alert('Edit producers information successfully!')</script>";
+		echo "<script>window.location='producer_list.php';</script>";
 	}
 ?>
 <!DOCTYPE html>
@@ -76,8 +68,7 @@
 					      				<tr>
 						      				<td>Name</td>
 						      				<td>
-						      					<input type="text" class="form-control" name="name" value="<?php echo $producer['pr_name']; ?>">
-						      					<?php if (!empty($errors['name'])) echo "<span style='color:#FF0000;'>{$errors['name']}</span>"; ?>
+						      					<input type="text" class="form-control" name="name" value="<?php echo $producer['pr_name']; ?>" maxlength="50" required>
 						      				</td>
 					      				</tr>
 					      				<tr>

@@ -57,4 +57,13 @@
 		return $query;
 	}
 
+	function delete_category($id)
+	{
+		global $conn;
+		connect_db();
+		$sql="delete from categories where ca_id=$id";
+		$query = mysqli_query($conn, $sql);
+		return $query;
+	}
+
 ?>

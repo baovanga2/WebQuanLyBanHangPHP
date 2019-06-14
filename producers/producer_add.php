@@ -50,7 +50,7 @@
 					      				<tr>
 						      				<td>Name</td>
 						      				<td>
-						      					<input type="text" class="form-control" name="name">
+						      					<input type="text" class="form-control" name="name" maxlength="50" required>
 						      				</td>
 					      				</tr>
 					      				<tr>

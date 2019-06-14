@@ -61,4 +61,13 @@
 		return $query;
 	}
 
+	function delete_customer($id)
+	{
+		global $conn;
+		connect_db();
+		$sql="delete from customers where cus_id=$id";
+		$query = mysqli_query($conn, $sql);
+		return $query;
+	}
+
 ?>

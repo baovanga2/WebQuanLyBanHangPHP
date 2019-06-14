@@ -6,40 +6,16 @@
 		$id=$_POST['id'];
 		$gender=$_POST['gender'];
 		$birthday=$_POST['birthday'];
-		$role=$_POST['role'];
-		$errors = array();
-		if ($_POST['fullname']=="")
-			$errors['fullname']="Full name not entered";
-		else
-			$fullname=$_POST['fullname'];
-
-		if ($_POST['email']=="")
-			$errors['email']="Email address not entered";
-		else
-			$email=$_POST['email'];
-
-		if ($_POST['phone']=="")
-			$errors['phone']="Phone number not entered";
-		else
-			$phone=$_POST['phone'];
-
-		if ($_POST['address']=="")
-			$errors['address']="Address not entered";
-		else
-			$address=$_POST['address'];
-
-		if ($_POST['hometown']=="")
-			$errors['hometown']="Hometown not entered";
-		else
-			$hometown=$_POST['hometown'];
-
-		if (!$errors)
-		{
-			edit_user($id, $fullname, $gender, $email, $phone, $address, $hometown, $birthday, $role);
-			disconnect_db();
-			echo "<script>alert('Edit user information successfully!')</script>";
-			echo "<script>window.location='user_list.php';</script>";
-		}
+		$role=$_POST['role'];		
+		$fullname=$_POST['fullname'];
+		$email=$_POST['email'];
+		$phone=$_POST['phone'];
+		$address=$_POST['address'];
+		$hometown=$_POST['hometown'];
+		edit_user($id, $fullname, $gender, $email, $phone, $address, $hometown, $birthday, $role);
+		disconnect_db();
+		echo "<script>alert('Edit user information successfully!')</script>";
+		echo "<script>window.location='user_list.php';</script>";
 	}
 ?>
 <!DOCTYPE html>
@@ -98,8 +74,7 @@
 					      				<tr>
 						      				<td>Full name</td>
 						      				<td>
-						      					<input type="text" class="form-control" name="fullname" value="<?php echo $user['u_fullname']; ?>">
-						      					<?php if (!empty($errors['fullname'])) echo "<span style='color:#FF0000;'>{$errors['fullname']}</span>"; ?>
+						      					<input type="text" class="form-control" name="fullname" value="<?php echo $user['u_fullname']; ?>" maxlength="50" required>
 						      				</td>
 					      				</tr>
 					      				<tr>
@@ -112,37 +87,33 @@
 			                    			</td>
 					      				</tr>
 					      				<tr>
-					      					<td>Email</td>
-					      					<td>
-					      						<input type="text" class="form-control" name="email" value="<?php echo $user['u_email']; ?>">
-					      						<?php if (!empty($errors['email'])) echo "<span style='color:#FF0000;'>{$errors['email']}</span>"; ?>
-					      					</td>
-					      				</tr>
-					      				<tr>
 					      					<td>Phone</td>
 					      					<td>
-					      						<input type="text" class="form-control" name="phone" value="<?php echo $user['u_phone']; ?>">
-					      						<?php if (!empty($errors['phone'])) echo "<span style='color:#FF0000;'>{$errors['phone']}</span>"; ?>
+					      						<input type="text" class="form-control" name="phone" value="<?php echo $user['u_phone']; ?>" pattern="[0-9]{10,11}" title="Số điện thoại gồm 10 hoặc 11 chữ số!" required>
 					      					</td>
 					      				</tr>
 					      				<tr>
-					      					<td>Address</td>
+					      					<td>Email</td>
 					      					<td>
-					      						<input type="text" class="form-control" name="address" value="<?php echo $user['u_address']; ?>">
-					      						<?php if (!empty($errors['address'])) echo "<span style='color:#FF0000;'>{$errors['address']}</span>"; ?>
-					      					</td>
-					      				</tr>
-					      				<tr>
-					      					<td>Hometown</td>
-					      					<td>
-					      						<input type="text" class="form-control" name="hometown" value="<?php echo $user['u_hometown']; ?>">
-					      						<?php if (!empty($errors['hometown'])) echo "<span style='color:#FF0000;'>{$errors['hometown']}</span>"; ?>
+					      						<input type="email" class="form-control" name="email" value="<?php echo $user['u_email']; ?>" maxlength="50" required>
 					      					</td>
 					      				</tr>
 					      				<tr>
 					      					<td>Birthday</td>
 					      					<td>
-					      						<input type="date" class="form-control" name="birthday" value="<?php echo $user['u_birthday']; ?>">
+					      						<input type="date" class="form-control" name="birthday" value="<?php echo $user['u_birthday']; ?>" required>
+					      					</td>
+					      				</tr>
+					      				<tr>
+					      					<td>Address</td>
+					      					<td>
+					      						<input type="text" class="form-control" name="address" value="<?php echo $user['u_address']; ?>" required>
+					      					</td>
+					      				</tr>
+					      				<tr>
+					      					<td>Hometown</td>
+					      					<td>
+					      						<input type="text" class="form-control" name="hometown" value="<?php echo $user['u_hometown']; ?>" required>
 					      					</td>
 					      				</tr>
 					      				<tr>

@@ -7,45 +7,17 @@
 		$birthday=$_POST['birthday'];
 		$role=$_POST['role'];
 		$errors = array();
-		if ($_POST['fullname']=="")
-			$errors['fullname']="Full name not entered!";
-		else
-			$fullname=$_POST['fullname'];
+		$fullname=$_POST['fullname'];
+		$email=$_POST['email'];
+		$phone=$_POST['phone'];
+		$address=$_POST['address'];
+		$hometown=$_POST['hometown'];
+		$password=md5($_POST['password']);
 
-		if ($_POST['email']=="")
-			$errors['email']="Email address not entered!";
-		else
-			$email=$_POST['email'];
-
-		if ($_POST['phone']=="") {
-			$errors['phone']="Phone number not entered!";
-		} elseif (!phone_avaiable($_POST['phone'])) {
-			$errors['phone']="Invalid phone number!";	
-		} else {
-			$phone=$_POST['phone'];
-		}
-
-		if ($_POST['address']=="")
-			$errors['address']="Address not entered!";
-		else
-			$address=$_POST['address'];
-
-		if ($_POST['hometown']=="")
-			$errors['hometown']="Hometown not entered!";
-		else
-			$hometown=$_POST['hometown'];
-
-		if ($_POST['loginname']=="")
-			$errors['loginname']="Login name not entered!";
-		elseif (loginname_exist($_POST['loginname']))
+		if (loginname_exist($_POST['loginname']))
 			$errors['loginname']="Login name exists!";
 		else
 			$loginname=$_POST['loginname'];
-
-		if ($_POST['password']=="")
-			$errors['password']="Password not entered!";
-		else
-			$password=md5($_POST['password']);
 
 		if (!$errors)
 		{
@@ -94,8 +66,7 @@
 					      				<tr>
 						      				<td>Full name</td>
 						      				<td>
-						      					<input type="text" class="form-control" name="fullname">
-						      					<?php if (!empty($errors['fullname'])) echo "<span style='color:#FF0000;'>{$errors['fullname']}</span>"; ?>
+						      					<input type="text" class="form-control" name="fullname" maxlength="50" required>
 						      				</td>
 					      				</tr>
 					      				<tr>
@@ -108,51 +79,46 @@
 			                    			</td>
 					      				</tr>
 					      				<tr>
-					      					<td>Email</td>
-					      					<td>
-					      						<input type="text" class="form-control" name="email">
-					      						<?php if (!empty($errors['email'])) echo "<span style='color:#FF0000;'>{$errors['email']}</span>"; ?>
-					      					</td>
-					      				</tr>
-					      				<tr>
 					      					<td>Phone</td>
 					      					<td>
-					      						<input type="text" class="form-control" name="phone">
-					      						<?php if (!empty($errors['phone'])) echo "<span style='color:#FF0000;'>{$errors['phone']}</span>"; ?>
+					      						<input type="text" class="form-control" name="phone" pattern="[0-9]{10,11}" title="Số điện thoại gồm 10 hoặc 11 chữ số!" required>
 					      					</td>
 					      				</tr>
 					      				<tr>
-					      					<td>Address</td>
+					      					<td>Email</td>
 					      					<td>
-					      						<input type="text" class="form-control" name="address">
-					      						<?php if (!empty($errors['address'])) echo "<span style='color:#FF0000;'>{$errors['address']}</span>"; ?>
-					      					</td>
-					      				</tr>
-					      				<tr>
-					      					<td>Hometown</td>
-					      					<td>
-					      						<input type="text" class="form-control" name="hometown">
-					      						<?php if (!empty($errors['hometown'])) echo "<span style='color:#FF0000;'>{$errors['hometown']}</span>"; ?>
+					      						<input type="email" class="form-control" maxlength="50" name="email" required>
 					      					</td>
 					      				</tr>
 					      				<tr>
 					      					<td>Birthday</td>
 					      					<td>
-					      						<input type="date" class="form-control" name="birthday">
+					      						<input type="date" class="form-control" name="birthday" required>
+					      					</td>
+					      				</tr>
+					      				<tr>
+					      					<td>Address</td>
+					      					<td>
+					      						<input type="text" class="form-control" name="address" required>
+					      					</td>
+					      				</tr>
+					      				<tr>
+					      					<td>Hometown</td>
+					      					<td>
+					      						<input type="text" class="form-control" name="hometown" required>
 					      					</td>
 					      				</tr>
 					      				<tr>
 					      					<td>Login name</td>
 					      					<td>
-					      						<input type="text" class="form-control" name="loginname">
+					      						<input type="text" class="form-control" name="loginname" maxlength="20" pattern="^[a-zA-Z0-9_.-]*$" required>
 					      						<?php if (!empty($errors['loginname'])) echo "<span style='color:#FF0000;'>{$errors['loginname']}</span>"; ?>
 					      					</td>
 					      				</tr>
 					      				<tr>
 					      					<td>Password</td>
 					      					<td>
-					      						<input type="password" class="form-control" name="password">
-					      						<?php if (!empty($errors['password'])) echo "<span style='color:#FF0000;'>{$errors['password']}</span>"; ?>
+					      						<input type="password" class="form-control" name="password" maxlength="20" required>
 					      					</td>
 					      				</tr>
 					      				<tr>
@@ -194,5 +160,6 @@
 		// Logout Modal
 		include_once("../layout/logout.php");
 	?>
+
 </body>
 </html>

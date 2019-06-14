@@ -69,15 +69,18 @@
 					                		<td><?php echo $producer['pr_id']; ?></td>
 					                		<td><?php echo $producer['pr_name']; ?></td>
 					                		<td>
-					                			<a href="producer_edit.php?id=<?php echo $producer['pr_id'] ?>" class="btn btn-info btn-circle">
-	                    							<i class="fas fa-info-circle"></i>
-	                  							</a>
-	                  							<a href="#" class="btn btn-warning btn-circle">
-	                    							<i class="fas fa-exclamation-triangle"></i>
-	                  							</a>
-	                  							<a href="#" class="btn btn-danger btn-circle">
-	                    							<i class="fas fa-trash"></i>
-	                  							</a>
+					                			<form method="post" action="producer_delete.php">
+						                			<a href="producer_edit.php?id=<?php echo $producer['pr_id'] ?>" class="btn btn-info btn-circle">
+		                    							<i class="fas fa-info-circle"></i>
+		                  							</a>
+		                  							<a href="#" class="btn btn-warning btn-circle">
+		                    							<i class="fas fa-exclamation-triangle"></i>
+		                  							</a>
+		                  							<input type="hidden" name="id" value="<?php echo $producer['pr_id']; ?>">
+	                  								<button type="submit" name="deleteproducer" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete producer <?php echo $producer['pr_id']; ?> ?');">
+	                  									<i class="fas fa-trash"></i>
+	                  								</button>
+		                  						</form>
 					                		</td>
 					                	</tr>
 					                	<?php

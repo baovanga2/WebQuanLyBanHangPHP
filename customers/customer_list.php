@@ -78,15 +78,18 @@
 					                		<td><?php echo $customer['cus_phone']; ?></td>
 					                		<td><?php echo $customer['cus_gender']; ?></td>
 					                		<td>
-					                			<a href="customer_edit.php?id=<?php echo $customer['cus_id']; ?>" class="btn btn-info btn-circle">
-	                    							<i class="fas fa-info-circle"></i>
-	                  							</a>
-	                  							<a href="#" class="btn btn-warning btn-circle">
-	                    							<i class="fas fa-exclamation-triangle"></i>
-	                  							</a>
-	                  							<a href="#" class="btn btn-danger btn-circle">
-	                    							<i class="fas fa-trash"></i>
-	                  							</a>
+					                			<form method="post" action="customer_delete.php">
+						                			<a href="customer_edit.php?id=<?php echo $customer['cus_id']; ?>" class="btn btn-info btn-circle">
+		                    							<i class="fas fa-info-circle"></i>
+		                  							</a>
+		                  							<a href="#" class="btn btn-warning btn-circle">
+		                    							<i class="fas fa-exclamation-triangle"></i>
+		                  							</a>
+		                  							<input type="hidden" name="id" value="<?php echo $customer['cus_id']; ?>">
+	                  								<button type="submit" name="deletecustomer" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete customer <?php echo $customer['cus_id']; ?> ?');">
+	                  									<i class="fas fa-trash"></i>
+	                  								</button>
+	                  							</form>
 					                		</td>
 					                	</tr>
 					                	<?php

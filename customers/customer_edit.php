@@ -8,24 +8,12 @@
 		$email=$_POST['email'];
 		$address=$_POST['address'];
 		$birthday=$_POST['birthday'];
-		$errors = array();
-		if ($_POST['fullname']=="")
-			$errors['fullname']="Full name not entered";
-		else
-			$fullname=$_POST['fullname'];
-
-		if ($_POST['phone']=="")
-			$errors['phone']="Phone number not entered";
-		else
-			$phone=$_POST['phone'];
-
-		if (!$errors)
-		{
-			edit_customer($id, $fullname, $gender, $email, $phone, $address, $birthday);
-			disconnect_db();
-			echo "<script>alert('Edit user information successfully!')</script>";
-			echo "<script>window.location='customer_list.php';</script>";
-		}
+		$fullname=$_POST['fullname'];
+		$phone=$_POST['phone'];
+		edit_customer($id, $fullname, $gender, $email, $phone, $address, $birthday);
+		disconnect_db();
+		echo "<script>alert('Edit user information successfully!')</script>";
+		echo "<script>window.location='customer_list.php';</script>";
 	}
 ?>
 <!DOCTYPE html>
@@ -84,8 +72,7 @@
 					      				<tr>
 						      				<td>Full name</td>
 						      				<td>
-						      					<input type="text" class="form-control" name="fullname" value="<?php echo $customer['cus_fullname']; ?>">
-						      					<?php if (!empty($errors['fullname'])) echo "<span style='color:#FF0000;'>{$errors['fullname']}</span>"; ?>
+						      					<input type="text" class="form-control" name="fullname" value="<?php echo $customer['cus_fullname']; ?>" maxlength="50" required>
 						      				</td>
 					      				</tr>
 					      				<tr>
@@ -98,29 +85,27 @@
 			                    			</td>
 					      				</tr>
 					      				<tr>
+					      					<td>Phone</td>
+					      					<td>
+					      						<input type="text" class="form-control" name="phone" value="<?php echo $customer['cus_phone']; ?>" pattern="[0-9]{10,11}" title="Số điện thoại gồm 10 hoặc 11 chữ số!" required>
+					      					</td>
+					      				</tr>		      				
+					      				<tr>
+					      					<td>Email</td>
+					      					<td>
+					      						<input type="email" class="form-control" name="email" value="<?php echo $customer['cus_email']; ?>" maxlength="50">
+					      					</td>
+					      				</tr>
+					      				<tr>
 					      					<td>Birthday</td>
 					      					<td>
 					      						<input type="date" class="form-control" name="birthday" value="<?php echo $customer['cus_birthday']; ?>">
 					      					</td>
 					      				</tr>
 					      				<tr>
-					      					<td>Email</td>
-					      					<td>
-					      						<input type="text" class="form-control" name="email" value="<?php echo $customer['cus_email']; ?>">
-					      					</td>
-					      				</tr>
-					      				<tr>
-					      					<td>Phone</td>
-					      					<td>
-					      						<input type="text" class="form-control" name="phone" value="<?php echo $customer['cus_phone']; ?>">
-					      						<?php if (!empty($errors['phone'])) echo "<span style='color:#FF0000;'>{$errors['phone']}</span>"; ?>
-					      					</td>
-					      				</tr>
-					      				<tr>
 					      					<td>Address</td>
 					      					<td>
-					      						<input type="text" class="form-control" name="address" value="<?php echo $customer['cus_address']; ?>">
-					      						<?php if (!empty($errors['address'])) echo "<span style='color:#FF0000;'>{$errors['address']}</span>"; ?>
+					      						<input type="text" class="form-control" name="address" value="<?php echo $customer['cus_address']; ?>" >
 					      					</td>
 					      				</tr>
       								</table>

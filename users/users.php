@@ -9,17 +9,15 @@
     	// Chống SQL Injection
     	$loginname=addslashes($loginname);
     	
-    	$sql="select * from users where u_loginname='$loginname'";
+    	$sql="select u_id, u_fullname, u_loginname, roles.r_id, roles.r_name from users, roles where users.r_id=roles.r_id and u_loginname='$loginname'";
     	$query=mysqli_query($conn, $sql);
-    	if (mysqli_num_rows($query)==0)
-    	{
-      		$bool=false;
+    	$result = array();
+    	if (mysqli_num_rows($query) > 0)
+		{
+        	$row = mysqli_fetch_assoc($query);
+        	$result = $row;
     	}
-    	else
-    	{
-      		$bool=true;
-    	}
-    	return $bool;
+    	return $result;
 	}
 
 	function password_true($loginname, $password)
@@ -41,20 +39,20 @@
     	return $bool;
 	}
 
-	function get_role($loginname)
-	{
-		global $conn;
-		connect_db();
-		$sql="select users.r_id, r_name from users, roles where users.r_id=roles.r_id and u_loginname='$loginname'";
-		$query=mysqli_query($conn, $sql);
-		$result = array();
-		if (mysqli_num_rows($query) > 0)
-		{
-	        $row = mysqli_fetch_assoc($query);
-	        $result = $row;
-    	}
-    	return $result;
-	}
+	// function get_role($loginname)
+	// {
+	// 	global $conn;
+	// 	connect_db();
+	// 	$sql="select users.r_id, r_name from users, roles where users.r_id=roles.r_id and u_loginname='$loginname'";
+	// 	$query=mysqli_query($conn, $sql);
+	// 	$result = array();
+	// 	if (mysqli_num_rows($query) > 0)
+	// 	{
+	//         $row = mysqli_fetch_assoc($query);
+	//         $result = $row;
+ //    	}
+ //    	return $result;
+	// }
 
 	function get_all_users()
 	{
@@ -142,11 +140,13 @@
 		return $query;
 	}
 
-	function phone_avaiable($phone)
+	function delete_user($id)
 	{
-		$bool=true;
-		if (strlen($phone)<10 or strlen($phone)>11)
-			$bool=false;
-		return $bool;
+		global $conn;
+		connect_db();
+		$sql="delete from users where u_id=$id";
+		$query = mysqli_query($conn, $sql);
+		return $query;
 	}
+
 ?>

@@ -22,8 +22,8 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="true" aria-controls="collapseOrders"><span>Order Management</span></a>
     <div id="collapseOrders" class="collapse" aria-labelledby="headingOrders" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="../order/add_order.php">Order Products</a>
-        <a class="collapse-item" href="../order/show_order.php">View Orders</a>
+        <a class="collapse-item" href="../orders/add_orders.php">Order Products</a>
+        <a class="collapse-item" href="../orders/show_orders.php">View Orders</a>
       </div>
     </div>
   </li>

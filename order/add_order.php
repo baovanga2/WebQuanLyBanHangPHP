@@ -43,7 +43,7 @@
                         <form action="" method="post">
 
                             <!-- <input type="text" name="customerName" placeholder="Customer name"> -->
-                            <input type="submit" class="btn btn-primary" value="Create Order" name="addOrder">
+                            <input type="submit" class="btn btn-primary" value="Add Orders" name="addOrder">
 
                         </form>
                     </div>
@@ -68,7 +68,7 @@
                                         <tr>
                                             <form action="dbconfig/btn_delete_order.php" method="GET">
                                                 <td>
-                                                    <input type="submit" class="btn btn-outline-primary btn-sm" name="addOrder" value="Add Product">
+                                                    <input type="submit" class="btn btn-outline-primary btn-sm" name="addOrder" value="Edit">
                                                     <input type="submit" class="btn btn-outline-danger btn-sm" name="deleteOrder" value="Delete">
                                                     <input type="hidden" name="idOrder" value="<?php echo $order['OrderID']; ?>">
                                                 </td>

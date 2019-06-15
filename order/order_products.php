@@ -29,17 +29,16 @@
                 <!-- End of topbar -->
                 <!-- Begin page content -->
                 <?php
-                include("dbconfig/db_driver.php");
+                include_once("dbconfig/db_driver.php");
                 $listProducts = ShowProducts();
                 $listOrderDetails = ShowOrderDetails();
                 disconnect_db();
                 ?>
-
+                <div class="container-fluid">
+                    <h1 class="h3 mb-2 text-gray-800">Choose products</h1>
+                
                 <!-- List of products -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Choose products</h6>
-                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <!-- <form method="GET"> -->
@@ -63,7 +62,7 @@
                                         <tr>
                                             <form id="get-id-product" method="GET">
                                                 <td>
-                                                    <input type="submit" class="btn btn-primary btn-sm" name="addProduct" value="Add">
+                                                    <input type="submit" class="btn btn-outline-primary btn-sm" name="addProduct" value="Add">
                                                     <input type="hidden" name="idProduct" value="<?php echo $product['pro_id']; ?>">
                                                 </td>
                                                 <td><?php echo $product['pro_id']; ?></td>
@@ -111,9 +110,9 @@
                                         <tr>
                                             <td><a href="delete"><i class="far fa-trash-alt"></i></a></td>
                                             <td>1</td>
-                                            <td><?php echo $orderDetails['pro_name']; ?></td>
+                                            <td><?php echo $orderDetails['ProductName']; ?></td>
                                             <td><input value="1" type="number" class="btn" name="quantity" min="1" size="10px"></td>
-                                            <td><?php echo $orderDetails['pro_price']; ?></td>
+                                            <td><?php echo $orderDetails['Price']; ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -140,6 +139,7 @@
                     </div>
 
                 </div>
+            </div>
                 <!-- End of list of products -->
             </div>
             <!-- End of main content -->

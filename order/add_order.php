@@ -32,60 +32,53 @@
                 $listOrders = ShowOrders();
                 disconnect_db();
                 ?>
-
+                <div class="container-fluid">
+                    <h2 class="h3 mb-2 text-gray-800">Orders</h2>
                 <!-- List of products -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Add Order</h6>
-                    </div>
-
-                    <div class="card-body">
-                        <form action="" method="post">
-
-                            <!-- <input type="text" name="customerName" placeholder="Customer name"> -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
                             <input type="submit" class="btn btn-primary" value="Add Orders" name="addOrder">
-
-                        </form>
-                    </div>
-
-                    <div class="card-body">
-
-                        <div class="table-responsive">
-
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
-                                <thead>
-                                    <tr>
-                                        <th>Action</th>
-                                        <th>OrderID</th>
-                                        <th>CustomerName</th>
-                                        <th>CreateDate</th>
-                                        <th>StaffCreated</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($listOrders as $order) { ?>
-                                        <tr>
-                                            <form action="dbconfig/btn_delete_order.php" method="GET">
-                                                <td>
-                                                    <input type="submit" class="btn btn-outline-primary btn-sm" name="addOrder" value="Edit">
-                                                    <input type="submit" class="btn btn-outline-danger btn-sm" name="deleteOrder" value="Delete">
-                                                    <input type="hidden" name="idOrder" value="<?php echo $order['OrderID']; ?>">
-                                                </td>
-                                                <td><?php echo $order['OrderID']; ?></td>
-                                                <td><?php echo $order['CustomerName']; ?></td>
-                                                <td><?php echo $order['CreateDate']; ?></td>
-                                                <td><?php echo $order['StaffCreated']; ?></td>
-
-                                            </form>
-
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-
-                            </table>
                         </div>
 
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>OrderID</th>
+                                            <th>CustomerName</th>
+                                            <th>CreateDate</th>
+                                            <th>StaffCreated</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($listOrders as $order) { ?>
+                                            <tr>
+                                                <form action="dbconfig/btn_delete_orders.php" method="GET">
+                                                    <td>
+                                                        <input type="submit" class="btn btn-outline-primary btn-sm" name="editOrders" value="Edit">
+                                                        <input type="submit" class="btn btn-outline-danger btn-sm" name="deleteOrders" value="Delete">
+                                                        <input type="hidden" name="idOrders" value="<?php echo $order['OrdersID']; ?>">
+                                                    </td>
+                                                    <td><?php echo $order['OrdersID']; ?></td>
+                                                    <td><?php echo $order['CustomerName']; ?></td>
+                                                    <td><?php echo $order['CreateDate']; ?></td>
+                                                    <td><?php echo $order['StaffCreated']; ?></td>
+
+                                                </form>
+
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 <!-- End of list of products -->

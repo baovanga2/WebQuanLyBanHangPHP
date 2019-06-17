@@ -7,10 +7,9 @@ function ShowProducts()
 {
     global $conn;
     connect_db();
-    $sql = "SELECT products.*, categories.ca_name
-                FROM products
-                JOIN categories
-                ON categories.ca_id = products.ca_id;";
+    $sql = "SELECT p.pro_id as ProductCode, p.pro_name as ProductName, SUM(p.pro_quantity) as Quantity, FORMAT(SUM(p.pro_price),0) as Price, p.pro_detail as Details
+            FROM products p
+            GROUP BY p.pro_id;";
 
     $result = mysqli_query($conn, $sql);
     $datas = array();
@@ -23,13 +22,14 @@ function ShowProducts()
 }
 
 // Hien thi san pham trong don hang cua khach
-function ShowOrderDetails()
+function ShowOrderDetails($ordersID)
 {
     global $conn;
     connect_db();
-    $sql = "SELECT o.or_id AS CodeOrders, c.cus_fullname AS CustomerName, p.pro_name AS ProductName, od.od_quantity AS Quantity, od.od_price AS Price
-            FROM customers c, orders o, orderdetails od, products p, users u
-            WHERE o.cus_id = c.cus_id AND od.or_id = 3 AND o.or_id = 3 AND p.pro_id = od.pro_id AND o.u_id = u.u_id;";
+    $sql = "SELECT p.pro_name as ProductName, SUM(od.od_quantity) as Quantity, SUM(od.od_quantity * p.pro_price) as Price
+    FROM orderdetails od, products p, orders o
+    WHERE od.pro_id = p.pro_id and o.or_id = $ordersID
+    GROUP BY od.pro_id;";
     $result = mysqli_query($conn, $sql);
     $datas = array();
     if ($result) {

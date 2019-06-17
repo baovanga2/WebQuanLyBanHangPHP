@@ -15,5 +15,3 @@ if (isset($_GET['editOrders'])) {
     disconnect_db();
 }
 ?>
-
-

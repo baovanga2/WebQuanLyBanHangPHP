@@ -26,7 +26,7 @@ function ShowOrderDetails($ordersID)
 {
     global $conn;
     connect_db();
-    $sql = "SELECT p.pro_name as ProductName, SUM(od.od_quantity) as Quantity, SUM(od.od_quantity * p.pro_price) as PriceEachItem, p.pro_price as Price, p.pro_id as ProductID
+    $sql = "SELECT p.pro_name as ProductName, SUM(od.od_quantity) as Quantity, SUM(od.od_quantity * p.pro_price) as TotalPrice, p.pro_price as Price, p.pro_id as ProductCode
     FROM orderdetails od, products p, orders o
     WHERE od.pro_id = p.pro_id and o.or_id = $ordersID and od.or_id = $ordersID
     GROUP BY od.pro_id;";

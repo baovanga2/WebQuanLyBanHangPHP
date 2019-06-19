@@ -34,9 +34,8 @@ if (isset($_GET['addProduct'])) {
 // Delete existing record in a orderdetails table
 if (isset($_GET['deleteRecord'])) {
     $productID = $_GET['productID'];
-    echo "ID: $productID";
-    echo "ID: $ordersID";
     DeleteRecord($productID, $ordersID);
+    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/order_products.php");
  }
 
 ?>
@@ -185,16 +184,18 @@ if (isset($_GET['deleteRecord'])) {
                                         foreach ($listOrderDetails as $orderDetails) {
                                             ?>
                                                 <tr>
-                                                    <td>
-                                                        <!-- <input type="submit" class="btn btn-outline-danger btn-sm" name="delProduct" value="Delete"> -->
-                                                        <button type="submit" class="btn-delete" name="deleteRecord"><i class="fa fa-trash"></i></button>
-                                                        <input type="hidden" name="productID" value="<?php echo $orderDetails['ProductID']; ?>">
-                                                    <td>1</td>
-                                                    <td><?php echo $orderDetails['ProductName']; ?></td>
-                                                    <td><input value="<?php echo $orderDetails['Quantity']; ?>" type="number" class="btn" name="quantity" min="1" size="10px"></td>
-                                                    <td><?php echo number_format($orderDetails['Price']); ?> VND</td>
-                                                    <td><?php echo number_format($orderDetails['PriceEachItem']); ?> VND</td>
-                                                    <?php $total += $orderDetails['PriceEachItem']; ?>
+                                                    <form method="get">
+                                                        <td>
+                                                            <!-- <input type="submit" class="btn btn-outline-danger btn-sm" name="delProduct" value="Delete"> -->
+                                                            <button type="submit" class="btn-delete" name="deleteRecord"><i class="fa fa-trash"></i></button>
+                                                            <input type="hidden" name="productID" value="<?php echo $orderDetails['ProductCode']; ?>">
+                                                        <td>1</td>
+                                                        <td><?php echo $orderDetails['ProductName']; ?></td>
+                                                        <td><input value="<?php echo $orderDetails['Quantity']; ?>" type="number" class="btn" name="quantity" min="1" size="10px"></td>
+                                                        <td><?php echo number_format($orderDetails['Price']); ?> VND</td>
+                                                        <td><?php echo number_format($orderDetails['TotalPrice']); ?> VND</td>
+                                                        <?php $total += $orderDetails['TotalPrice']; ?>
+                                                    </form>
                                                 </tr>
                                             <?php } ?>
                                         <?php } ?>

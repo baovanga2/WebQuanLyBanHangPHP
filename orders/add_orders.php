@@ -52,7 +52,7 @@
                                     <thead>
                                         <tr>
                                             <th>Action</th>
-                                            <th>OrderID</th>
+                                            <th>CodeOrders</th>
                                             <th>CustomerName</th>
                                             <th>CreateDate</th>
                                             <th>StaffCreated</th>
@@ -69,7 +69,7 @@
                                                         <input type="hidden" name="customerName" value="<?php echo $order['CustomerName']; ?>">
                                                     </td>
                                                 </form>
-                                                <td><?php echo $order['OrdersID']; ?></td>
+                                                <td><?php echo "#".$order['OrdersID']; ?></td>
                                                 <td><?php echo $order['CustomerName']; ?></td>
                                                 <td><?php echo $order['CreateDate']; ?></td>
                                                 <td><?php echo $order['StaffCreated']; ?></td>

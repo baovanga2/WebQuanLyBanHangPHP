@@ -24,7 +24,7 @@ $customerName = $_COOKIE['customerName'];
 $ordersID = $_COOKIE['ordersID'];
 $listOrderDetails = ShowOrderDetails($ordersID);
 
-// Insert product to orderdetails table
+// Insert the product into the orderdetails table
 if (isset($_GET['addProduct'])) {
     header("Location:http://localhost/WebQuanLyBanHangPHP/orders/order_products.php");
     $productID = $_GET['productID'];
@@ -105,7 +105,7 @@ if (isset($_GET['deleteRecord'])) {
                 disconnect_db();
                 ?>
                 <div class="container-fluid">
-                    <h1 class="h3 mb-2 text-gray-800">Choose Product</h1>
+                    <h1 class="h3 mb-2 text-gray-800"><strong>Edit orders</strong></h1>
 
                     <!-- List of products -->
                     <div class="card shadow mb-4">
@@ -153,8 +153,8 @@ if (isset($_GET['deleteRecord'])) {
                             <h6 class="m-0 font-weight-bold text-primary">
                                 <table>
                                     <tr>
-                                        <th>Order ID: <?php echo $ordersID ?></th>
-                                        <th>&emsp;&emsp;Customer Name: <?php echo $customerName ?></th>
+                                        <th>Code Orders: <?php echo "#$ordersID" ?></th>
+                                        <th>&emsp;&emsp;Customer's Name: <?php echo $customerName ?></th>
                                     </tr>
                                 </table>
                             </h6>
@@ -170,18 +170,18 @@ if (isset($_GET['deleteRecord'])) {
                                             <th>ProductName</th>
                                             <th>Quantity</th>
                                             <th>Price</th>
-                                            <th>PriceEachItem</th>
+                                            <th>TotalPrice</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         if (empty($listOrderDetails)) { ?>
                                             <div class="alert alert-warning">
-                                                <strong>Cart is currently empty!</strong>
+                                                <strong>Cart is empty!</strong>
                                             </div>
                                         <?php
                                     } else {
-                                        foreach ($listOrderDetails as $orderDetails) {
+                                        foreach ($listOrderDetails as $key => $orderDetails) {
                                             ?>
                                                 <tr>
                                                     <form method="get">
@@ -189,7 +189,8 @@ if (isset($_GET['deleteRecord'])) {
                                                             <!-- <input type="submit" class="btn btn-outline-danger btn-sm" name="delProduct" value="Delete"> -->
                                                             <button type="submit" class="btn-delete" name="deleteRecord"><i class="fa fa-trash"></i></button>
                                                             <input type="hidden" name="productID" value="<?php echo $orderDetails['ProductCode']; ?>">
-                                                        <td>1</td>
+                                                        </td>
+                                                        <td><?php echo $key + 1; ?></td>
                                                         <td><?php echo $orderDetails['ProductName']; ?></td>
                                                         <td><input value="<?php echo $orderDetails['Quantity']; ?>" type="number" class="btn" name="quantity" min="1" size="10px"></td>
                                                         <td><?php echo number_format($orderDetails['Price']); ?> VND</td>

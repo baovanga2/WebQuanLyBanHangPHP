@@ -1,5 +1,8 @@
 <?php
+
 include_once("dbconfig/db_driver.php");
+
+// Delete an orders 
 if (isset($_GET['deleteOrders'])) {
     $ordersID = $_GET['ordersID'];
     DeleteOrders($ordersID);
@@ -7,11 +10,34 @@ if (isset($_GET['deleteOrders'])) {
     disconnect_db();
 }
 
+// Get data orders ID and Customer name 
 if (isset($_GET['editOrders'])) {
+    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/order_products.php");
     $ordersID = $_GET['ordersID'];
+    setcookie("ordersID", "$ordersID", time() + 3600);
     $customerName = $_GET['customerName'];
-    $listOrderDetails = ShowOrderDetails($ordersID);
+    setcookie("customerName", "$customerName", time() + 3600);
+    $ordersID = $_COOKIE['ordersID'];
 }
+
+$customerName = $_COOKIE['customerName'];
+$ordersID = $_COOKIE['ordersID'];
+$listOrderDetails = ShowOrderDetails($ordersID);
+
+// Insert product to orderdetails table
+if (isset($_GET['addProduct'])) {
+    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/order_products.php");
+    $productID = $_GET['productID'];
+    InsertOrderdetails($productID, $ordersID);
+}
+
+// Delete existing record in a orderdetails table
+if (isset($_GET['deleteRecord'])) {
+    $productID = $_GET['productID'];
+    echo "ID: $productID";
+    echo "ID: $ordersID";
+    DeleteRecord($productID, $ordersID);
+ }
 
 ?>
 
@@ -29,7 +55,7 @@ if (isset($_GET['editOrders'])) {
             color: black
         }
 
-        .btn {
+        .btn-add {
             background-color: #668cff;
             border: none;
             color: white;
@@ -38,6 +64,7 @@ if (isset($_GET['editOrders'])) {
             cursor: pointer;
             border-radius: 12px;
         }
+
         .btn-delete {
             background-color: #ff4d4d;
             border: none;
@@ -49,7 +76,7 @@ if (isset($_GET['editOrders'])) {
         }
 
         /* Darker background on mouse-over */
-        .btn:hover {
+        .btn-add:hover {
             background-color: #3366ff;
         }
 
@@ -106,7 +133,7 @@ if (isset($_GET['editOrders'])) {
                                                 <form id="get-id-product" method="GET">
                                                     <td>
                                                         <!-- <input type="submit" class="btn btn-outline-primary btn-sm" name="addProduct" value="Add"> -->
-                                                        <button type="submit" class="btn"><i class="fas fa-plus"></i></button>
+                                                        <button type="submit" class="btn-add" name="addProduct"><i class="fas fa-plus"></i></button>
                                                         <input type="hidden" name="productID" value="<?php echo $product['ProductCode']; ?>">
                                                     </td>
                                                     <td><?php echo $product['ProductCode']; ?></td>
@@ -143,23 +170,33 @@ if (isset($_GET['editOrders'])) {
                                             <th>NumericalOrder</th>
                                             <th>ProductName</th>
                                             <th>Quantity</th>
+                                            <th>Price</th>
                                             <th>PriceEachItem</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
+                                        if (empty($listOrderDetails)) { ?>
+                                            <div class="alert alert-warning">
+                                                <strong>Cart is currently empty!</strong>
+                                            </div>
+                                        <?php
+                                    } else {
                                         foreach ($listOrderDetails as $orderDetails) {
                                             ?>
-                                            <tr>
-                                                <td>
-                                                    <!-- <input type="submit" class="btn btn-outline-danger btn-sm" name="delProduct" value="Delete"> -->
-                                                    <button type="submit" class="btn-delete"><i class="fa fa-trash"></i></button>
-                                                <td>1</td>
-                                                <td><?php echo $orderDetails['ProductName']; ?></td>
-                                                <td><input value="<?php echo $orderDetails['Quantity']; ?>" type="number" class="btn" name="quantity" min="1" size="10px"></td>
-                                                <td><?php echo number_format($orderDetails['Price']); ?> VND</td>
-                                                <?php $total += $orderDetails['Price']; ?>
-                                            </tr>
+                                                <tr>
+                                                    <td>
+                                                        <!-- <input type="submit" class="btn btn-outline-danger btn-sm" name="delProduct" value="Delete"> -->
+                                                        <button type="submit" class="btn-delete" name="deleteRecord"><i class="fa fa-trash"></i></button>
+                                                        <input type="hidden" name="productID" value="<?php echo $orderDetails['ProductID']; ?>">
+                                                    <td>1</td>
+                                                    <td><?php echo $orderDetails['ProductName']; ?></td>
+                                                    <td><input value="<?php echo $orderDetails['Quantity']; ?>" type="number" class="btn" name="quantity" min="1" size="10px"></td>
+                                                    <td><?php echo number_format($orderDetails['Price']); ?> VND</td>
+                                                    <td><?php echo number_format($orderDetails['PriceEachItem']); ?> VND</td>
+                                                    <?php $total += $orderDetails['PriceEachItem']; ?>
+                                                </tr>
+                                            <?php } ?>
                                         <?php } ?>
                                     </tbody>
                                 </table>

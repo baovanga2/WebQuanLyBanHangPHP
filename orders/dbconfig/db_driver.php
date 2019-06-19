@@ -21,14 +21,14 @@ function ShowProducts()
     return $datas;
 }
 
-// Hien thi san pham trong don hang cua khach
+// Hien thi san pham trong don hang cua khach.
 function ShowOrderDetails($ordersID)
 {
     global $conn;
     connect_db();
-    $sql = "SELECT p.pro_name as ProductName, SUM(od.od_quantity) as Quantity, SUM(od.od_quantity * p.pro_price) as Price
+    $sql = "SELECT p.pro_name as ProductName, SUM(od.od_quantity) as Quantity, SUM(od.od_quantity * p.pro_price) as PriceEachItem, p.pro_price as Price, p.pro_id as ProductID
     FROM orderdetails od, products p, orders o
-    WHERE od.pro_id = p.pro_id and o.or_id = $ordersID
+    WHERE od.pro_id = p.pro_id and o.or_id = $ordersID and od.or_id = $ordersID
     GROUP BY od.pro_id;";
     $result = mysqli_query($conn, $sql);
     $datas = array();
@@ -40,15 +40,25 @@ function ShowOrderDetails($ordersID)
     return $datas;
 }
 
-// Them san pham vao don hang
-function InsertProduct($productID, $orderID, $quantity)
+// Them san pham vao trong don hang, mac dinh so luong la 1.
+function InsertOrderdetails($productID, $ordersID)
+{ 
+    global $conn;
+    connect_db();
+    $sqlOne = "ALTER TABLE orderdetails AUTO_INCREMENT = 1;";
+    $sqlTwo = "INSERT INTO orderdetails(pro_id,or_id,od_quantity,od_price) VALUES($productID,$ordersID,1,(SELECT pro_price FROM products WHERE pro_id = $productID));";
+    mysqli_query($conn, $sqlOne);
+    mysqli_query($conn, $sqlTwo);
+}
+
+// Delete existing record in a `orderdetails` table
+function DeleteRecord($productID, $ordersID)
 {
     global $conn;
     connect_db();
-    $sql = "";
-    $result = mysqli_query($conn, $sql);
+    $sql = "DELETE FROM orderdetails WHERE pro_id = $productID AND or_id = $ordersID;";
+    mysqli_query($conn, $sql);
 }
-
 
 // Hien thi danh sach don hang 
 function ShowOrders()
@@ -67,6 +77,7 @@ function ShowOrders()
     }
     return $datas;
 }
+
 
 // Xoa mot don hang
 function DeleteOrders($ordersID)

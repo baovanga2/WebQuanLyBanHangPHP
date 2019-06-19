@@ -12,7 +12,6 @@
             background-color: #e4e6e7;
             color: black
         }
-
     </style>
 </head>
 
@@ -40,7 +39,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <form action="create_orders.php" method="get">
-                                <input type="submit" style="border-radius: 15px;" class="btn btn-primary" value="Create Orders" name="addOrder" >
+                                <input type="submit" style="border-radius: 15px;" class="btn btn-primary" value="Create Orders" name="addOrder">
                             </form>
                         </div>
 
@@ -65,7 +64,7 @@
                                                 <form action="order_products.php" method="GET">
                                                     <td>
                                                         <input type="submit" style="border-radius: 12px;" class="btn btn-outline-primary btn-sm" name="editOrders" value="Edit">
-                                                        <input type="submit" style="border-radius: 12px;" class="btn btn-outline-danger btn-sm" name="deleteOrders" value="Delete" >
+                                                        <input type="submit" style="border-radius: 12px;" class="btn btn-outline-danger btn-sm" name="deleteOrders" value="Delete">
                                                         <input type="hidden" name="ordersID" value="<?php echo $order['OrdersID']; ?>">
                                                         <input type="hidden" name="customerName" value="<?php echo $order['CustomerName']; ?>">
                                                     </td>

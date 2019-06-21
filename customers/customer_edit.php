@@ -10,9 +10,17 @@
 		$birthday=$_POST['birthday'];
 		$fullname=$_POST['fullname'];
 		$phone=$_POST['phone'];
-		edit_customer($id, $fullname, $gender, $email, $phone, $address, $birthday);
-		disconnect_db();
-		echo "<script>alert('Edit user information successfully!')</script>";
+		$r=edit_customer($id, $fullname, $gender, $email, $phone, $address, $birthday);
+		if ($r)
+		{
+			echo "<script>alert('Edit customer information successfully!')</script>";
+		}
+		else
+		{
+			echo "<script>alert('Edit customer information failed!')</script>";
+			echo "<script>window.history.back();</script>";
+		}
+		disconnect_db();	
 		echo "<script>window.location='customer_list.php';</script>";
 	}
 ?>

@@ -9,9 +9,17 @@
 		$address=$_POST['address'];
 		$fullname=$_POST['fullname'];
 		$phone=$_POST['phone'];
-		add_customer($fullname, $gender, $email, $phone, $address, $birthday);
-		disconnect_db();
-		echo "<script>alert('Add customer successfully!')</script>";
+		$r=add_customer($fullname, $gender, $email, $phone, $address, $birthday);
+		if ($r)
+		{
+			echo "<script>alert('Add customer successfully!')</script>";
+		}
+		else
+		{
+			echo "<script>alert('Add customer failed!')</script>";
+			echo "<script>window.history.back();</script>";
+		}
+		disconnect_db();	
 		echo "<script>window.location='customer_list.php';</script>";
 	}
 ?>

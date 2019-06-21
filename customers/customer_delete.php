@@ -3,8 +3,16 @@
 	$id = isset($_POST['id']) ? (int)$_POST['id'] : '';
 	if ($id)
 	{
-    	delete_customer($id);
-	}
-	echo "<script>alert('Delete customer {$id} successfully!')</script>";
+    	$r=delete_customer($id);
+    	if ($r)
+    	{
+    		echo "<script>alert('Delete customer {$id} successfully!')</script>";
+    	}
+    	else
+    	{
+    		echo "<script>alert('Customer {$id} cannot be deleted because there is a order in this customer!')</script>";
+    	}
+    	disconnect_db();
+	}	
 	echo "<script>window.location='customer_list.php';</script>";
 ?>

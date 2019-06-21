@@ -12,9 +12,17 @@
 		$phone=$_POST['phone'];
 		$address=$_POST['address'];
 		$hometown=$_POST['hometown'];
-		edit_user($id, $fullname, $gender, $email, $phone, $address, $hometown, $birthday, $role);
+		$r=edit_user($id, $fullname, $gender, $email, $phone, $address, $hometown, $birthday, $role);
+		if ($r)
+		{
+			echo "<script>alert('Edit user information successfully!')</script>";
+		}
+		else
+		{
+			echo "<script>alert('Edit user information failed!')</script>";
+			echo "<script>window.history.back();</script>";
+		}	
 		disconnect_db();
-		echo "<script>alert('Edit user information successfully!')</script>";
 		echo "<script>window.location='user_list.php';</script>";
 	}
 ?>

@@ -5,10 +5,26 @@
 	{
 		$name=$_POST['name'];
 		$description=$_POST['description'];
-		
-		add_producer($name, $description);
+		$r1=producer_exist(0, $name);
+		if ($r1)
+		{
+			echo "<script>alert('Producer exists!')</script>";
+			echo "<script>window.history.back();</script>";
+		}
+		else
+		{
+			$r2=add_producer($name, $description);
+			if ($r2)
+			{		
+				echo "<script>alert('Add producer successfully!')</script>";				
+			}
+			else
+			{
+				echo "<script>alert('Add producer failed!')</script>";
+				echo "<script>window.history.back();</script>";
+			}
+		}
 		disconnect_db();
-		echo "<script>alert('Add producer successfully!')</script>";
 		echo "<script>window.location='producer_list.php';</script>";
 	}
 ?>

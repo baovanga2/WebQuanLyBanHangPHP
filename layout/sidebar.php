@@ -42,8 +42,7 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="true" aria-controls="collapseProducts"><span>Products</span></a>
     <div id="collapseProducts" class="collapse" aria-labelledby="headingProducts" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="#">Page1</a>
-        <a class="collapse-item" href="#">Page2</a>
+        <a class="collapse-item" href="../products/product_list.php">Products</a>
         <a class="collapse-item" href="../categories/category_list.php">Categories</a>
         <a class="collapse-item" href="../producers/producer_list.php">Producers</a>
       </div>

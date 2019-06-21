@@ -66,4 +66,18 @@
 		return $query;
 	}
 
+	function category_exist($id, $name)
+	{
+		global $conn;
+    	connect_db();
+    	$sql="select * from categories where ca_name='$name' and not ca_id=$id";
+    	$query=mysqli_query($conn, $sql);
+    	$result = array();
+    	if (mysqli_num_rows($query) > 0)
+		{
+        	$row = mysqli_fetch_assoc($query);
+        	$result = $row;
+    	}
+    	return $result;
+	}
 ?>

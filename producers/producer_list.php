@@ -1,6 +1,8 @@
 <?php
 	include_once("../session.php");
 	include("producers.php");
+	$producers = get_all_producers();
+    disconnect_db();
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -32,12 +34,8 @@
       			?>
       			<!-- End of Topbar -->
       			<!-- Begin Page Content -->
-      			<?php
-      				$producers = get_all_producers();
-      				disconnect_db();
-      			?>
       			<div class="container-fluid">
-      				<p class="mb-4"><a href="producer_add.php" class="btn btn-success btn-icon-split">&nbspAdd producer&nbsp</a></p>
+      				<p class="mb-4"><a href="producer_add.php" class="btn btn-success">Add producer</a></p>
       				<!-- DataTales Users -->
       				<div class="card shadow mb-4">
       					<div class="card-header py-3">
@@ -45,7 +43,7 @@
       					</div>
       					<div class="card-body">
       						<div class="table-responsive">
-      							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      							<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
       								<thead>
 				                    	<tr>
 					                      	<th>ID</th>
@@ -72,9 +70,6 @@
 					                			<form method="post" action="producer_delete.php">
 						                			<a href="producer_edit.php?id=<?php echo $producer['pr_id'] ?>" class="btn btn-info btn-circle">
 		                    							<i class="fas fa-info-circle"></i>
-		                  							</a>
-		                  							<a href="#" class="btn btn-warning btn-circle">
-		                    							<i class="fas fa-exclamation-triangle"></i>
 		                  							</a>
 		                  							<input type="hidden" name="id" value="<?php echo $producer['pr_id']; ?>">
 	                  								<button type="submit" name="deleteproducer" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete producer <?php echo $producer['pr_id']; ?> ?');">

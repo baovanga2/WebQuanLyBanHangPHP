@@ -1,6 +1,8 @@
 <?php
 	include_once("../session.php");
 	include("users.php");
+	$users = get_all_users();
+    disconnect_db();
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -33,12 +35,8 @@
       			?>
       			<!-- End of Topbar -->
       			<!-- Begin Page Content -->
-      			<?php
-      				$users = get_all_users();
-      				disconnect_db();
-      			?>
       			<div class="container-fluid">
-                    <p class="mb-4"><a href="user_add.php" class="btn btn-success btn-icon-split">&nbspAdd user&nbsp</a></p>
+                    <p class="mb-4"><a href="user_add.php" class="btn btn-success">Add user</a></p>
                   	<!-- DataTales Users -->
       				<div class="card shadow mb-4">
       					<div class="card-header py-3">
@@ -46,7 +44,7 @@
       					</div>
       					<div class="card-body">
       						<div class="table-responsive">
-      							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      							<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
       								<thead>
 			                    		<tr>
 				                      		<th>ID</th>
@@ -87,7 +85,7 @@
 	                    								<i class="fas fa-info-circle"></i>
 	                  								</a>
 	                  								<a href="#" class="btn btn-warning btn-circle">
-	                    								<i class="fas fa-exclamation-triangle"></i>
+	                    								<i class="fas fa-key"></i>
 	                  								</a>                  							
 	                  								<input type="hidden" name="id" value="<?php echo $user['u_id']; ?>">
 	                  								<button type="submit" name="deleteuser" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete user <?php echo $user['u_id']; ?> ?');">

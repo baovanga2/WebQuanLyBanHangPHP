@@ -5,10 +5,26 @@
 	{
 		$name=$_POST['name'];
 		$description=$_POST['description'];
-		
-		add_category($name, $description);
+		$r1=category_exist(0, $name);
+		if ($r1)
+		{
+			echo "<script>alert('Category exists!')</script>";
+			echo "<script>window.history.back();</script>";
+		}
+		else
+		{
+			$r2=add_category($name, $description);
+			if ($r2)
+			{			
+				echo "<script>alert('Add category successfully!')</script>";			
+			}
+			else
+			{
+				echo "<script>alert('Add category failed!')</script>";
+				echo "<script>window.history.back();</script>";
+			}
+		}
 		disconnect_db();
-		echo "<script>alert('Add category successfully!')</script>";
 		echo "<script>window.location='category_list.php';</script>";
 	}
 ?>

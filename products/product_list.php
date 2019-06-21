@@ -1,7 +1,7 @@
 <?php
 	include_once("../session.php");
-	include_once("categories.php");
-	$categories = get_all_categories();
+	include("products.php");
+	$products = get_all_products();
     disconnect_db();
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
 		// Custom styles for this page
 		include_once("../layout/cssdatatables.php");
 	?>
-	<title>Category Management</title>
+	<title>Products Management</title>
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -35,44 +35,59 @@
       			<!-- End of Topbar -->
       			<!-- Begin Page Content -->
       			<div class="container-fluid">
-      				<p class="mb-4"><a href="category_add.php" class="btn btn-success">Add Category</a></p>
-	      			<!-- DataTales Users -->
-	      			<div class="card shadow mb-4">
-	      				<div class="card-header py-3">
-	      					<h6 class="m-0 font-weight-bold text-primary">Categories List</h6>
-	      				</div>
-	      				<div class="card-body">
-	      					<div class="table-responsive">
-	      						<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-	      							<thead>
+      				<p class="mb-4"><a href="product_add.php" class="btn btn-success">Add product</a></p>
+      				<!-- DataTales Products -->
+      				<div class="card shadow mb-4">
+      					<div class="card-header py-3">
+      						<h6 class="m-0 font-weight-bold text-primary">Products List</h6>
+      					</div>
+      					<div class="card-body">
+      						<div class="table-responsive">
+      							<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+      								<thead>
 				                    	<tr>
 					                      	<th>ID</th>
-					                      	<th>Name</th>
+					                      	<th class="w-25">Name</th>
+					                      	<th>Price</th>
+					                      	<th>Quantity</th>
+					                      	<th>Category</th>
+					                      	<th>Producer</th>
 					                      	<th>Actions</th>
 				                    	</tr>
-					                </thead>
+				                	</thead>
 					                <tfoot>
 					                    <tr>
 					                      	<th>ID</th>
 					                      	<th>Name</th>
+					                      	<th>Price</th>
+					                      	<th>Quantity</th>
+					                      	<th>Category</th>
+					                      	<th>Producer</th>
 					                      	<th>Actions</th>
 				                    	</tr>
 					                </tfoot>
 					                <tbody>
 					                	<?php
-					                		foreach ($categories as $category)
+					                		foreach ($products as $product)
 					                		{
 					                	?>
 					                	<tr>
-					                		<td><?php echo $category['ca_id']; ?></td>
-					                		<td><?php echo $category['ca_name']; ?></td>
+					                		<td><?php echo $product['pro_id']; ?></td>
+					                		<td><?php echo $product['pro_name']; ?></td>
+					                		<td><?php echo $product['pro_price']; ?></td>
+					                		<td><?php echo $product['pro_quantity']; ?></td>
+					                		<td><?php echo $product['ca_name']; ?></td>
+					                		<td><?php echo $product['pr_name']; ?></td>
 					                		<td>
-					                			<form method="post" action="category_delete.php">
-						                			<a href="category_edit.php?id=<?php echo $category['ca_id'] ?>" class="btn btn-info btn-circle">
+					                			<form method="post" action="product_delete.php">
+						                			<a href="product_edit.php?id=<?php echo $product['pro_id'] ?>" class="btn btn-info btn-circle">
 		                    							<i class="fas fa-info-circle"></i>
 		                  							</a>
-		                  							<input type="hidden" name="id" value="<?php echo $category['ca_id']; ?>">
-	                  								<button type="submit" name="deletecategory" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete category <?php echo $category['ca_id']; ?> ?');">
+		                  							<a href="" class="btn btn-success btn-circle">
+		                  								<i class="fas fa-plus"></i>
+		                  							</a>
+		                  							<input type="hidden" name="id" value="<?php echo $product['pro_id']; ?>">
+	                  								<button type="submit" name="deleteproduct" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete product <?php echo $product['pro_id']; ?> ?');">
 	                  									<i class="fas fa-trash"></i>
 	                  								</button>
 		                  						</form>
@@ -82,10 +97,10 @@
 					                		}
 					                	?>
 					                </tbody>
-	      						</table>
-	      					</div>
-	      				</div>
-	      			</div>
+      							</table>
+      						</div>
+      					</div>
+      				</div>
       			</div>
       			<!-- End of Page Content -->
       		</div>
@@ -99,6 +114,7 @@
 		<!-- End of Content Wrapper -->
 	</div>
 	<!-- End of Page Wrapper -->
+
 	<?php
 		// Scroll to Top Button
 		include_once("../layout/topbutton.php");

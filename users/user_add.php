@@ -12,25 +12,28 @@
 		$phone=$_POST['phone'];
 		$address=$_POST['address'];
 		$hometown=$_POST['hometown'];
+		$loginname=$_POST['loginname'];
 		$password=md5($_POST['password']);
-		$errors=false;
-		if (loginname_exist($_POST['loginname']))
-			$errors=true;
-		else
-			$loginname=$_POST['loginname'];
-
-		if (!$errors)
+		$r1=loginname_exist($loginname);
+		if ($r1)
 		{
-			add_user($fullname, $gender, $email, $phone, $address, $hometown, $birthday, $loginname, $password, $role);
-			disconnect_db();
-			echo "<script>alert('Add user successfully!')</script>";
-			echo "<script>window.location='user_list.php';</script>";
-		}
-		if ($errors)
-		{		
 			echo "<script>alert('Login name exists!')</script>";
 			echo "<script>window.history.back();</script>";
 		}
+		else
+		{
+			$r2=add_user($fullname, $gender, $email, $phone, $address, $hometown, $birthday, $loginname, $password, $role);
+			if ($r2)
+			{
+				echo "<script>alert('Add user successfully!')</script>";
+			}
+			else
+			{
+				echo "<script>alert('Add user failed!')</script>";
+			}
+		}
+		disconnect_db();	
+		echo "<script>window.location='user_list.php';</script>";
 	}
 ?>
 <!DOCTYPE html>

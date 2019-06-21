@@ -6,9 +6,26 @@
 		$id=$_POST['id'];
 		$description=$_POST['description'];
 		$name=$_POST['name'];
-		edit_category($id, $name, $description);
-		disconnect_db();
-		echo "<script>alert('Edit categories information successfully!')</script>";
+		$r1=category_exist($id, $name);
+		if ($r1)
+		{
+			echo "<script>alert('Category exists!')</script>";
+			echo "<script>window.history.back();</script>";
+		}
+		else
+		{
+			$r2=edit_category($id, $name, $description);
+			if ($r2)
+			{
+				echo "<script>alert('Edit category information successfully!')</script>";
+			}
+			else
+			{
+				echo "<script>alert('Edit category information failed!')</script>";
+				echo "<script>window.history.back();</script>";
+			}
+		}	
+		disconnect_db();	
 		echo "<script>window.location='category_list.php';</script>";
 	}
 ?>
@@ -19,7 +36,7 @@
 	<?php
 		include_once("../layout/meta_link.php");
 	?>
-	<title>Category Management</title>
+	<title>Category Editing</title>
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -49,6 +66,7 @@
     						$category = get_category($id);
     						disconnect_db();
 						}
+
       					if (!$category)
       					{
    							echo "<script>window.location='category_list.php';</script>";

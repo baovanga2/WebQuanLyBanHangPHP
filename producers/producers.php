@@ -66,4 +66,19 @@
 		return $query;
 	}
 
+	function producer_exist($id, $name)
+	{
+		global $conn;
+    	connect_db();
+    	$sql="select * from producers where pr_name='$name' and not pr_id=$id";
+    	$query=mysqli_query($conn, $sql);
+    	$result = array();
+    	if (mysqli_num_rows($query) > 0)
+		{
+        	$row = mysqli_fetch_assoc($query);
+        	$result = $row;
+    	}
+    	return $result;
+	}
+
 ?>

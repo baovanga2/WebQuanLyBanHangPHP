@@ -20,7 +20,7 @@
 			$r2=edit_product($id, $name, $price, $ca_id, $pr_id, $detail);
 			if ($r2)
 			{			
-				echo "<script>alert('Edit product information successfully!')</script>";			
+				echo "<script>alert('Edit product information successfully!')</script>";
 			}
 			else
 			{

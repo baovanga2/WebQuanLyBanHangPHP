@@ -1,7 +1,7 @@
 <?php
 	include_once("../session.php");
 	include("users.php");
-	$users = get_all_users();
+	$items = get_password_change_history();
     disconnect_db();
 ?>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 	<?php
 		include_once("../layout/cssdatatables.php")
 	?>
-	<title>User Management</title>
+	<title>Password change history</title>
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -36,11 +36,11 @@
       			<!-- End of Topbar -->
       			<!-- Begin Page Content -->
       			<div class="container-fluid">
-                    <p class="mb-4"><a href="user_add.php" class="btn btn-success">Add user</a></p>
-                  	<!-- DataTales Users -->
+      				<p class="mb-4">When deleting users or changing passwords, the system will automatically record and present here.</p>
+                  	<!-- DataTales Password change history -->
       				<div class="card shadow mb-4">
       					<div class="card-header py-3">
-      						<h6 class="m-0 font-weight-bold text-primary">Users List</h6>
+      						<h6 class="m-0 font-weight-bold text-primary">Password change history</h6>
       					</div>
       					<div class="card-body">
       						<div class="table-responsive">
@@ -48,51 +48,29 @@
       								<thead>
 			                    		<tr>
 				                      		<th>ID</th>
-					                      	<th>Full name</th>
-					                      	<th>Email</th>
-					                      	<th>Phone</th>
-						                    <th>Gender</th>
-						                    <th>Roles</th>
-						                    <th>Actions</th>
+					                      	<th>User is changed</th>
+					                      	<th>User changed</th>
+					                      	<th>Change at</th>
 			                    		</tr>
 					                </thead>
 					                <tfoot>
 					                    <tr>
 					                      	<th>ID</th>
-					                      	<th>Full name</th>
-					                      	<th>Email</th>
-					                      	<th>Phone</th>
-						                    <th>Gender</th>
-						                    <th>Roles</th>
-						                    <th>Actions</th>
+					                      	<th>User is change</th>
+					                      	<th>User changed</th>
+					                      	<th>Change at</th>
 				                    	</tr>
 					                </tfoot>
 					                <tbody>
 					                	<?php
-					                		foreach ($users as $user)
+					                		foreach ($items as $item)
 					                		{
 					                	?>
 					                	<tr>
-					                		<td><?php echo $user['u_id']; ?></td>
-					                		<td><?php echo $user['u_fullname']; ?></td>
-					                		<td><?php echo $user['u_email']; ?></td>
-					                		<td><?php echo $user['u_phone']; ?></td>
-					                		<td><?php echo $user['u_gender']; ?></td>
-					                		<td><?php echo $user['r_name']; ?></td>
-					                		<td>
-					                			<form method="post" action="user_delete.php">
-					                				<a href="user_edit.php?id=<?php echo $user['u_id']; ?>" class="btn btn-info btn-circle">
-	                    								<i class="fas fa-info-circle"></i>
-	                  								</a>
-	                  								<a href="user_password_change.php?id=<?php echo $user['u_id']; ?>" class="btn btn-warning btn-circle">
-	                    								<i class="fas fa-key"></i>
-	                  								</a>                  							
-	                  								<input type="hidden" name="id" value="<?php echo $user['u_id']; ?>">
-	                  								<button type="submit" name="deleteuser" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete user <?php echo $user['u_id']; ?> ?');">
-	                  									<i class="fas fa-trash"></i>
-	                  								</button>
-	                  							</form>
-					                		</td>
+					                		<td><?php echo $item['id']; ?></td>
+					                		<td><?php echo $item['user_is_changed']; ?></td>
+					                		<td><?php echo $item['user_changed']; ?></td>
+					                		<td><?php echo $item['change_at']; ?></td>
 					                	</tr>
 					                	<?php
 					                		}

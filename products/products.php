@@ -45,8 +45,8 @@
 	{
 		global $conn;
 		connect_db();
-		$sql="insert into products (pro_name, pro_price, ca_id, pr_id, pro_detail)
-						values ('$name', $price, $ca_id, $pr_id, '$detail')";
+		$sql="insert into products (pro_name, pro_price, ca_id, pr_id, pro_detail, pro_quantity)
+						values ('$name', $price, $ca_id, $pr_id, '$detail', 0)";
 		$query = mysqli_query($conn, $sql);
 		return $query;
 	}
@@ -81,5 +81,14 @@
         	$result = $row;
     	}
     	return $result;
+	}
+
+	function add_quantity($id, $quantity)
+	{
+		global $conn;
+		connect_db();
+		$sql="update products set pro_quantity=pro_quantity+$quantity where pro_id=$id";
+		$query = mysqli_query($conn, $sql);
+		return $query;
 	}
 ?>

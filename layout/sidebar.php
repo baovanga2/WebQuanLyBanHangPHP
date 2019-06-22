@@ -53,7 +53,9 @@
   <hr class="sidebar-divider">
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStatistical" aria-expanded="true" aria-controls="collapseStatistical"><span>Statistical</span></a>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStatistical" aria-expanded="true" aria-controls="collapseStatistical">
+      <span>Statistical</span>
+    </a>
     <div id="collapseStatistical" class="collapse" aria-labelledby="headingStatistical" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" href="#">Page1</a>
@@ -66,7 +68,15 @@
   <hr class="sidebar-divider">
 
   <li class="nav-item">
-    <a class="nav-link" href="../users/user_list.php"><span>Users</span></a>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
+      <span>Users</span>
+    </a>
+    <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="../users/user_list.php">Users</a>
+        <a class="collapse-item" href="../users/password_change_history.php">Password change history</a>
+      </div>
+    </div>
   </li>
 
   <!-- Divider -->

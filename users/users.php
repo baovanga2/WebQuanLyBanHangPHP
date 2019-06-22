@@ -133,4 +133,40 @@
 		return $query;
 	}
 
+	function add_password_change_history($user_is_changed, $user_changed)
+	{
+		global $conn;
+		connect_db();
+		$sql="insert into password_change_history (user_is_changed, user_changed, change_at) values ('$user_is_changed', '$user_changed', now())";
+		$query = mysqli_query($conn, $sql);
+		return $query;
+	}
+
+	function change_password($id, $password)
+	{
+		global $conn;
+		connect_db();
+		$password=md5($password);
+		$sql="update users set u_password='$password' where u_id=$id";
+		$query = mysqli_query($conn, $sql);
+		return $query;
+	}
+
+	function get_password_change_history()
+	{
+		global $conn;
+		connect_db();
+		$sql="select id, user_is_changed, user_changed, change_at from password_change_history";
+		$query=mysqli_query($conn, $sql);
+		$result=array();
+		if ($query)
+		{
+			while ($row=mysqli_fetch_assoc($query))
+			{
+				$result[]=$row;
+			}
+		}
+		return $result;
+	}
+
 ?>

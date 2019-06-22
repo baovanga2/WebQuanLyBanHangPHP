@@ -1,11 +1,14 @@
 <?php
+    include_once("../session.php");
 	include_once("users.php");
 	$id = isset($_POST['id']) ? (int)$_POST['id'] : '';
 	if ($id)
 	{
+        $user=get_user($id);
     	$r=delete_user($id);
     	if ($r)
     	{
+            add_password_change_history($user['u_loginname'], $_SESSION['u_loginname']);
     		echo "<script>alert('Delete user {$id} successfully!')</script>";
     	}
     	else

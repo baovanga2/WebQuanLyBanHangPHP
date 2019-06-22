@@ -2,7 +2,6 @@
 	include_once("../session.php");
 	include("products.php");
 	$products = get_all_products();
-    disconnect_db();
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -83,7 +82,7 @@
 						                			<a href="product_edit.php?id=<?php echo $product['pro_id'] ?>" class="btn btn-info btn-circle">
 		                    							<i class="fas fa-info-circle"></i>
 		                  							</a>
-		                  							<a href="" class="btn btn-success btn-circle">
+		                  							<a href="" class="btn btn-success btn-circle" data-toggle="modal"  data-target="#addQuantity<?php echo $product['pro_id'] ?>Modal">
 		                  								<i class="fas fa-plus"></i>
 		                  							</a>
 		                  							<input type="hidden" name="id" value="<?php echo $product['pro_id']; ?>">
@@ -116,6 +115,9 @@
 	<!-- End of Page Wrapper -->
 
 	<?php
+		//add Quantity Modal
+		include_once("addquantity.php");
+
 		// Scroll to Top Button
 		include_once("../layout/topbutton.php");
 		include_once("../layout/script.php");

@@ -14,9 +14,9 @@ if (isset($_GET['deleteOrders'])) {
 if (isset($_GET['editOrders'])) {
     header("Location:http://localhost/WebQuanLyBanHangPHP/orders/order_products.php");
     $ordersID = $_GET['ordersID'];
-    setcookie("ordersID", "$ordersID", time() + 3600);
+    setcookie("ordersID", "$ordersID", time() + 7200);
     $customerName = $_GET['customerName'];
-    setcookie("customerName", "$customerName", time() + 3600);
+    setcookie("customerName", "$customerName", time() + 7200);
     $ordersID = $_COOKIE['ordersID'];
 }
 

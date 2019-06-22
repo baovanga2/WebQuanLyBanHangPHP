@@ -42,15 +42,28 @@ function ShowOrderDetails($ordersID)
 
 // Them san pham vao trong don hang, mac dinh so luong la 1.
 function InsertOrderdetails($productID, $ordersID)
-{ 
+{
     global $conn;
     connect_db();
     $sqlOne = "ALTER TABLE `orderdetails` AUTO_INCREMENT = 1;";
     $sqlTwo = "INSERT INTO `orderdetails`(`pro_id`,`or_id`,`od_quantity`,`od_price`) VALUES('$productID','$ordersID',1,(SELECT `pro_price` FROM `products` WHERE `pro_id` = '$productID'));";
     mysqli_query($conn, $sqlOne);
     mysqli_query($conn, $sqlTwo);
-   
+}
 
+function InsertOrderdetailsPlus($productID, $customerName)
+{
+    global $conn;
+    connect_db();
+    $sqlOne = "ALTER TABLE `orderdetails` AUTO_INCREMENT = 1;";
+    $sqlTwo = "INSERT INTO `orderdetails`(`pro_id`,`or_id`,`od_quantity`,`od_price`) values('$productID',(SELECT or_id FROM orders WHERE cus_id = (SELECT `cus_id` FROM `customers` WHERE `cus_fullname` = '$customerName')),1,(SELECT `pro_price` FROM `products` WHERE `pro_id` = '$productID'));";
+    mysqli_query($conn, $sqlOne);
+    $result = mysqli_query($conn, $sqlTwo);
+    if (!$result) {
+        print_r("<pre>");
+        echo "Error when inserting to orderdetails table!";
+        echo "\n" . mysqli_error($conn);
+    }
 }
 
 // Delete existing record in a `orderdetails` table
@@ -60,7 +73,6 @@ function DeleteRecord($productID, $ordersID)
     connect_db();
     $sql = "DELETE FROM `orderdetails` WHERE `pro_id` = '$productID' AND `or_id` = '$ordersID';";
     mysqli_query($conn, $sql);
-    
 }
 
 // Hien thi danh sach don hang 
@@ -94,11 +106,11 @@ function DeleteOrders($ordersID)
     $result = mysqli_query($conn, $sqlOne);
     $result = mysqli_query($conn, $sqlTwo);
     $result = mysqli_query($conn, $sqlThree);
-    if($result==false) {
+    if ($result == false) {
         print_r("<pre>");
         echo "Error when do deleting a record orders!";
+        echo "\n" . mysqli_error($conn);
     }
-    
 }
 
 // Insert a record into the `customers` table.
@@ -110,10 +122,24 @@ function InsertCustomer($customerName, $customerEmail, $customerAddress, $custom
     $sqlTwo = "INSERT INTO `customers`(`cus_fullname`, `cus_email`, `cus_address`, `cus_gender`, `cus_phone`, `cus_birthday`) VALUES('$customerName', '$customerEmail', '$customerAddress', '$customerGender', '$customerPhone', '$customerBirthday');";
     mysqli_query($conn, $sqlOne);
     $result = mysqli_query($conn, $sqlTwo);
-    if(!$result) {
+    if (!$result) {
         print_r("<pre>");
         echo "Error when inserting to customers table!";
         echo "\n" . mysqli_error($conn);
     }
+}
 
+function CreateOrders($customerName, $userID, $dateCreated)
+{
+    global $conn;
+    connect_db();
+    $sqlOne = "ALTER TABLE `orders` AUTO_INCREMENT = 1;";
+    $sqlTwo = "INSERT INTO `orders`(`cus_id`,`u_id`,`or_createddate`) VALUES((SELECT `cus_id` FROM `customers` WHERE `cus_fullname` = '$customerName'), '$userID','$dateCreated');";
+    mysqli_query($conn, $sqlOne);
+    $result = mysqli_query($conn, $sqlTwo);
+    if (!$result) {
+        print_r("<pre>");
+        echo "Error when inserting to orders table!";
+        echo "\n" . mysqli_error($conn);
+    }
 }

@@ -23,7 +23,7 @@
     <div id="collapseOrders" class="collapse" aria-labelledby="headingOrders" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" href="../orders/orders.php">Management</a>
-        <a class="collapse-item" href="../orders/view-orders.php">List</a>
+        <a class="collapse-item" href="../orders/view-oreders.php">List</a>
       </div>
     </div>
   </li>

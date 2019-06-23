@@ -1,18 +1,21 @@
 <?php
 
-include_once("dbconfig/db_driver.php");
+include_once("dbconfig/db-driver.php");
 
-// Delete an orders 
+// Delete an orders from orders.php
 if (isset($_GET['deleteOrders'])) {
     $ordersID = $_GET['ordersID'];
-    DeleteOrders($ordersID);
-    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/add_orders.php");
+    $productID = $_GET['productID'];
+    $quantity = $_GET['quantity'];
+    // Delete a product in orders
+    delete_orders($ordersID, $productID, $quantity);
+    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/orders.php");
     disconnect_db();
 }
 
-// Get data orders ID and Customer name 
+// Get data orders ID and Customer name from orders.php
 if (isset($_GET['editOrders'])) {
-    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/order_products.php");
+    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/edit-cart.php");
     $ordersID = $_GET['ordersID'];
     setcookie("ordersID", "$ordersID", time() + 7200);
     $customerName = $_GET['customerName'];
@@ -22,21 +25,33 @@ if (isset($_GET['editOrders'])) {
 
 $customerName = $_COOKIE['customerName'];
 $ordersID = $_COOKIE['ordersID'];
-$listOrderDetails = ShowOrderDetails($ordersID);
+$listOrderDetails = show_order_details($ordersID);
 
 // Insert the product into the orderdetails table
 if (isset($_GET['addProduct'])) {
-    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/order_products.php");
-    $productID = $_GET['productID'];
-    InsertOrderdetails($productID, $ordersID);
+    $quantity = $_GET['quantity'];
+    if ($quantity == '0') {
+        echo "<script style=\"text/javascript\">";
+        echo "notification();";
+        echo "</script>";
+    } else {
+        header("Location:http://localhost/WebQuanLyBanHangPHP/orders/edit-cart.php");
+        $productID = $_GET['productID'];
+        insert_order_details($productID, $ordersID);
+        // update_quantity_add($productID);
+    }
 }
 
 // Delete existing record in a orderdetails table
 if (isset($_GET['deleteRecord'])) {
+    $quantity = $_GET['quantity'];
     $productID = $_GET['productID'];
-    DeleteRecord($productID, $ordersID);
-    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/order_products.php");
- }
+    delete_record($productID, $ordersID);
+    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/edit-cart.php");
+    update_quantity_delete($productID, $quantity);
+}
+
+
 
 ?>
 
@@ -74,6 +89,16 @@ if (isset($_GET['deleteRecord'])) {
             border-radius: 12px;
         }
 
+        .btn-update {
+            background-color: #ffa366;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+
         /* Darker background on mouse-over */
         .btn-add:hover {
             background-color: #3366ff;
@@ -82,10 +107,41 @@ if (isset($_GET['deleteRecord'])) {
         .btn-delete:hover {
             background-color: #ff0000;
         }
+
+        .btn-update:hover {
+            background-color: #ff6600;
+        }
     </style>
+    <script style="text/javascript">
+        function notification() {
+            $('#notification').modal()
+        }
+        notification();
+    </script>
 </head>
 
 <body id="page-top">
+    <!-- Begin modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="notification">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Notification!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Products are out of stock, please choose another product!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Eng modal -->
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
@@ -99,21 +155,45 @@ if (isset($_GET['deleteRecord'])) {
                 <!-- End of topbar -->
                 <!-- Begin page content -->
                 <?php
-                include_once("dbconfig/db_driver.php");
-                $listProducts = ShowProducts();
+                include_once("dbconfig/db-driver.php");
+                $listProducts = show_products();
                 // $listOrderDetails = ShowOrderDetails($ordersID);
                 disconnect_db();
                 ?>
                 <div class="container-fluid">
+
                     <h1 class="h3 mb-2 text-gray-800"><strong>Edit orders</strong></h1>
 
                     <!-- List of products -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
+                            <!-- <table style="border:0px; float: left; margin-right: 10px" class="table table-borderless">
+                                    <th colspan="4">
+                                        <a href="./orders.php">
+                                            <button type="submit" style="" class="btn btn-light" name="back">
+                                                <img src="./imgs/back.png"> Back
+                                            </button>
+                                        </a>
+                                    </th>
+
+                                    <th colspan="5">
+                                        <a href="../home/homepage.php">
+                                            <button type="submit" style="float: right" class="btn btn-light" name="homepage">
+                                                <img src="./imgs/homepage.png"> Homepage
+                                            </button>
+                                        </a>
+                                    </th>
+                                </table> -->
+                            <a href="./orders.php">
+                                <button type="submit" style="" class="btn btn-light" name="back">
+                                    <img src="./imgs/back.png"> Back
+                                </button>
+                            </a>
+                            <hr>
                             <div class="table-responsive">
                                 <!-- <form method="GET"> -->
-                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <table class="table table-hover table-sm" id="dataTable" width="100%" cellspacing="0">
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>Action</th>
                                             <th>ProductCode</th>
@@ -132,14 +212,18 @@ if (isset($_GET['deleteRecord'])) {
                                                 <form id="get-id-product" method="GET">
                                                     <td>
                                                         <!-- <input type="submit" class="btn btn-outline-primary btn-sm" name="addProduct" value="Add"> -->
-                                                        <button type="submit" class="btn-add" name="addProduct"><i class="fas fa-plus"></i></button>
+                                                        <button type="submit" class="btn-add" name="addProduct"><i class="fas fa-plus"></i> Add</button>
                                                         <input type="hidden" name="productID" value="<?php echo $product['ProductCode']; ?>">
                                                     </td>
                                                     <td><?php echo $product['ProductCode']; ?></td>
                                                     <td><?php echo $product['ProductName']; ?></td>
-                                                    <td><?php echo $product['Quantity']; ?></td>
+                                                    <td>
+                                                        <?php echo $product['Quantity']; ?>
+                                                        <input type="hidden" name="quantity" value="<?php echo $product['Quantity']; ?>">
+                                                    </td>
                                                     <td><?php echo $product['Price']; ?> VND</td>
                                                     <td><?php echo $product['Details']; ?></td>
+
                                                 </form>
                                             </tr>
                                         <?php } ?>
@@ -162,8 +246,8 @@ if (isset($_GET['deleteRecord'])) {
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <table class="table table-hover table-sm" id="dataTable" width="100%" cellspacing="0">
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>Action</th>
                                             <th>NumericalOrder</th>
@@ -171,6 +255,7 @@ if (isset($_GET['deleteRecord'])) {
                                             <th>Quantity</th>
                                             <th>Price</th>
                                             <th>TotalPrice</th>
+                                            <th>UpdateQuantity</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -187,7 +272,7 @@ if (isset($_GET['deleteRecord'])) {
                                                     <form method="get">
                                                         <td>
                                                             <!-- <input type="submit" class="btn btn-outline-danger btn-sm" name="delProduct" value="Delete"> -->
-                                                            <button type="submit" class="btn-delete" name="deleteRecord"><i class="fa fa-trash"></i></button>
+                                                            <button type="submit" class="btn-delete" name="deleteRecord"><i class="fa fa-trash"></i> Delete</button>
                                                             <input type="hidden" name="productID" value="<?php echo $orderDetails['ProductCode']; ?>">
                                                         </td>
                                                         <td><?php echo $key + 1; ?></td>
@@ -195,6 +280,11 @@ if (isset($_GET['deleteRecord'])) {
                                                         <td><input value="<?php echo $orderDetails['Quantity']; ?>" type="number" class="btn" name="quantity" min="1" size="10px"></td>
                                                         <td><?php echo number_format($orderDetails['Price']); ?> VND</td>
                                                         <td><?php echo number_format($orderDetails['TotalPrice']); ?> VND</td>
+                                                        <td style="float: right;">
+                                                            <button type="submit" class="btn-update" name="updateQuantity">
+                                                                <i style='font-size:14px' class='fas'>&#xf044;</i> Update
+                                                            </button>
+                                                        </td>
                                                         <?php $total += $orderDetails['TotalPrice']; ?>
                                                     </form>
                                                 </tr>

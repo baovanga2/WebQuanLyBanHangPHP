@@ -19,11 +19,11 @@
   <hr class="sidebar-divider">
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="true" aria-controls="collapseOrders"><span>Order Management</span></a>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="true" aria-controls="collapseOrders"><span>Orders</span></a>
     <div id="collapseOrders" class="collapse" aria-labelledby="headingOrders" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="../orders/add_orders.php">Order Products</a>
-        <a class="collapse-item" href="../orders/show_orders.php">View Orders</a>
+        <a class="collapse-item" href="../orders/orders.php">Management</a>
+        <a class="collapse-item" href="../orders/view-orders.php">List</a>
       </div>
     </div>
   </li>

@@ -111,16 +111,6 @@
             transform: rotate(45deg);
         }
     </style>
-    <script style="text/javascript">
-        function validateForm() {
-            // Check customer name
-            var cName = document.forms["register"]["customerName"].value;
-            if(cName='') {
-                alert('Do not leave the required fields blank');
-                return false;
-            }
-        }
-    </script>
 </head>
 
 <body id="page-top">
@@ -137,17 +127,44 @@
                 <!-- End of topbar -->
                 <!-- Begin page content -->
                 <?php
-                include("dbconfig/db_driver.php");
-                $listProducts = ShowProducts();
+                include("dbconfig/db-driver.php");
+                $listProducts = show_products();
                 disconnect_db();
                 ?>
                 <div class="container-fluid">
+
                     <h2 class="h3 mb-2 text-gray-800">Create a new orders</h2>
                     <!-- List of products -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            <form action="dbconfig/btn_create_orders.php" method="POST" name="register" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" onsubmit="return validateForm()">
-                                <h4><b>Register</b></h4>
+                            <!-- <table style="border:0px; float: left; margin-right: 10px" class="table table-borderless">
+                                <th colspan="4">
+                                    <a href="./orders.php">
+                                        <button type="submit" style="" class="btn btn-light" name="back">
+                                            <img src="./imgs/back.png"> Back
+                                        </button>
+                                    </a>
+                                </th>
+
+                                <th colspan="5">
+                                    <a href="../home/homepage.php">
+                                        <button type="submit" style="float: right" class="btn btn-light" name="homepage">
+                                            <img src="./imgs/homepage.png"> Homepage
+                                        </button>
+                                    </a>
+                                </th>
+                            </table> -->
+
+                            <a href="./orders.php">
+                                <button type="submit" style="" class="btn btn-light" name="back">
+                                    <img src="./imgs/back.png"> Back
+                                </button>
+                            </a>
+
+                            <form action="dbconfig/btn-create-orders.php" method="POST" name="register" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
+                                <hr class="hr-customise">
+
+                                <h4><b>Customer information:</b></h4>
                                 <hr class="hr-customise">
                                 <div class="col-sm-10">
                                     <div class="table-responsive">
@@ -189,8 +206,8 @@
                                 <hr class="hr-customise">
                                 <div class="table-responsive">
                                     <!-- <form method="GET"> -->
-                                    <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
+                                    <table class="table table-hover table-sm" id="dataTable" width="100%" cellspacing="0">
+                                        <thead class="thead-dark">
                                             <tr>
                                                 <th>Action</th>
                                                 <th>ProductCode</th>
@@ -225,7 +242,7 @@
                                         </tbody>
                                     </table>
                                     <br>
-                                    <button type="submit" class="btn btn-success btn-md btn-block" name="smOrders">Add now!</button>
+                                    <button type="submit" class="btn btn-success btn-md btn-block" name="smOrders" onclick="validateCreateOrders();">Add now</button>
                             </form>
                             <!-- </form> -->
                         </div>

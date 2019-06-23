@@ -103,7 +103,7 @@
                         <div class="card-header py-3">
                             <form action="create-orders.php" method="get">
                                 <!-- <input type="submit" style="border-radius: 15px;" class="btn btn-primary" value="Create new" name="createNew"> -->
-                                <button type="submit" style="border-radius: 100px;" class="btn btn-new btn-default" name="createNew">
+                                <button type="submit" style="border-radius: 50px;" class="btn btn-new btn-default" name="createNew">
                                     <img src="./imgs/cart.png" /> New 
                                 </button>
                             </form>

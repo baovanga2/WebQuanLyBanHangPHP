@@ -185,7 +185,7 @@ if (isset($_GET['deleteRecord'])) {
                                     </th>
                                 </table> -->
                             <a href="./orders.php">
-                                <button type="submit" style="" class="btn btn-light" name="back">
+                                <button type="submit" style="border-radius: 50px;" class="btn btn-light" name="back">
                                     <img src="./imgs/back.png"> Back
                                 </button>
                             </a>

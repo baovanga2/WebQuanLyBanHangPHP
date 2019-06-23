@@ -156,7 +156,7 @@
                             </table> -->
 
                             <a href="./orders.php">
-                                <button type="submit" style="" class="btn btn-light" name="back">
+                                <button type="submit" style="border-radius: 50px;" class="btn btn-light" name="back">
                                     <img src="./imgs/back.png"> Back
                                 </button>
                             </a>
@@ -242,7 +242,7 @@
                                         </tbody>
                                     </table>
                                     <br>
-                                    <button type="submit" class="btn btn-success btn-md btn-block" name="smOrders" onclick="validateCreateOrders();">Add now</button>
+                                    <button type="submit" class="btn btn-success btn-md btn-block" name="smOrders" onclick="validateCreateOrders();">Add orders</button>
                             </form>
                             <!-- </form> -->
                         </div>

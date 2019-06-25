@@ -1,4 +1,5 @@
 <?php
+    include_once("../session.php");
 	include_once("products.php");
 	$id = isset($_POST['id']) ? (int)$_POST['id'] : '';
 	if ($id)

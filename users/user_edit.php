@@ -1,5 +1,6 @@
 <?php
 	include_once("../session.php");
+	include_once("adminsession.php");
 	include_once("users.php");
 	if (isset($_POST['edituser']))
 	{

@@ -1,5 +1,6 @@
 <?php
 	include_once("../session.php");
+	include_once("adminsession.php");
 	include("users.php");
 	$items = get_password_change_history();
     disconnect_db();

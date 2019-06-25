@@ -1,4 +1,5 @@
 <?php
+	include_once("../session.php");
 	include_once("../database.php");
 	function get_all_products()
 	{

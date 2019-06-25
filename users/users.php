@@ -114,6 +114,25 @@
 		return $query;
 	}
 
+	function edit_myself($id, $fullname, $gender, $email, $phone, $address, $hometown, $birthday)
+	{
+		global $conn;
+		connect_db();
+		$sql="
+			update users set
+			u_fullname='$fullname',
+			u_gender='$gender',
+			u_email='$email',
+			u_phone='$phone',
+			u_address='$address',
+			u_hometown='$hometown',
+			u_birthday='$birthday'
+			where u_id=$id
+		";
+		$query = mysqli_query($conn, $sql);
+		return $query;
+	}
+
 	function add_user($fullname, $gender, $email, $phone, $address, $hometown, $birthday, $loginname, $password, $role)
 	{
 		global $conn;

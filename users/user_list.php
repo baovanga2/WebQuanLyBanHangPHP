@@ -1,5 +1,6 @@
 <?php
 	include_once("../session.php");
+	include_once("adminsession.php");
 	include("users.php");
 	$users = get_all_users();
     disconnect_db();

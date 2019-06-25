@@ -1,5 +1,6 @@
 <?php
     include_once("../session.php");
+    include_once("adminsession.php");
 	include_once("users.php");
 	$id = isset($_POST['id']) ? (int)$_POST['id'] : '';
 	if ($id)

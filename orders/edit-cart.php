@@ -1,9 +1,9 @@
 <?php
-
+session_start();
 include_once("dbconfig/db-driver.php");
 // Get data orders ID and Customer name from orders.php
 if (isset($_GET['editOrders'])) {
-    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/edit-cart.php");
+    echo "<script>window.location='edit-cart.php';</script>";
     $ordersID = $_GET['ordersID'];
     setcookie("ordersID", "$ordersID", time() + 7200);
     $customerName = $_GET['customerName'];
@@ -45,7 +45,7 @@ if (isset($_GET['addProduct'])) {
         echo "alert('In stock products is not enough')";
         echo "</script>";
     } else {
-        header("Location:http://localhost/WebQuanLyBanHangPHP/orders/edit-cart.php");
+        echo "<script>window.location='edit-cart.php';</script>";
         $productID = $_GET['productID'];
         insert_order_details($productID, $ordersID);
         // update_quantity_add($productID);
@@ -257,11 +257,11 @@ if (isset($_GET['deleteRecord'])) {
                                 <table>
                                     <tr>
                                         <form action="#" method="GET">
-                                        <th>
-                                            <button type="submit" style="border-radius: 12px;" class="btn btn-delete-order btn-outline-danger btn-sm" name="deleteOrders">
-                                                <img src="./imgs/trash.png"> Delete order
-                                            </button>
-                                        </th>
+                                            <th>
+                                                <button type="submit" style="border-radius: 12px;" class="btn btn-delete-order btn-outline-danger btn-sm" name="deleteOrders">
+                                                    <img src="./imgs/trash.png"> Delete order
+                                                </button>
+                                            </th>
                                         </form>
                                         <th>&emsp;&emsp;Code Orders: <?php echo "#$ordersID" ?></th>
                                         <th>&emsp;&emsp;Customer's Name: <?php echo $customerName ?></th>

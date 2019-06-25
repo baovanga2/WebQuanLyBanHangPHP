@@ -57,10 +57,8 @@ if (isset($_GET['deleteRecord'])) {
     $quantity = $_GET['quantity'];
     $productID = $_GET['productID'];
     delete_product($productID, $ordersID, $quantity);
-    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/edit-cart.php");
+    echo "<script>window.location='edit-cart.php';</script>";
 }
-
-
 
 ?>
 

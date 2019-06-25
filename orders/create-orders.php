@@ -4,7 +4,8 @@
 <head>
     <?php include_once("../layout/meta_link.php"); ?>
     <?php include_once("../layout/cssdatatables.php"); ?>
-    <title>Order Products</title>
+    <link rel="shortcut icon" type="image/png" href="./imgs/cart-icon.png" />
+    <title>Order Products | Create a new orders </title>
     <style>
         input[type=number] {
             width: 80px;
@@ -232,7 +233,10 @@
                                                     </td>
                                                     <td><?php echo $product['ProductCode']; ?></td>
                                                     <td><?php echo $product['ProductName']; ?></td>
-                                                    <td><?php echo $product['Quantity']; ?></td>
+                                                    <td>
+                                                        <?php echo $product['Quantity']; ?>
+                                                        <input type="hidden" name="quantity" value="<?php echo $product['Quantity']; ?>">
+                                                    </td>
                                                     <td><?php echo $product['Price']; ?> VND</td>
                                                     <td><?php echo $product['Details']; ?></td>
 

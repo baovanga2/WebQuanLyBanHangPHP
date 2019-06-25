@@ -10,33 +10,34 @@ if (isset($_POST['smOrders'])) {
     $customerEmail      = $_POST['customerEmail'];
     $customerPhone      = $_POST['customerPhone'];
     $customerGender     = $_POST['customerGender'];
-    if (!empty($customerName && $customerGender && $customerPhone)) {
-        insert_customer($customerName, $customerEmail, $customerAddress, $customerGender, $customerPhone, $customerBirthday);
-    } else {
-        echo "<script>alert('Do not leave the required fields blank');</script>";
-        echo "<script>window.location='../create-orders.php';</script>";
-    }
+    $quantity           = $_POST['quantity'];
+    $chooseID           = $_POST['chooseID'];
 
-    if (isset($_SESSION['u_id'])) {
-        $staffID = $_SESSION['u_id'];
-        $dateCreated = date("Y-m-d h:i");
-        create_orders($customerName, $staffID, $dateCreated);
-    } else {
-        echo "<script>alert('Please login again!');</script>";
-        echo "<script>window.location='../create-orders.php';</script>";
-    }
 
-    $chooseID = $_POST['chooseID'];
-    // print_r(var_dump($chooseID));
-    if (!empty($chooseID)) {
-        foreach ($chooseID as $productID) {
-            insert_order_details_plus($productID, $customerName);
-            echo "<script>window.alert('Create successful orders for customers name: {$customerName}');</script>";
-            echo "<script>window.location='../orders.php';</script>";
+    if (!empty($customerName && $customerGender && $customerPhone && $quantity)) {
+        // Check ID user in the session array
+        if (isset($_SESSION['u_id'])) {
+            // If no choose the product to add to the cart then stop 
+            if (!empty($chooseID)) {
+                $staffID = $_SESSION['u_id'];
+                $dateCreated = date("Y-m-d h:i");
+                insert_customer($customerName, $customerEmail, $customerAddress, $customerGender, $customerPhone, $customerBirthday);
+                create_orders($customerName, $staffID, $dateCreated);
+                foreach ($chooseID as $productID) {
+                    insert_order_details_plus($productID, $customerName);
+                    echo "<script>window.alert('Create successful orders for customers name: {$customerName}');</script>";
+                    echo "<script>window.location='../orders.php';</script>";
+                }
+            } else {
+                echo "<script>alert('Please select a product to create a shopping cart!');</script>";
+                echo "<script>window.location='../create-orders.php';</script>";
+            }
+        } else {
+            echo "<script>alert('Please login again!');</script>";
+            echo "<script>window.location='../../home/homepage.php;</script>";
         }
     } else {
-        echo "<script>alert('Please add products to the cart!');</script>";
-        echo "<script>window.location='../orders.php';</script>";
-
-     }
+        echo "<script>alert('Complete here with all the necessary information in the section marked with (*)');</script>";
+        echo "<script>window.location='../create-orders.php';</script>";
+    }
 }

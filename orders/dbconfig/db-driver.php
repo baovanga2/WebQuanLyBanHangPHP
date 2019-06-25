@@ -77,12 +77,19 @@ function insert_order_details_plus($productID, $customerName)
 }
 
 // Delete existing record in a `orderdetails` table
-function delete_record($productID, $ordersID)
+function delete_product($productID, $ordersID, $quantity)
 {
     global $conn;
     connect_db();
-    $sql = "DELETE FROM `orderdetails` WHERE `pro_id` = '$productID' AND `or_id` = '$ordersID';";
-    mysqli_query($conn, $sql);
+    $sqlOne = "DELETE FROM `orderdetails` WHERE `pro_id` = '$productID' AND `or_id` = '$ordersID';";
+    $sqlTwo = "UPDATE `products` SET `pro_quantity` = (SELECT `pro_quantity` FROM (SELECT * FROM products) as Price WHERE `pro_id` = '$productID') + '$quantity' WHERE `pro_id` = '$productID'";
+    mysqli_query($conn, $sqlOne);
+    $result = mysqli_query($conn, $sqlTwo);
+    if (!$result) {
+        print_r("<pre>");
+        echo "Error when deleting a product in orderdetails table!";
+        echo "\n" . mysqli_error($conn);
+    }
 }
 
 // Hien thi danh sach don hang 
@@ -90,13 +97,35 @@ function show_orders()
 {
     global $conn;
     connect_db();
-    $sql = "SELECT o.`or_id` as OrdersID, c.`cus_fullname` as CustomerName, o.`or_createddate` as CreateDate, u.`u_fullname` as StaffCreated
-            FROM `orders` o, `customers` c, `users` u 
-            WHERE o.`cus_id` = c.`cus_id` and o.`u_id` = u.`u_id`;";
+    $sql = "SELECT o.or_id AS OrdersID, c.cus_fullname AS CustomerName, o.or_createddate AS CreateDate, u.u_fullname AS StaffCreated
+    FROM `orders` o, `customers` c, `users` u
+    WHERE o.cus_id = c.cus_id AND o.u_id = u.u_id;";
     $result = mysqli_query($conn, $sql);
     $datas = array();
     if ($result) {
-        while ($rows = mysqli_fetch_assoc($result)) {
+        while ($rows = mysqli_fetch_assoc($result)) {   
+            $datas[] = $rows;
+        }
+    }
+    return $datas;
+}
+
+function show_quantity($ordersID) 
+{
+    # code...
+    global $conn;
+    connect_db();
+    $sql = "SELECT sum(od.`od_quantity`) as Quantity
+    FROM `orderdetails` as od, `orders` as o
+    WHERE od.or_id = $ordersID
+    GROUP BY od.`od_quantity`;";
+    $result = mysqli_query($conn, $sql);
+    if ($result == false) {
+        print_r("<pre>");
+        echo "Error when do geting quantity a record orders!";
+        echo "\n" . mysqli_error($conn);
+    }else if ($result) {
+        while ($rows = mysqli_fetch_assoc($result)) {   
             $datas[] = $rows;
         }
     }
@@ -112,17 +141,41 @@ function delete_orders($ordersID, $productID, $quantity)
     $sqlOne     = "ALTER TABLE `orderdetails` DROP FOREIGN KEY fk_od_or;";
     $sqlTwo     = "ALTER TABLE `orderdetails` ADD CONSTRAINT fk_od_or FOREIGN KEY (or_id)
     REFERENCES orders (or_id) ON DELETE CASCADE ON UPDATE CASCADE;";
-    $sqlThree   = "DELETE FROM `orders` WHERE `or_id` = '$ordersID';";
-    $sqlFour    = "UPDATE `products` SET `pro_quantity` = (SELECT `pro_quantity` FROM (SELECT * FROM products) as Price WHERE `pro_id` = '$productID') + '$quantity' WHERE `pro_id` = '$productID'";
+    $sqlThree   = "DELETE FROM `orderdetails` WHERE `pro_id` = '$productID' AND `or_id` = '$ordersID';";
+    $sqlFour    = "UPDATE `products` SET `pro_quantity` = (SELECT `pro_quantity` FROM (SELECT * FROM products) as Price WHERE `pro_id` = '$productID') + '$quantity' WHERE `pro_id` = '$productID';";
+    $sqlFive    = "DELETE FROM `orders` WHERE `or_id` = '$ordersID';";
     $result = mysqli_query($conn, $sqlOne);
     $result = mysqli_query($conn, $sqlTwo);
     $result = mysqli_query($conn, $sqlThree);
     $result = mysqli_query($conn, $sqlFour);
+    $result = mysqli_query($conn, $sqlFive);
     if ($result == false) {
         print_r("<pre>");
         echo "Error when do deleting a record orders!";
         echo "\n" . mysqli_error($conn);
     }
+}
+
+function get_num_products($ordersID)
+{
+    # code...
+    global $conn;
+    connect_db();
+    $sql = "SELECT od.`or_id` as OrdersID, od.`pro_id` as ProductID, count(od.`od_quantity`) as Quantity
+    FROM `orderdetails` as od, `orders` as o
+    WHERE od.`or_id` = '$ordersID' and o.`or_id` = '$ordersID'
+    GROUP BY od.`pro_id`, od.`od_quantity`;";
+    $result = mysqli_query($conn, $sql);
+    if ($result == false) {
+        print_r("<pre>");
+        echo "Error when do geting quantity a record orders!";
+        echo "\n" . mysqli_error($conn);
+    }else if ($result) {
+        while ($rows = mysqli_fetch_assoc($result)) {   
+            $datas[] = $rows;
+        }
+    }
+    return $datas;
 }
 
 // Insert a record into the `customers` table.
@@ -178,7 +231,7 @@ function update_quantity_delete($productID, $quantity) {
     $result = mysqli_query($conn, $sqlOne);
     if (!$result) {
         print_r("<pre>");
-        echo "Error when inserting to orders table!";
+        echo "Error when deleting to orders table!";
         echo "\n" . mysqli_error($conn);
     }
 }

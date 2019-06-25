@@ -1,18 +1,6 @@
 <?php
 
 include_once("dbconfig/db-driver.php");
-
-// Delete an orders from orders.php
-if (isset($_GET['deleteOrders'])) {
-    $ordersID = $_GET['ordersID'];
-    $productID = $_GET['productID'];
-    $quantity = $_GET['quantity'];
-    // Delete a product in orders
-    delete_orders($ordersID, $productID, $quantity);
-    header("Location:http://localhost/WebQuanLyBanHangPHP/orders/orders.php");
-    disconnect_db();
-}
-
 // Get data orders ID and Customer name from orders.php
 if (isset($_GET['editOrders'])) {
     header("Location:http://localhost/WebQuanLyBanHangPHP/orders/edit-cart.php");
@@ -27,12 +15,34 @@ $customerName = $_COOKIE['customerName'];
 $ordersID = $_COOKIE['ordersID'];
 $listOrderDetails = show_order_details($ordersID);
 
+// Delete an orders from orders.php
+if (isset($_GET['deleteOrders'])) {
+    // $ordersID = $_GET['ordersID'];
+    // $productID = $_GET['productID'];
+    // $quantity = $_GET['quantity'];
+    // Delete a product in orders
+    $getNumProduct = get_num_products($ordersID);
+    foreach ($getNumProduct as $value) {
+        $productID = $value['ProductID'];
+        $quantity = $value['Quantity'];
+
+        if (!empty($ordersID && $productID && $quantity)) {
+            delete_orders($ordersID, $productID, $quantity);
+            echo "<script>window.location='orders.php';</script>";
+        } else {
+            echo "<script>alert('Deleting the cart failed!');</script>";
+            echo "<script>window.location='orders.php';</script>";
+        }
+    }
+    disconnect_db();
+}
+
 // Insert the product into the orderdetails table
 if (isset($_GET['addProduct'])) {
     $quantity = $_GET['quantity'];
     if ($quantity == '0') {
         echo "<script style=\"text/javascript\">";
-        echo "notification();";
+        echo "alert('In stock products is not enough')";
         echo "</script>";
     } else {
         header("Location:http://localhost/WebQuanLyBanHangPHP/orders/edit-cart.php");
@@ -46,9 +56,8 @@ if (isset($_GET['addProduct'])) {
 if (isset($_GET['deleteRecord'])) {
     $quantity = $_GET['quantity'];
     $productID = $_GET['productID'];
-    delete_record($productID, $ordersID);
+    delete_product($productID, $ordersID, $quantity);
     header("Location:http://localhost/WebQuanLyBanHangPHP/orders/edit-cart.php");
-    update_quantity_delete($productID, $quantity);
 }
 
 
@@ -61,7 +70,8 @@ if (isset($_GET['deleteRecord'])) {
 <head>
     <?php include_once("../layout/meta_link.php"); ?>
     <?php include_once("../layout/cssdatatables.php"); ?>
-    <title>Order Products</title>
+    <link rel="shortcut icon" type="image/png" href="./imgs/cart-icon.png" />
+    <title>Order Products | Edit orders</title>
     <style>
         input[type=number] {
             width: 80px;
@@ -80,13 +90,22 @@ if (isset($_GET['deleteRecord'])) {
         }
 
         .btn-delete {
-            background-color: #ff4d4d;
+            background-color: #ff6666;
             border: none;
             color: white;
             padding: 8px 12px;
             font-size: 12px;
             cursor: pointer;
             border-radius: 12px;
+        }
+
+        .btn-delete-order {
+            border: 0px solid #c2d6d6;
+            background-color: #ffcccc;
+            color: gray;
+            padding: 6px 10px;
+            font-size: 16px;
+            cursor: pointer;
         }
 
         .btn-update {
@@ -162,7 +181,7 @@ if (isset($_GET['deleteRecord'])) {
                 ?>
                 <div class="container-fluid">
 
-                    <h1 class="h3 mb-2 text-gray-800"><strong>Edit orders</strong></h1>
+                    <h1 class="h3 mb-2 text-gray-800"><img src="./imgs/edit.png"><strong> Edit orders </strong></h1>
 
                     <!-- List of products -->
                     <div class="card shadow mb-4">
@@ -237,7 +256,14 @@ if (isset($_GET['deleteRecord'])) {
                             <h6 class="m-0 font-weight-bold text-primary">
                                 <table>
                                     <tr>
-                                        <th>Code Orders: <?php echo "#$ordersID" ?></th>
+                                        <form action="#" method="GET">
+                                        <th>
+                                            <button type="submit" style="border-radius: 12px;" class="btn btn-delete-order btn-outline-danger btn-sm" name="deleteOrders">
+                                                <img src="./imgs/trash.png"> Delete order
+                                            </button>
+                                        </th>
+                                        </form>
+                                        <th>&emsp;&emsp;Code Orders: <?php echo "#$ordersID" ?></th>
                                         <th>&emsp;&emsp;Customer's Name: <?php echo $customerName ?></th>
                                     </tr>
                                 </table>
@@ -269,7 +295,7 @@ if (isset($_GET['deleteRecord'])) {
                                         foreach ($listOrderDetails as $key => $orderDetails) {
                                             ?>
                                                 <tr>
-                                                    <form method="get">
+                                                    <form method="GET">
                                                         <td>
                                                             <!-- <input type="submit" class="btn btn-outline-danger btn-sm" name="delProduct" value="Delete"> -->
                                                             <button type="submit" class="btn-delete" name="deleteRecord"><i class="fa fa-trash"></i> Delete</button>

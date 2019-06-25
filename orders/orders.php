@@ -4,6 +4,7 @@
 <head>
     <?php include_once("../layout/meta_link.php"); ?>
     <?php include_once("../layout/cssdatatables.php"); ?>
+    <link rel="shortcut icon" type="image/png" href="./imgs/cart-icon.png" />
     <title>Order Products</title>
     <style>
         input[type=number] {
@@ -23,18 +24,18 @@
 
         .btn-new {
             border: 0px solid #c2d6d6;
-            background-color: #ffcc99;
-            color: black;
+            background-color: #e6e6e6;
+            color: #666666;
             padding: 8px 10px;
             font-size: 16px;
             cursor: pointer;
         }
 
 
-        .btn-add {
+        .btn-edit {
             border: 0px solid #c2d6d6;
-            background-color: #66a3ff;
-            color: black;
+            background-color: #cce0ff;
+            color: gray;
             padding: 6px 10px;
             font-size: 16px;
             cursor: pointer;
@@ -44,12 +45,12 @@
             border: 0px solid #c2d6d6;
             background-color: #ffcccc;
             color: black;
-            padding: 6px 12px;
+            padding: 6px 10px;
             font-size: 16px;
             cursor: pointer;
         }
 
-        .btn-add:hover {
+        .btn-edit:hover {
             background-color: #3366ff;
             color: white;
         }
@@ -68,7 +69,7 @@
         /* Gray */
         .btn-default {
             border-color: #ccccff;
-            color: black;
+            color: #666666;
         }
 
         .btn-default:hover {
@@ -104,13 +105,12 @@
                             <form action="create-orders.php" method="get">
                                 <!-- <input type="submit" style="border-radius: 15px;" class="btn btn-primary" value="Create new" name="createNew"> -->
                                 <button type="submit" style="border-radius: 50px;" class="btn btn-new btn-default" name="createNew">
-                                    <img src="./imgs/cart.png" /> New 
+                                    <img src="./imgs/cart.png" height="24px" width="24px"> New
                                 </button>
                             </form>
                         </div>
 
                         <div class="card-body">
-
                             <div class="table-responsive">
 
                                 <table class="table table-hover table-sm" id="dataTable" width="100%" cellspacing="0">
@@ -125,31 +125,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($listOrders as $order) { ?>
-                                            <tr>
-                                                <form action="edit-cart.php" method="GET">
-                                                    <td>
-                                                        <!-- <input type="submit" style="border-radius: 12px;" class="btn-add btn-outline-primary btn-sm" name="editOrders" value="Edit"> -->
+                                        <?php foreach ($listOrders as $order) {?>
+                                            
+                                        <tr>
+                                            <form action="edit-cart.php" method="GET">
+                                                <td>
+                                                    <!-- <input type="submit" style="border-radius: 12px;" class="btn-add btn-outline-primary btn-sm" name="editOrders" value="Edit"> -->
 
-                                                        <button type="submit" style="border-radius: 12px;" class="btn btn-add btn-outline-primary btn-sm" name="editOrders">
-                                                            <img src="./imgs/edit.png">
-                                                        </button>
+                                                    <button type="submit" style="border-radius: 12px;" class="btn btn-edit btn-outline-primary btn-sm" name="editOrders">
+                                                        <img src="./imgs/edit.png"> Edit
+                                                    </button>
 
-                                                        <button type="submit" style="border-radius: 12px;" class="btn btn-delete btn-outline-danger btn-sm" name="deleteOrders">
-                                                            <img src="./imgs/delete.png">
-                                                        </button>
-
-                                                        <!-- <input type="submit" style="border-radius: 12px;" class="btn-delete btn-outline-danger btn-sm" name="deleteOrders" value="Delete"> -->
-                                                        <input type="hidden" name="ordersID" value="<?php echo $order['OrdersID']; ?>">
-                                                        <input type="hidden" name="customerName" value="<?php echo $order['CustomerName']; ?>">
-                                                    </td>
-                                                </form>
-                                                <td><?php echo $order['OrdersID']; ?></td>
-                                                <td><?php echo $order['CustomerName']; ?></td>
-                                                <td><?php echo $order['CreateDate']; ?></td>
-                                                <td><?php echo $order['StaffCreated']; ?></td>
-
-                                            </tr>
+                                                    <!-- <input type="submit" style="border-radius: 12px;" class="btn-delete btn-outline-danger btn-sm" name="deleteOrders" value="Delete"> -->
+                                                    <input type="hidden" name="ordersID" value="<?php echo $order['OrdersID']; ?>">
+                                                    <input type="hidden" name="customerName" value="<?php echo $order['CustomerName']; ?>">
+                                                    <input type="hidden" name="productID" value="<?php echo $order['ProductID']; ?>">
+                                                </td>
+                                            </form>
+                                            <td><?php echo $order['OrdersID']; ?></td>
+                                            <td><?php echo $order['CustomerName']; ?></td>
+                                            <td><?php echo $order['CreateDate']; ?></td>
+                                            <td><?php echo $order['StaffCreated']; ?></td>
+                                        </tr>
                                         <?php } ?>
                                     </tbody>
 

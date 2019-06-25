@@ -154,7 +154,9 @@ function delete_orders($ordersID, $productID, $quantity)
         echo "Error when do deleting a record orders!";
         echo "\n" . mysqli_error($conn);
     }
+    disconnect_db();
 }
+
 
 function get_num_products($ordersID)
 {

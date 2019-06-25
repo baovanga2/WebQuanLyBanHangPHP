@@ -227,15 +227,18 @@
 
                                                     <td>
                                                         <label class="container">
-                                                            <input type="checkbox" name="chooseID[]" value="<?php echo $product['ProductCode']; ?>">
+                                                            <input type="checkbox" name="choosesID[]" value="<?php echo $product['ProductCode']; ?>">
                                                             <span class="checkmark"></span>
                                                         </label>
                                                     </td>
                                                     <td><?php echo $product['ProductCode']; ?></td>
-                                                    <td><?php echo $product['ProductName']; ?></td>
+                                                    <td>
+                                                        <?php echo $product['ProductName']; ?>
+                                                        <input type="hidden" name="productsName[]" value="<?php echo $product['ProductName']; ?>">
+                                                    </td>
                                                     <td>
                                                         <?php echo $product['Quantity']; ?>
-                                                        <input type="hidden" name="quantity" value="<?php echo $product['Quantity']; ?>">
+                                                        <input type="hidden" name="quantities[]" value="<?php echo $product['Quantity']; ?>">
                                                     </td>
                                                     <td><?php echo $product['Price']; ?> VND</td>
                                                     <td><?php echo $product['Details']; ?></td>

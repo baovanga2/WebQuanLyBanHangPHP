@@ -22,16 +22,22 @@ if (isset($_GET['deleteOrders'])) {
     // $quantity = $_GET['quantity'];
     // Delete a product in orders
     $getNumProduct = get_num_products($ordersID);
-    foreach ($getNumProduct as $value) {
-        $productID = $value['ProductID'];
-        $quantity = $value['Quantity'];
+    if ($getNumProduct == '') {
+        delete_orders_empty($ordersID);
+        echo "<script>alert('Deleting the cart successful!');</script>";
+        echo "<script>window.location='orders.php';</script>";
+    } else {
+        foreach ($getNumProduct as $value) {
+            $productID = $value['ProductID'];
+            $quantity = $value['Quantity'];
 
-        if (!empty($ordersID && $productID && $quantity)) {
-            delete_orders($ordersID, $productID, $quantity);
-            echo "<script>window.location='orders.php';</script>";
-        } else {
-            echo "<script>alert('Deleting the cart failed!');</script>";
-            echo "<script>window.location='orders.php';</script>";
+            if (!empty($ordersID && $productID && $quantity)) {
+                delete_orders($ordersID, $productID, $quantity);
+                echo "<script>window.location='orders.php';</script>";
+            } else {
+                echo "<script>alert('Deleting the cart failed!');</script>";
+                echo "<script>window.location='orders.php';</script>";
+            }
         }
     }
     disconnect_db();

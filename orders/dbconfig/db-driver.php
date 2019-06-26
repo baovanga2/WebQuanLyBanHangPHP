@@ -133,7 +133,7 @@ function show_quantity($ordersID)
 }
 
 
-// Xoa mot don hang
+// Deleting a the cart had products
 function delete_orders($ordersID, $productID, $quantity)
 {
     global $conn;
@@ -149,6 +149,26 @@ function delete_orders($ordersID, $productID, $quantity)
     $result = mysqli_query($conn, $sqlThree);
     $result = mysqli_query($conn, $sqlFour);
     $result = mysqli_query($conn, $sqlFive);
+    if ($result == false) {
+        print_r("<pre>");
+        echo "Error when do deleting a record orders!";
+        echo "\n" . mysqli_error($conn);
+    }
+    disconnect_db();
+}
+
+// Deleting a the cart empty
+function delete_orders_empty($ordersID)
+{
+    global $conn;
+    connect_db();
+    $sqlOne     = "ALTER TABLE `orderdetails` DROP FOREIGN KEY fk_od_or;";
+    $sqlTwo     = "ALTER TABLE `orderdetails` ADD CONSTRAINT fk_od_or FOREIGN KEY (or_id)
+    REFERENCES orders (or_id) ON DELETE CASCADE ON UPDATE CASCADE;";
+    $sqlThree    = "DELETE FROM `orders` WHERE `or_id` = '$ordersID';";
+    $result = mysqli_query($conn, $sqlOne);
+    $result = mysqli_query($conn, $sqlTwo);
+    $result = mysqli_query($conn, $sqlThree);
     if ($result == false) {
         print_r("<pre>");
         echo "Error when do deleting a record orders!";

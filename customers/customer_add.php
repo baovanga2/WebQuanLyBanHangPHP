@@ -67,10 +67,12 @@
 					      				<tr>
 					      					<td>Gender</td>
 					      					<td>
-					      						<select class="form-control" name="gender">
+					      						<!-- <select class="form-control" name="gender">
 			                            			<option value="Nam">Nam</option>
 			                            			<option value="Nữ">Nữ</option>
-			                        			</select>
+			                        			</select> -->
+			                        			<label class="radio-inline"><input type="radio" name="gender" value="Nam" checked>Nam&emsp;</label>
+			                        			<label class="radio-inline"><input type="radio" name="gender" value="Nữ">Nữ&emsp;</label>
 			                    			</td>
 					      				</tr>
 					      				<tr>

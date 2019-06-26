@@ -81,7 +81,7 @@
 		                    							<i class="fas fa-info-circle"></i>
 		                  							</a>
 		                  							<input type="hidden" name="id" value="<?php echo $customer['cus_id']; ?>">
-	                  								<button type="submit" name="deletecustomer" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete customer <?php echo $customer['cus_id']; ?> ?');">
+	                  								<button type="submit" name="deletecustomer" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete customer <?php echo $customer['cus_fullname']; ?> ?');">
 	                  									<i class="fas fa-trash"></i>
 	                  								</button>
 	                  							</form>

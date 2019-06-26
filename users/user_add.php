@@ -31,6 +31,7 @@
 			else
 			{
 				echo "<script>alert('Add user failed!')</script>";
+				echo "<script>window.history.back();</script>";
 			}
 		}
 		disconnect_db();	
@@ -81,10 +82,12 @@
 					      				<tr>
 					      					<td>Gender</td>
 					      					<td>
-					      						<select class="form-control" name="gender">
+					      						<!-- <select class="form-control" name="gender">
 			                            			<option value="Nam">Nam</option>
 			                            			<option value="Nữ">Nữ</option>
-			                        			</select>
+			                        			</select> -->
+			                        			<label class="radio-inline"><input type="radio" name="gender" value="Nam" checked>Nam&emsp;</label>
+			                        			<label class="radio-inline"><input type="radio" name="gender" value="Nữ">Nữ&emsp;</label>
 			                    			</td>
 					      				</tr>
 					      				<tr>
@@ -132,14 +135,17 @@
 					      				<tr>
 					      					<td>Role</td>
 					      					<td>
-					      						<select class="form-control" name="role">
+					      						<!-- <select class="form-control" name="role">
 					      							<option value="1">Quản trị viên</option>
 			                            			<option value="2">Nhân viên</option>
-			                        			</select>
+			                        			</select> -->
+			                        			<label class="radio-inline"><input type="radio" name="role" value="1">Quản trị viên&emsp;</label>
+			                        			<label class="radio-inline"><input type="radio" name="role" value="2" checked>Nhân viên&emsp;</label>
 					      					</td>
 					      				</tr>
       								</table>
-      								<button style="float: right;" class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
+      								<!-- <button style="float: right;" class="btn btn-secondary" onclick="window.location='user_list.php';">Cancel</button> -->
+      								<a href="user_list.php" style="float: right;" class="btn btn-secondary">Cancel</a>
       								<input type="submit" style="float: right; margin-right: 10px" class="btn btn-primary" name="adduser" value="Add">
       							</div>
       						</div>

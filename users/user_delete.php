@@ -10,11 +10,11 @@
     	if ($r)
     	{
             add_password_change_history($user['u_loginname'], $_SESSION['u_loginname']);
-    		echo "<script>alert('Delete user {$id} successfully!')</script>";
+    		echo "<script>alert('Delete user {$user['u_fullname']} successfully!')</script>";
     	}
     	else
     	{
-    		echo "<script>alert('User {$id} cannot be deleted because there is a order in this user!')</script>";
+    		echo "<script>alert('User {$user['u_fullname']} cannot be deleted because there is a order in this user!')</script>";
     	}
     	disconnect_db();
 	}

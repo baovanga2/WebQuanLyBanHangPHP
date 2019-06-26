@@ -72,7 +72,7 @@
 		                    							<i class="fas fa-info-circle"></i>
 		                  							</a>
 		                  							<input type="hidden" name="id" value="<?php echo $producer['pr_id']; ?>">
-	                  								<button type="submit" name="deleteproducer" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete producer <?php echo $producer['pr_id']; ?> ?');">
+	                  								<button type="submit" name="deleteproducer" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete producer <?php echo $producer['pr_name']; ?> ?');">
 	                  									<i class="fas fa-trash"></i>
 	                  								</button>
 		                  						</form>

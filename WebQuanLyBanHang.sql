@@ -64,6 +64,7 @@ create table ORDERS
    CUS_ID               int not null,
    U_ID                 int not null,
    OR_CREATEDDATE       timestamp not null,
+   OR_TotalPrice		decimal not null,
    primary key (OR_ID)
 );
 

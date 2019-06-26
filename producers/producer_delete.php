@@ -4,14 +4,15 @@
 	$id = isset($_POST['id']) ? (int)$_POST['id'] : '';
 	if ($id)
 	{
+        $producer=get_producer($id);
     	$r=delete_producer($id);
     	if ($r)
     	{
-    		echo "<script>alert('Delete producer {$id} successfully!')</script>";
+    		echo "<script>alert('Delete producer {$producer['pr_name']} successfully!')</script>";
     	}
     	else
     	{
-    		echo "<script>alert('Producer {$id} cannot be deleted because there is a product in this producer!')</script>";
+    		echo "<script>alert('Producer {$producer['pr_name']} cannot be deleted because there is a product in this producer!')</script>";
     	}
     	disconnect_db();
 	}

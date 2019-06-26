@@ -89,7 +89,7 @@
 	                    								<i class="fas fa-key"></i>
 	                  								</a>                  							
 	                  								<input type="hidden" name="id" value="<?php echo $user['u_id']; ?>">
-	                  								<button type="submit" name="deleteuser" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete user <?php echo $user['u_id']; ?> ?');">
+	                  								<button type="submit" name="deleteuser" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete user <?php echo $user['u_fullname']; ?> ?');">
 	                  									<i class="fas fa-trash"></i>
 	                  								</button>
 	                  							</form>

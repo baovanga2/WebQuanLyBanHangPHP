@@ -94,7 +94,8 @@
 					      					</td>
 					      				</tr>
       								</table>
-      								<button style="float: right;" class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
+      								<!-- <button style="float: right;" class="btn btn-secondary" onclick="window.history.back();">Cancel</button> -->
+      								<a href="user_list.php" style="float: right;" class="btn btn-secondary">Cancel</a>
       								<input type="submit" style="float: right; margin-right: 10px" class="btn btn-primary" name="changepassword" value="Change">
       							</div>
       						</div>

@@ -72,7 +72,7 @@
 		                    							<i class="fas fa-info-circle"></i>
 		                  							</a>
 		                  							<input type="hidden" name="id" value="<?php echo $category['ca_id']; ?>">
-	                  								<button type="submit" name="deletecategory" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete category <?php echo $category['ca_id']; ?> ?');">
+	                  								<button type="submit" name="deletecategory" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete category <?php echo $category['ca_name']; ?> ?');">
 	                  									<i class="fas fa-trash"></i>
 	                  								</button>
 		                  						</form>

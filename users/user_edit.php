@@ -89,10 +89,12 @@
 					      				<tr>
 					      					<td>Gender</td>
 					      					<td>
-					      						<select class="form-control" name="gender">
+					      						<!-- <select class="form-control" name="gender">
 			                            			<option value="Nam">Nam</option>
 			                            			<option value="Nữ" <?php if ($user['u_gender'] == 'Nữ') echo 'selected'; ?> >Nữ</option>
-			                        			</select>
+			                        			</select> -->
+			                        			<label class="radio-inline"><input type="radio" name="gender" value="Nam" <?php if ($user['u_gender'] == 'Nam') echo 'checked' ?>>Nam&emsp;</label>
+			                        			<label class="radio-inline"><input type="radio" name="gender" value="Nữ" <?php if ($user['u_gender'] == 'Nữ') echo 'checked' ?>>Nữ&emsp;</label>
 			                    			</td>
 					      				</tr>
 					      				<tr>
@@ -134,14 +136,17 @@
 					      				<tr>
 					      					<td>Role</td>
 					      					<td>
-					      						<select class="form-control" name="role">
+					      						<!-- <select class="form-control" name="role">
 					      							<option value="1">Quản trị viên</option>
 			                            			<option value="2" <?php if ($user['r_id'] == 2) echo 'selected'; ?> >Nhân viên</option>
-			                        			</select>
+			                        			</select> -->
+			                        			<label class="radio-inline"><input type="radio" name="role" value="1" <?php if ($user['r_id'] == '1') echo 'checked' ?>>Quản trị viên&emsp;</label>
+			                        			<label class="radio-inline"><input type="radio" name="role" value="2" <?php if ($user['r_id'] == '2') echo 'checked' ?>>Nhân viên&emsp;</label>
 					      					</td>
 					      				</tr>
       								</table>
-      								<button style="float: right;" class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
+      								<!-- <button style="float: right;" class="btn btn-secondary" onclick="window.location='user_list.php';">Cancel</button> -->
+      								<a href="user_list.php" style="float: right;" class="btn btn-secondary">Cancel</a>
       								<input type="submit" style="float: right; margin-right: 10px" class="btn btn-primary" name="edituser" value="Edit">
       							</div>
       						</div>

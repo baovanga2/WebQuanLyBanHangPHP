@@ -86,10 +86,12 @@
 					      				<tr>
 					      					<td>Gender</td>
 					      					<td>
-					      						<select class="form-control" name="gender">
+					      						<!-- <select class="form-control" name="gender">
 			                            			<option value="Nam">Nam</option>
 			                            			<option value="Nữ" <?php if ($customer['cus_gender'] == 'Nữ') echo 'selected'; ?> >Nữ</option>
-			                        			</select>
+			                        			</select> -->
+			                        			<label class="radio-inline"><input type="radio" name="gender" value="Nam" <?php if ($customer['cus_gender'] == 'Nam') echo 'checked' ?>>Nam&emsp;</label>
+			                        			<label class="radio-inline"><input type="radio" name="gender" value="Nữ" <?php if ($customer['cus_gender'] == 'Nữ') echo 'checked' ?>>Nữ&emsp;</label>
 			                    			</td>
 					      				</tr>
 					      				<tr>

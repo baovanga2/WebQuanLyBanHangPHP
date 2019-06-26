@@ -86,7 +86,7 @@
 		                  								<i class="fas fa-plus"></i>
 		                  							</a>
 		                  							<input type="hidden" name="id" value="<?php echo $product['pro_id']; ?>">
-	                  								<button type="submit" name="deleteproduct" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete product <?php echo $product['pro_id']; ?> ?');">
+	                  								<button type="submit" name="deleteproduct" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete product <?php echo $product['pro_name']; ?> ?');">
 	                  									<i class="fas fa-trash"></i>
 	                  								</button>
 		                  						</form>

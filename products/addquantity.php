@@ -20,7 +20,7 @@
     foreach ($products as $product)
     {
 ?>
-    <!-- Logout Modal-->
+    <!-- Add Quantity product Modal-->
     <div class="modal fade" <?php echo "id='addQuantity{$product['pro_id']}Modal'"; ?> tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -56,7 +56,7 @@
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                         <input type="submit" class="btn btn-primary" name="addquantity" value="Add">   
-                    </div>    
+                    </div>
                 </form>
             </div>
         </div>

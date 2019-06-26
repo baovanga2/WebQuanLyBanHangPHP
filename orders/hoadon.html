@@ -1,0 +1,1591 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:hnx="http://www.w3.org/2000/09/xmldsig#"
+	xmlns:exsl="http://exslt.org/common" xmlns:inv="http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1">
+
+<head>
+	<meta charset="utf-8" />
+	<title>TiKi Evat Invoice</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<script
+		type="text/javascript">window.NREUM || (NREUM = {}), __nr_require = function (e, n, t) { function r(t) { if (!n[t]) { var o = n[t] = { exports: {} }; e[t][0].call(o.exports, function (n) { var o = e[t][1][n]; return r(o || n) }, o, o.exports) } return n[t].exports } if ("function" == typeof __nr_require) return __nr_require; for (var o = 0; o < t.length; o++)r(t[o]); return r }({ 1: [function (e, n, t) { function r() { } function o(e, n, t) { return function () { return i(e, [c.now()].concat(u(arguments)), n ? null : this, t), n ? void 0 : this } } var i = e("handle"), a = e(3), u = e(4), f = e("ee").get("tracer"), c = e("loader"), s = NREUM; "undefined" == typeof window.newrelic && (newrelic = s); var p = ["setPageViewName", "setCustomAttribute", "setErrorHandler", "finished", "addToTrace", "inlineHit", "addRelease"], d = "api-", l = d + "ixn-"; a(p, function (e, n) { s[n] = o(d + n, !0, "api") }), s.addPageAction = o(d + "addPageAction", !0), s.setCurrentRouteName = o(d + "routeName", !0), n.exports = newrelic, s.interaction = function () { return (new r).get() }; var m = r.prototype = { createTracer: function (e, n) { var t = {}, r = this, o = "function" == typeof n; return i(l + "tracer", [c.now(), e, t], r), function () { if (f.emit((o ? "" : "no-") + "fn-start", [c.now(), r, o], t), o) try { return n.apply(this, arguments) } catch (e) { throw f.emit("fn-err", [arguments, this, e], t), e } finally { f.emit("fn-end", [c.now()], t) } } } }; a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","), function (e, n) { m[n] = o(l + n) }), newrelic.noticeError = function (e, n) { "string" == typeof e && (e = new Error(e)), i("err", [e, c.now(), !1, n]) } }, {}], 2: [function (e, n, t) { function r(e, n) { if (!o) return !1; if (e !== o) return !1; if (!n) return !0; if (!i) return !1; for (var t = i.split("."), r = n.split("."), a = 0; a < r.length; a++)if (r[a] !== t[a]) return !1; return !0 } var o = null, i = null, a = /Version\/(\S+)\s+Safari/; if (navigator.userAgent) { var u = navigator.userAgent, f = u.match(a); f && u.indexOf("Chrome") === -1 && u.indexOf("Chromium") === -1 && (o = "Safari", i = f[1]) } n.exports = { agent: o, version: i, match: r } }, {}], 3: [function (e, n, t) { function r(e, n) { var t = [], r = "", i = 0; for (r in e) o.call(e, r) && (t[i] = n(r, e[r]), i += 1); return t } var o = Object.prototype.hasOwnProperty; n.exports = r }, {}], 4: [function (e, n, t) { function r(e, n, t) { n || (n = 0), "undefined" == typeof t && (t = e ? e.length : 0); for (var r = -1, o = t - n || 0, i = Array(o < 0 ? 0 : o); ++r < o;)i[r] = e[n + r]; return i } n.exports = r }, {}], 5: [function (e, n, t) { n.exports = { exists: "undefined" != typeof window.performance && window.performance.timing && "undefined" != typeof window.performance.timing.navigationStart } }, {}], ee: [function (e, n, t) { function r() { } function o(e) { function n(e) { return e && e instanceof r ? e : e ? f(e, u, i) : i() } function t(t, r, o, i) { if (!d.aborted || i) { e && e(t, r, o); for (var a = n(o), u = v(t), f = u.length, c = 0; c < f; c++)u[c].apply(a, r); var p = s[y[t]]; return p && p.push([b, t, r, a]), a } } function l(e, n) { h[e] = v(e).concat(n) } function m(e, n) { var t = h[e]; if (t) for (var r = 0; r < t.length; r++)t[r] === n && t.splice(r, 1) } function v(e) { return h[e] || [] } function g(e) { return p[e] = p[e] || o(t) } function w(e, n) { c(e, function (e, t) { n = n || "feature", y[t] = n, n in s || (s[n] = []) }) } var h = {}, y = {}, b = { on: l, addEventListener: l, removeEventListener: m, emit: t, get: g, listeners: v, context: n, buffer: w, abort: a, aborted: !1 }; return b } function i() { return new r } function a() { (s.api || s.feature) && (d.aborted = !0, s = d.backlog = {}) } var u = "nr@context", f = e("gos"), c = e(3), s = {}, p = {}, d = n.exports = o(); d.backlog = s }, {}], gos: [function (e, n, t) { function r(e, n, t) { if (o.call(e, n)) return e[n]; var r = t(); if (Object.defineProperty && Object.keys) try { return Object.defineProperty(e, n, { value: r, writable: !0, enumerable: !1 }), r } catch (i) { } return e[n] = r, r } var o = Object.prototype.hasOwnProperty; n.exports = r }, {}], handle: [function (e, n, t) { function r(e, n, t, r) { o.buffer([e], r), o.emit(e, n, t) } var o = e("ee").get("handle"); n.exports = r, r.ee = o }, {}], id: [function (e, n, t) { function r(e) { var n = typeof e; return !e || "object" !== n && "function" !== n ? -1 : e === window ? 0 : a(e, i, function () { return o++ }) } var o = 1, i = "nr@id", a = e("gos"); n.exports = r }, {}], loader: [function (e, n, t) { function r() { if (!E++) { var e = x.info = NREUM.info, n = l.getElementsByTagName("script")[0]; if (setTimeout(s.abort, 3e4), !(e && e.licenseKey && e.applicationID && n)) return s.abort(); c(y, function (n, t) { e[n] || (e[n] = t) }), f("mark", ["onload", a() + x.offset], null, "api"); var t = l.createElement("script"); t.src = "https://" + e.agent, n.parentNode.insertBefore(t, n) } } function o() { "complete" === l.readyState && i() } function i() { f("mark", ["domContent", a() + x.offset], null, "api") } function a() { return O.exists && performance.now ? Math.round(performance.now()) : (u = Math.max((new Date).getTime(), u)) - x.offset } var u = (new Date).getTime(), f = e("handle"), c = e(3), s = e("ee"), p = e(2), d = window, l = d.document, m = "addEventListener", v = "attachEvent", g = d.XMLHttpRequest, w = g && g.prototype; NREUM.o = { ST: setTimeout, SI: d.setImmediate, CT: clearTimeout, XHR: g, REQ: d.Request, EV: d.Event, PR: d.Promise, MO: d.MutationObserver }; var h = "" + location, y = { beacon: "bam.nr-data.net", errorBeacon: "bam.nr-data.net", agent: "js-agent.newrelic.com/nr-1123.min.js" }, b = g && w && w[m] && !/CriOS/.test(navigator.userAgent), x = n.exports = { offset: u, now: a, origin: h, features: {}, xhrWrappable: b, userAgent: p }; e(1), l[m] ? (l[m]("DOMContentLoaded", i, !1), d[m]("load", r, !1)) : (l[v]("onreadystatechange", o), d[v]("onload", r)), f("mark", ["firstbyte", u], null, "api"); var E = 0, O = e(5) }, {}] }, {}, ["loader"]);</script>
+	<script type="text/javascript" src="https://tikicdn.com/media/js/8c758b69.js" />
+	<script language="javascript" type="text/javascript">
+		/*
+		$(document).ready(function() {
+			PrintCapaloteClienteController.Init();
+		});
+		*/
+	</script>
+	<style type="text/css" media="all">
+		.line {
+			border-top: 1px solid #000;
+			margin: 3px 0 !important;
+			line-height: 3px !important
+		}
+
+		canvas {
+			display: inline-block
+		}
+
+		html {
+			font-size: 100%
+		}
+
+		i {
+			font-size: 12px
+		}
+
+		input {
+			margin: 0;
+			vertical-align: middle
+		}
+
+		tr {
+			page-break-inside: avoid
+		}
+
+		p {
+			orphans: 0;
+			widows: 3
+		}
+
+		body {
+			margin: 0;
+			font-family: "Arial", Times New Roman, Helvetica, Arial, sans-serif;
+			font-size: 13px;
+			line-height: 20px;
+			color: #333;
+			background-color: #fff
+		}
+
+		[class*=span] {
+			float: left;
+			min-height: 1px;
+			margin-left: 20px
+		}
+
+		p {
+			margin: 0 0 5px
+		}
+
+		.text-left {
+			text-align: left !important
+		}
+
+		.text-right {
+			text-align: right !important
+		}
+
+		.text-center {
+			text-align: center !important
+		}
+
+		legend {
+			display: block;
+			width: 100%;
+			padding: 0;
+			color: #333;
+			border-width: 0 0 1px;
+			border-style: none none solid;
+			border-color: -moz-use-text-color -moz-use-text-color #e5e5e5;
+			-moz-border-top-colors: none;
+			-moz-border-right-colors: none;
+			-moz-border-bottom-colors: none;
+			-moz-border-left-colors: none;
+			border-image: none
+		}
+
+		input {
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 20px;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			width: 206px;
+			margin-left: 0
+		}
+
+		p {
+			margin: 5px 0
+		}
+
+		.boderRaudi {
+			border: 1px solid #000;
+			width: 98%;
+			margin-left: 6px
+		}
+
+		.brBlack {
+			border-top: 1px solid #000;
+			margin: 5px 0
+		}
+
+		a {
+			text-dicorition: none
+		}
+
+		@page {
+			margin-top: 40px;
+			margin-left: 40px;
+			margin-right: 40px;
+			margin-bottom: 40px;
+		}
+
+		.text-center {
+			text-align: center !important;
+		}
+
+		.text-left {
+			text-align: left !important;
+		}
+
+		.text-right {
+			text-align: right !important;
+		}
+
+		#hangHoa {
+			padding-top: 15px;
+		}
+
+		#hangHoa table tr td,
+		#hangHoa table tr th {
+			border: 1px solid #000000;
+		}
+
+		.row {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			clear: both;
+			display: block;
+		}
+
+		.row .col1,
+		.row .col2,
+		.row .col3,
+		.row .col4,
+		.row .col5,
+		.row .col6,
+		.row .col7,
+		.row .col8,
+		.row .col9,
+		.row .col10,
+		.row .col11,
+		.row .col12,
+		.row .col13,
+		.row .col14,
+		.row .col15,
+		.row .col16,
+		.row .col17,
+		.row .col18,
+		.row .col20 {
+			display: block;
+			float: left;
+			padding: 0;
+			margin: 0;
+		}
+
+		.row:after {
+			clear: both
+		}
+
+		.row:after,
+		.row:before {
+			content: "";
+			display: table;
+			line-height: 0
+		}
+
+
+		.fixPage {
+			display: none;
+		}
+
+
+		.container {
+			width: 867px;
+			font-size: 12px;
+			line-height: 22px;
+			font-family: Arial;
+			padding: 0px;
+			border-radius: 0px;
+			margin: 0 auto;
+
+			position: relative;
+			display: table;
+			color: #000;
+			background-position: 50% 50%;
+
+
+			background-repeat: no-repeat;
+			background-position: center 580;
+		}
+
+		.breackPage {
+			page-break-after: always;
+		}
+
+		.displayPage {
+			border-bottom: 0px solid #000;
+			border-right: 0px solid #000;
+			border-left: 0px solid #000;
+			display: block;
+		}
+
+		#footerFix {
+			display: table;
+		}
+
+
+
+		.table {
+			border-spacing: 0;
+			width: 98%;
+			margin: 0px 7px;
+			font-size: 12px;
+			color: #000;
+		}
+
+		.table {
+			border-style: solid solid solid solid;
+			border-width: 1px 1px 1px 1px
+		}
+
+		.table th {
+			padding: 2px;
+			text-align: center;
+		}
+
+		.table th {
+			border-bottom: 1px solid #000;
+			font-weight: 700;
+			border-left: 1px solid #000;
+		}
+
+		.table th:last-child {
+			border-right: 1px solid #000
+		}
+
+		.table tbody tr th:last-child {
+			border-right: 0px solid #000
+		}
+
+		.table tbody tr th:first-child {
+			border-left: 0px solid #000
+		}
+
+		.table th {
+			line-height: 17px
+		}
+
+
+		.table td {
+			padding: 2px;
+			text-align: left;
+			vertical-align: top;
+			border-left: 1px solid #000
+		}
+
+		.table td {
+			border-top: 1px solid #DDD
+		}
+
+		.table tbody tr td:last-child {
+			border-right: 1px solid #000
+		}
+
+		.table tbody tr td:first-child {
+			border-left: 1px solid #000
+		}
+
+		.table tbody tr:last-child &gt;
+
+		td {
+			border-top: 1px solid #ddd;
+		}
+
+
+		.table-all-border {
+			border-spacing: 0;
+			width: 100%
+		}
+
+		.table-all-border td {
+			padding: 2px;
+			border-left: 1px solid #000;
+			border-top: 1px solid #000
+		}
+
+		.table-all-border tbody tr td:last-child {
+			border-right: 1px solid #000
+		}
+
+		.table-all-border tbody tr:last-child &gt;
+
+		td {
+			border-top: 1px solid #000;
+		}
+
+		.table td {
+			line-height: 21px
+		}
+
+		.tdFixBD {
+			border-top: 1px solid #DDD;
+
+
+			white-space: normal;
+		}
+
+		table {
+			max-width: 100%;
+			background-color: transparent;
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+
+		.fixTa {
+			color: #000;
+			width: 98%;
+			margin-left: 7px;
+			margin-right: 7px;
+			font-size: 13px;
+			background-color: transparent;
+			border-collapse: collapse;
+		}
+
+		.fixTable,
+		.sumTable {
+			color: #000;
+			width: 98%;
+			margin-left: 7px;
+			font-size: 12px;
+			background-color: transparent;
+			border-collapse: collapse;
+			border-spacing: 0;
+			border-top: 1px solid #000;
+			border-bottom: 1px solid #000;
+			border-left: 0px solid #000;
+			border-right: 1px solid #000;
+			-moz-border-top-colors: none;
+			-moz-border-right-colors: none;
+			-moz-border-bottom-colors: none;
+			-moz-border-left-colors: none;
+			border-image: none;
+			border-collapse: separate;
+			border-radius: 0px
+		}
+
+		.fixTable td {
+			padding: 2px
+		}
+
+		.fixTable td {
+			padding: 2px;
+			text-align: left;
+			vertical-align: top;
+			border-left: 1px solid #000
+		}
+
+		.fixTable td {
+			border-top: 1px solid #DDD
+		}
+
+		.fixTable tbody tr td:last-child {
+			border-right: 0px solid #000
+		}
+
+		.fixTable tbody tr td:first-child {
+			border-left: 1px solid #000
+		}
+
+		.fixTable tbody tr:last-child &gt;
+
+		td {
+			border-top: 1px solid #ddd;
+		}
+
+		.abcdef {
+			border: 3px none #000000;
+			font-weight: bold;
+			font-size: 40px;
+			position: absolute;
+			top: 490px;
+			left: 69px;
+			width: 600px;
+			background: none;
+			z-index: -1;
+
+		}
+
+		.invName {
+			text-align: center;
+			font-size: 20px;
+			line-height: 25px;
+			font-weight: 700;
+			margin: 0 0 3px;
+			text-transform: uppercase
+		}
+
+		.textEvat {
+			position: absolute;
+			top: 250px;
+			display: block;
+			right: -12px;
+			font-style: italic;
+			font-size: 11px;
+			width: 13px;
+		}
+
+		.boderTop {
+			border-top: 1px solid #000 !important;
+		}
+
+		.boderLe {
+			border-left: 1px solid #000 !important;
+		}
+
+		.boderRi {
+			border-right: 1px solid #000 !important;
+		}
+
+		.boderAll {
+			border: 1px solid #000 !important;
+		}
+
+		.phathanh {
+			position: absolute;
+			opacity: 0.8;
+			filter: alpha(opacity=100);
+			top: 297px;
+			left: 180px;
+			width: 300px;
+			height: auto;
+			z-index: 1;
+			background: none;
+		}
+
+		.TitleHD {
+			text-transform: uppercase;
+			font-size: 19px;
+			font-weight: 500;
+
+		}
+
+		.nom {
+			font-weight: normal !important;
+
+		}
+
+		.maginHeader {
+			display: table;
+			width: 100%;
+			margin: 0;
+			padding-top: 0px;
+			clear: both;
+			height: 0px;
+			color: #fff;
+			border-top: 0px solid #000;
+			margin-bottom: 0px
+		}
+
+		.maginHeaderTop {
+			display: table;
+			width: 100%;
+			margin: 0;
+			padding-top: 0px;
+			clear: both;
+			height: 0px;
+			color: #fff;
+			border-top: 0px solid #000;
+			margin-bottom: 30px
+		}
+
+		.maginHeaderMin {
+			display: table;
+			width: 100%;
+			margin: 0;
+			padding-top: 10px;
+			clear: both;
+			height: 10px;
+			color: #fff;
+		}
+
+		.border2 {
+			border-left: 0px solid #000;
+			border-right: 0px solid #000;
+			padding: 0px;
+			margin-right: 0px;
+			display: table;
+			width: 100%;
+		}
+
+		.wallperBg {
+			position: relative;
+		}
+
+		.boderNew {
+			border-width: 1px 1px 0 1px;
+			border-style: solid
+		}
+
+		.wallperTable {
+			border-left: 0px solid #000;
+			border-right: 0px solid #000;
+		}
+
+		.marginTopDiv {
+			margin-top: 20px;
+		}
+
+		.span12 {
+			width: 800px
+		}
+
+		.span9 {
+			width: 800px
+		}
+
+		.span8 {
+			width: 600px
+		}
+
+		.span6 {
+			width: 460px
+		}
+
+		.span4 {
+			width: 300px
+		}
+
+		.span3_1 {
+			width: 200px
+		}
+
+		.span3 {
+			width: 200px
+		}
+
+		.row-fluid {
+			width: 100%
+		}
+
+		.row-fluid [class*=span] {
+			display: block;
+			float: left;
+			width: 100%;
+			margin-left: 2.12766%;
+			box-sizing: border-box
+		}
+
+		.row-fluid .span12 {
+			width: 100%
+		}
+
+		.row-fluid .span9 {
+			width: 74.4681%
+		}
+
+		.row-fluid .span8 {
+			width: 53.191%
+		}
+
+		.row-fluid .span4 {
+			width: 31.9149%
+		}
+
+		.row-fluid .span3 {
+			width: 21.276%
+		}
+
+		.span13 {
+			width: 780
+		}
+
+		.row-fluid strong {
+			font-size: 10px
+		}
+
+		.invName {
+			text-align: center;
+			font-size: 13px;
+			font-weight: 700;
+			margin: 0 0 3px;
+			text-transform: uppercase
+		}
+
+		legend {
+			border-bottom-color: #DDD;
+			text-align: center;
+			line-height: 16px;
+			font-size: 14px;
+			font-weight: 700;
+			margin-bottom: 8px
+		}
+
+		.table td,
+		.table th {
+			line-height: 10px
+		}
+
+		.table-bordered&gt;
+		tbody&gt;
+		tr.thead&gt;
+
+		th {
+			text-align: center
+		}
+
+		.table tr.thead th {
+			vertical-align: middle
+		}
+
+		.table {
+			margin-bottom: 0px
+		}
+
+		.table td.text-right {
+			text-align: right
+		}
+
+		.table td.text-center {
+			text-align: center
+		}
+
+		.row-fluid [class*=span]:first-child {
+			margin-left: 0
+		}
+
+		.row-fluid .span6 {
+			width: 48.9362%;
+			margin-top: 10px;
+		}
+
+		.row-fluid [class*=span] {
+			min-height: 12px
+		}
+
+		.footer {
+			font-style: italic;
+			font-weight: 700;
+			margin-bottom: 0;
+			font-size: 13px
+		}
+
+		.row-fluid:after {
+			clear: both
+		}
+
+		.row-fluid:after,
+		.row-fluid:before {
+			content: "";
+			display: table;
+			line-height: 0
+		}
+
+		.pull-right[class*=span],
+		.row-fluid .pull-right[class*=span] {
+			float: right
+		}
+
+		.percentage:after {
+			content: " %"
+		}
+
+		tr:last-child td {
+			border-bottom: none
+		}
+
+		@media print {
+			.container {
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: none
+			}
+
+			.no-print {
+				display: none !important
+			}
+		}
+
+		.divButton {
+			margin-right: auto;
+			margin-left: auto;
+			width: 700px;
+			line-height: 16px;
+			padding: 10px
+		}
+
+		.divButton .button {
+			float: right
+		}
+
+		.divButton:after,
+		.divButton:before {
+			content: "";
+			display: table;
+			line-height: 0
+		}
+
+		.divButton:after {
+			clear: both
+		}
+
+		.button {
+			border-top: 1px solid #96d1f8;
+			background: #65a9d7;
+			background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+			background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+			background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+			background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+			background: -o-linear-gradient(top, #3e779d, #65a9d7);
+			padding: 5px 10px;
+			-webkit-border-radius: 8px;
+			-moz-border-radius: 8px;
+			border-radius: 8px;
+			-webkit-box-shadow: rgba(0, 0, 0, 1)0 1px 0;
+			-moz-box-shadow: rgba(0, 0, 0, 1)0 1px 0;
+			box-shadow: rgba(0, 0, 0, 1)0 1px 0;
+			text-shadow: rgba(0, 0, 0, .4)0 1px 0;
+			color: #fff;
+			font-size: 14px;
+			font-family: Georgia, serif;
+			text-decoration: none;
+			vertical-align: middle
+		}
+
+		.button:hover {
+			border-top-color: #28597a;
+			background: #28597a;
+			color: #ccc;
+			cursor: pointer
+		}
+
+		.button:active {
+			border-top-color: #1b435e;
+			background: #1b435e
+		}
+
+		[class*=" icon-"],
+		[class^=icon-] {
+			background-image: url(../img/glyphicons-halflings.png);
+			background-position: 14px 14px;
+			background-repeat: no-repeat;
+			display: inline-block;
+			height: 16px;
+			line-height: 16px;
+			margin-top: 1px;
+			vertical-align: text-top;
+			width: 14px
+		}
+
+		.icon-white {
+			background-image: url(../img/glyphicons-halflings-white.png)
+		}
+
+		.icon-print {
+			background-position: -96px -48px
+		}
+
+		.em {
+			font-size: 12px;
+			display: none;
+		}
+
+		.invoice_background {
+			opacity: 0.3;
+			filter: alpha(opacity=100);
+			width: 250px;
+			background: none z-index: 1;
+			position: absolute;
+			display: block;
+			margin-top: 320px;
+			margin-left: 275px;
+		}
+
+		.next-page {
+			page-break-inside: always;
+			page-break-after: always
+		}
+
+		.bodertable {
+			border: 1px solid #8F9AA3;
+			border-collapse: collapse;
+			padding-bottom: 2px;
+			padding-left: 5px;
+			padding-right: 2px;
+			padding-top: 0px;
+		}
+
+		.nom {
+			font-weight: normal !important;
+		}
+
+		.boderTop {
+			border-top: 1px solid #000 !important;
+		}
+
+		.textFirebase {
+			position: absolute;
+			top: 250px;
+			display: block;
+			right: -230px;
+
+			font-size: 11px;
+			-ms-transform: rotate(270deg);
+			/* IE 9 */
+			-webkit-transform: rotate(270deg);
+			/* Safari */
+			transform: rotate(270deg);
+			/* Standard syntax */
+
+		}
+
+		.textFirebase2 {
+			position: absolute;
+			top: 250px;
+			display: block;
+			right: 0px;
+			font-style: italic;
+			font-size: 12px;
+
+			-ms-writing-mode: bt-lr;
+			-ms-transform: rotate(180deg);
+			transform: rotate(180deg);
+
+		}
+
+		.phathanh {
+			position: absolute;
+			opacity: 0.8;
+			filter: alpha(opacity=100);
+			top: 104px;
+			left: 182px;
+			width: 144px;
+			height: auto;
+			z-index: 1;
+			background: none;
+		}
+
+		.logo {}
+
+		.boder {
+			border: solid 1px;
+			margin-left: 7px;
+			margin-right: 9px;
+		}
+
+		.boderfull {
+			border: solid 1px;
+		}
+
+		.boderleftrighy {
+			boder-left: solid 1px;
+			boder-right: solid 1px;
+		}
+
+		.barcode {
+			font-weight: normal;
+			font-style: normal;
+			line-height: normal;
+			sans-serif;
+			font-size: 12pt
+		}
+	</style>
+	<script>
+		function getHeight(element1, width) {
+			var element = element1.cloneNode(true);
+			if (width != 0) {
+				element.style.width = width;
+			}
+
+			element.style.visibility = "hidden";
+			document.body.appendChild(element);
+			var height = element.offsetHeight + 0;
+			document.body.removeChild(element);
+			element.style.visibility = "visible";
+			return height;
+		}
+
+		function loadData() {
+			//return;
+			//conver '--' in itemName to line break
+			var lstItemName = document.getElementsByClassName("tdFixBD");
+			for (var j = 0; j < lstItemName.length; j++) {
+				var itemName = lstItemName[j].innerHTML;
+				lstItemName[j].innerHTML = itemName.replace(/--/g, "<br/>");
+			}
+			try {
+
+				var mainElement = document.getElementById("main");
+				//Khai bao max height của mỗi page tùy thuộc vào khổ in px
+				var heightA4 = 1100;
+				var curHeight = getHeight(document.getElementsByClassName("footerInvoice")[0], 0) + getHeight(document.getElementsByClassName("tableHangHoa")[0], 867) + getHeight(document.getElementsByClassName("headerPanel")[0], 0);
+
+				if (curHeight > heightA4) {
+					listRow = document.getElementsByClassName("tableHangHoa")[0].getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+					if (listRow.length < 5) {
+						throw "no-page-break";
+					}
+				}
+
+				var xuatBoiHtmlString = document.getElementById("imgXuatBoi").innerHTML;
+
+				//vong for duyet qua tat ca Invoice
+				var lisInvoices = document.getElementsByClassName("newInvoice");
+				for (var j = 0; j < lisInvoices.length; j++) {
+					var headerHtmlString = lisInvoices[j].getElementsByClassName("headerPanel")[0].innerHTML;
+					var headerTableHtmlString = lisInvoices[j].getElementsByClassName("tableHangHoa")[0].getElementsByTagName("thead")[0].innerHTML;
+
+					var listRow = 0;
+					var indexRow = 0; //biến duyệt qua các dòng trong bảng hàng hóa
+					var countPage = 1;// biến đếm số trang khi breack ra
+					var maxHeightTable = 0;
+					var heightTemTable = 0;
+
+					//ve lai cac trang cua 1 invoice
+					var run = 0;
+					do {
+						run++;
+						if (run > 1000) {
+							throw "loop";
+						}
+						//add xuat boi Evat
+						var xuatBoi1 = document.createElement("div");
+						xuatBoi1.className = "wallperBg";
+						xuatBoi1.innerHTML = xuatBoiHtmlString;
+						mainElement.appendChild(xuatBoi1);
+
+
+						//add header vào mỗi trang****************************************************************************************************************************
+						var marginTopDiv = document.createElement("div");
+						marginTopDiv.className = "marginTopDiv";
+						mainElement.appendChild(marginTopDiv);
+
+						var tempHeader1 = document.createElement("div");
+						tempHeader1.setAttribute("id", ("invoice" + j + "header" + countPage));
+						tempHeader1.className = "border2";
+						tempHeader1.innerHTML = headerHtmlString;
+						mainElement.appendChild(tempHeader1);
+
+						//add table dong hang vao moi trang *******************************************************************************************************************
+						// lay chieu cao toi da cua table dong hang 
+						maxHeightTable = heightA4 - tempHeader1.offsetHeight;
+						var wallperTable = document.createElement("div");
+						wallperTable.className = "wallperTable";
+						var tempTable = document.createElement("table");
+
+						tempTable.setAttribute("id", ("invoice" + j + "table" + countPage));
+						tempTable.className = "table table-bordered";
+						var theadTemp = document.createElement("thead");
+						theadTemp.innerHTML = headerTableHtmlString;
+						tempTable.appendChild(theadTemp);
+						var tbodyTemp = document.createElement("tbody");
+						tempTable.appendChild(tbodyTemp);
+						mainElement.appendChild(wallperTable);
+						wallperTable.appendChild(tempTable);
+						///add dong hang vao bang
+						listRow = lisInvoices[j].getElementsByClassName("tableHangHoa")[0].getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+
+						for (var i = indexRow; i < listRow.length; i++) {
+							var tr = document.createElement("tr");
+							tr.setAttribute("id", ("invoice" + j + "_tr_so" + indexRow));
+							tr.innerHTML = listRow[i].innerHTML;
+							tbodyTemp.appendChild(tr);
+
+							heightTemTable = tempTable.offsetHeight;
+							if (heightTemTable >= maxHeightTable) {
+
+								// remove dong cuoi cung vau add
+								var elem = document.getElementById("invoice" + j + "_tr_so" + indexRow);
+								elem.parentElement.removeChild(elem);
+
+								//Hiển thị thông tin số trang (trang 1/ tong so..)
+
+								var displayPageString1 = "<div class='row text-center' ><div class='displayPage'>Tiếp theo trang trước; Trang " + countPage + "/<span class='maxPageInvoice" + j + "'></span></div></div>";
+
+								if (countPage === 1) {
+									displayPageString1 = "<div class='row text-center' ><div class='displayPage'>Trang " + countPage + "/<span class='maxPageInvoice" + j + "'></span></div></div>";
+								}
+
+								var displayPageElement1 = document.createElement("div");
+								displayPageElement1.innerHTML = displayPageString1;
+								displayPageElement1.setAttribute("id", ("invoice" + j + "_soPage" + countPage));
+								mainElement.appendChild(displayPageElement1);
+
+								// add brack trang
+								var divBreack1 = document.createElement("div");
+								divBreack1.className = "breackPage";
+								mainElement.appendChild(divBreack1);
+
+								heightTemTable = tempTable.offsetHeight;
+								break;
+							}
+							indexRow++;
+						}
+
+
+						countPage++;
+
+					} while (indexRow < listRow.length);
+
+					countPage--;
+					//add footer (chu ky ben mua ben ban)
+					var elmentFooter = lisInvoices[j].getElementsByClassName("footerInvoice")[0];
+					elmentFooter.setAttribute("id", ("invoice" + j + "footer"));
+					mainElement.appendChild(elmentFooter);
+
+					//tinh toan xem add footer vao thi co bi sang trang nua ko
+					var heightFooter = elmentFooter.clientHeight;
+					if ((maxHeightTable - heightTemTable) < heightFooter) {
+
+						//Hiển thị thông tin số trang (trang 1/ tong so..)
+
+						var displayPageString2 = "<div class='row text-center' ><div class='displayPage'>Tiếp theo trang trước; Trang " + countPage + "/<span class='maxPageInvoice" + j + "'></span></div></div>";
+						if (countPage === 1) {
+							displayPageString2 = "<div class='row text-center' ><div class='displayPage'>Trang " + countPage + "/<span class='maxPageInvoice" + j + "'></span></div></div>";
+						}
+
+						var displayPageElement2 = document.createElement("div");
+						displayPageElement2.innerHTML = displayPageString2;
+						displayPageElement2.setAttribute("id", ("invoice" + j + "_soPage" + countPage));
+						elmentFooter.parentNode.insertBefore(displayPageElement2, elmentFooter);
+
+						//add break trang
+						var divBreack = document.createElement("div");
+						divBreack.className = "breackPage";
+						elmentFooter.parentNode.insertBefore(divBreack, elmentFooter);
+
+						countPage++;
+						//add xuat boi Evat
+						var xuatBoi2 = document.createElement("div");
+						xuatBoi2.className = "wallperBg";
+						xuatBoi2.innerHTML = xuatBoiHtmlString;
+						elmentFooter.parentNode.insertBefore(xuatBoi2, elmentFooter);
+
+
+						//add  header vào mỗi trang
+						var marginTopDiv1 = document.createElement("div");
+						marginTopDiv1.className = "marginTopDiv";
+						elmentFooter.parentNode.insertBefore(marginTopDiv1, elmentFooter);
+
+						var tempHeader2 = document.createElement("div");
+						tempHeader2.setAttribute("id", ("invoice" + j + "header" + countPage));
+						tempHeader2.innerHTML = headerHtmlString;
+						tempHeader2.className = "border2";
+						elmentFooter.parentNode.insertBefore(tempHeader2, elmentFooter);
+
+						//Hiển thị thông tin số trang (trang 1/ tong so..)
+
+						var displayPageString3 = "<div class='row text-center' ><div class='displayPage'>Tiếp theo trang trước; Trang " + countPage + "/<span class='maxPageInvoice" + j + "'></span></div></div>";
+						if (countPage === 1) {
+							displayPageString3 = "<div class='row text-center' ><div class='displayPage'>Trang " + countPage + "/<span class='maxPageInvoice" + j + "'></span></div></div>";
+						}
+
+						var displayPageElement3 = document.createElement("div");
+						displayPageElement3.innerHTML = displayPageString3;
+						displayPageElement3.setAttribute("id", ("invoice" + j + "_soPage" + countPage));
+						mainElement.appendChild(displayPageElement3);
+
+						countPage++;
+
+					} else {
+						if (countPage === 1) {
+							var displayPageString4 = "<div class='row text-center' ><div class='displayPage'></div></div>";
+							var displayPageElement4 = document.createElement("div");
+							displayPageElement4.innerHTML = displayPageString4;
+							mainElement.appendChild(displayPageElement4);
+							countPage++;
+						}
+						else {
+							var displayPageString4 = "<div class='row text-center' ><div class='displayPage'>Tiếp theo trang trước; Trang " + countPage + "/<span class='maxPageInvoice" + j + "'></span></div></div>";
+							if (countPage === 1) {
+								displayPageString4 = "<div class='row text-center' ><div class='displayPage'>Trang " + countPage + "/<span class='maxPageInvoice" + j + "'></span></div></div>";
+							}
+							var displayPageElement4 = document.createElement("div");
+							displayPageElement4.innerHTML = displayPageString4;
+							displayPageElement4.setAttribute("id", ("invoice" + j + "_soPage" + countPage));
+							mainElement.appendChild(displayPageElement4);
+							countPage++;
+						}
+					}
+
+					//add max page vao cac trang
+					countPage--;
+					var listMaxPage = document.getElementsByClassName("maxPageInvoice" + j);
+					for (var y = 0; y < listMaxPage.length; y++) {
+						listMaxPage[y].innerHTML = countPage;
+					}
+
+
+					// Thêm dòng trống trong table nội dung hàng hóa				  
+					var tableDongHang = document.getElementById(("invoice" + j + "table" + countPage));
+					if (typeof (tableDongHang) != '' && tableDongHang != null) {
+						// truong hop trang cuoi  co bang hang hoa
+						var ft = document.getElementById("invoice" + j + "footer");
+						var hd = document.getElementById("invoice" + j + "header" + countPage);
+						tableDongHang = document.getElementById(("invoice" + j + "table" + (countPage)));
+
+						var maxH = heightA4 - 15 - hd.clientHeight - ft.clientHeight - 26;
+						var run2 = 0;
+						while (maxH > 0 && tableDongHang.clientHeight < maxH) {
+							run2++;
+							if (run2 > 1000) {
+								throw "loop";
+							}
+							var trAdd = document.createElement("tr");
+							trAdd.innerHTML = "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
+							tableDongHang.getElementsByTagName("tbody")[0].appendChild(trAdd);
+						}
+
+					} else {
+
+						// truong hop trang cuoi khong co bang hang hoa
+						var ft = document.getElementById("invoice" + j + "footer");
+						var hd = document.getElementById("invoice" + j + "header" + countPage);
+						var h1 = heightA4 - 15 - hd.clientHeight - ft.clientHeight;
+						if (h1 > 0) {
+							if (ft.getElementsByClassName("noteText").length) {
+								ft.getElementsByClassName("noteText")[0].setAttribute("style", "padding-top:" + h1 + "px");
+							}
+						}
+
+						tableDongHang = document.getElementById(("invoice" + j + "table" + (countPage - 1)));
+						var maxH = heightA4 - 15 - hd.clientHeight - 26;
+
+						var run2 = 0;
+						while (maxH > 0 && tableDongHang.clientHeight < maxH) {
+							if (run2++ > 1000) {
+								throw "loop";
+							}
+							var trAdd = document.createElement("tr");
+							trAdd.innerHTML = "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
+							tableDongHang.getElementsByTagName("tbody")[0].appendChild(trAdd);
+						}
+					}
+
+
+					//breck trang sang invoice tiep theo
+					var divBreackEnd = document.createElement("div");
+					divBreackEnd.className = "breackPage";
+					mainElement.appendChild(divBreackEnd);
+				}//ket thuc vong for Invoice
+
+			} catch (err) {
+				console.log("Exception", err);
+				var mainElement = document.getElementById("main");
+				document.getElementsByClassName("tableHangHoa")[0].className = "tableHangHoa table table-bordered";
+				mainElement.appendChild(document.getElementsByClassName("headerPanel")[0]);
+				mainElement.appendChild(document.getElementsByClassName("tableHangHoa")[0]);
+				mainElement.appendChild(document.getElementsByClassName("footerInvoice")[0]);
+			}
+			document.getElementById('main').style.display = 'none';
+			document.getElementById('main').style.display = 'table';
+		}
+
+	</script>
+</head>
+
+<body style="margin: 0; padding: 0" onload="loadData()">
+	<div id="main" class="container">
+		<img class="invoice_background"
+			style="opacity: 0.2;width: 350px; position: absolute; display: block; margin-top: 445px; margin-left: 270px;" />
+	</div>
+	<div id="imgXuatBoi" class="wallperBg" style="display:none;">
+		<img class="textEvat" style="" src="" />
+	</div>
+	<div style="display: none" class="newInvoice">
+		<div class="headerPanel">
+			<div style="overflow: hidden;margin-top:10px">
+				<div style="float: left;width: 73%;">
+					<div style="float: left;width: 40%;">
+						<img src=""
+							style="margin-left:5px;height: 70px;" />
+					</div>
+					<div style="float: right;width: 60%; text-align: center;margin-top:15px;">
+						<b style="font-size: 23px!important;line-height:22px;color:red;">
+							HÓA ĐƠN GIÁ TRỊ GIA TĂNG<br /></b>
+						<p style="margin:10px 0px;" align="center">
+							Ngày<em class="em"> (Date)</em>   31   tháng<em class="em"> (month)</em>   05   năm<em
+								class="em"> (year)</em>   2019</p>
+					</div>
+				</div>
+				<div style="float: right;line-height: 1.4;margin-top:20px;margin-right:9px;">
+					<div>Mẫu số <em class="em">(Form No.)</em>: 01GTKT0/002</div>
+					<div style="padding-top: 3px;">Ký hiệu <em class="em">(Serial)</em>: AA/19E</div>
+					<div>Số <em class="em">(No.)</em>: 
+						<b style="color:red;font-size:18px">2878602</b></div>
+				</div>
+				<div style="clear:both;line-height: 0px;"> </div>
+			</div>
+			<p
+				style="color:red;font-size:14px; margin-top:10px;margin-bottom:10px; text-transform: uppercase; text-align: center;" />
+			<div>
+				<table class="fixTa" border="0" cellspacing="0" cellpadding="0" width="100%"
+					style="font-size:13px; margin-top:15px; line-height:18px;">
+					<tr>
+						<td width="100" valign="middle" nowrap="nowrap">Đơn vị bán hàng</td>
+						<td width="5" valign="top">:</td>
+						<td colspan="6" valign="middle">
+							<b style="font-size:16px!important;font-weight:bold;width:800px;color:#00b9f4">
+								  CÔNG TY TNHH MTV THƯƠNG MẠI TI KI</b>
+						</td>
+					</tr>
+					<tr>
+						<td width="100" valign="middle" nowrap="nowrap">Mã số thuế</td>
+						<td width="5" valign="top">:</td>
+						<td colspan="5" valign="middle">
+							<span style="font-weight: bold; letter-spacing: 5px;font-size:13px;">
+								 0312388363</span>
+						</td>
+					</tr>
+					<tr>
+						<td width="100" valign="top" nowrap="nowrap">Địa chỉ</td>
+						<td valign="top">:</td>
+						<td colspan="5" valign="middle">
+							<span style="line-height:17px;">
+								  52 Út Tịch, P.4, Q. Tân Bình, TP. Hồ Chí Minh, Việt Nam</span>
+						</td>
+					</tr>
+					<tr>
+						<td width="100" valign="top" nowrap="nowrap">Điện thoại</td>
+						<td width="5" valign="top">:</td>
+						<td colspan="5" valign="middle">
+							<span style="line-height:17px;">
+								  (028) 7 305 8454</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br />
+			<div class="fixTa">
+				<div
+					style="line-height: 17px; padding-bottom:5px; margin-bottom:5px; border:1px #000 solid;padding-left:10px; padding-top: 5px;">
+					<table style="font-size:13px;">
+						<tr>
+							<td width="140" valign="left" nowrap="nowrap">
+								Họ tên người mua hàng<i class="em"> (Buyer's name)</i></td>
+							<td width="5" valign="top">:</td>
+							<td colspan="5" valign="left">
+								<span>LE THUAN</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="140" valign="left" nowrap="nowrap">
+								Đơn vị mua hàng<i class="em"> (Company name)</i></td>
+							<td width="5" valign="top">:</td>
+							<td colspan="5" valign="left">
+								<span>LE THUAN</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="140" valign="left" nowrap="nowrap">
+								Mã số thuế<i class="em"> (Tax code)</i></td>
+							<td width="5" valign="left">:</td>
+							<td colspan="5" valign="left">
+								<span>-------</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="140" valign="top" nowrap="nowrap">Địa chỉ <i class="em">(Address)</i></td>
+							<td valign="top">:</td>
+							<td colspan="5" valign="left">
+								<span style="line-height:17px;">Hẻm 233 - Đường Nguyễn Văn Cừ, Phường An Hòa, Quận Ninh
+									Kiều, Cần Thơ</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="140" valign="left" nowrap="nowrap">
+								Điện thoại
+							</td>
+							<td width="5" valign="left">:</td>
+							<td width="200" valign="middle" nowrap="nowrap">0907203922</td>
+							<td valign="left" nowrap="nowrap">Hình thức thanh toán<i class="em"> (Method of payment)</i>
+							</td>
+							<td width="5" valign="left">:</td>
+							<td valign="middle" nowrap="nowrap">TM/CK</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div style="display:none;line-height:1px">
+			<table class="tableHangHoa table table-bordered">
+				<thead class="text-center">
+					<tr class="thead" style="font-size:11px; line-height:15px;">
+						<th style="width:30px">
+							<p style="margin:2px 2px;line-height:15px;">
+								<span>STT</span>
+							</p>
+							<p style="margin:2px 2px;">
+								<em class="em">(No.)</em>
+							</p>
+						</th>
+						<th style="">
+							<p style="margin:2px 2px;line-height:15px;">
+								<span>Tên hàng hóa dịch vụ</span>
+							</p>
+							<p style="margin:2px 2px;">
+								<em class="em">(Description of goods/service)</em>
+							</p>
+						</th>
+						<th style="width: 50px;">
+							<p style="margin:2px 2px;line-height:15px;">
+								<span>Đơn vị tính</span>
+							</p>
+							<p style="margin:2px 2px;">
+								<em class="em">(Unit)</em>
+							</p>
+						</th>
+						<th style="width: 50px;">
+							<p style="margin:2px 2px;line-height:15px;">
+								<span>Số lượng</span>
+							</p>
+							<p style="margin:2px 2px;">
+								<em class="em">(Quantity)</em>
+							</p>
+						</th>
+						<th style="width: 80px;">
+							<p style="margin:2px 2px;line-height:15px;">
+								<span>Đơn giá trước chiết khấu</span>
+							</p>
+							<p style="margin:2px 2px;">
+								<em class="em">(Unit price)</em>
+							</p>
+						</th>
+						<th style="width: 80px;">
+							<p style="margin:2px 2px;line-height:15px;">
+								<span>Tổng số tiền chiết khấu</span>
+							</p>
+							<p style="margin:2px 2px;">
+								<em class="em" />
+							</p>
+						</th>
+						<th style="width: 90px;">
+							<p style="margin:2px 2px;line-height:15px;">
+								<span>Thành tiền trước thuế</span>
+							</p>
+							<p style="margin:2px 2px;">
+								<em class="em">(Amount before VAT)</em>
+							</p>
+						</th>
+						<th style="width: 80px;">
+							<p style="margin:2px 2px;line-height:15px;">
+								<span>Thuế suất GTGT</span>
+							</p>
+							<p style="margin:2px 2px;">
+								<em class="em">(VAT rate)</em>
+							</p>
+						</th>
+						<th style="width: 80px;">
+							<p style="margin:2px 2px;line-height:15px;">
+								<span>Tiền thuế</span>
+							</p>
+							<p style="margin:2px 2px;">
+								<em class="em">VAT</em>
+							</p>
+						</th>
+						<th style="width: 95px;">
+							<p style="margin:2px 2px;line-height:15px;">
+								<span>Thành tiền sau thuế GTGT</span>
+								<br />
+								<em class="em">(Amount after VAT)</em>
+							</p>
+						</th>
+					</tr>
+					<tr>
+						<th>
+							<p style="margin:2px 2px;" class="text-center">1</p>
+						</th>
+						<th class="text-center">2</th>
+						<th class="text-center">3</th>
+						<th class="text-center">4</th>
+						<th class="text-center">5</th>
+						<th class="text-center">6</th>
+						<th class="text-center">7=4x5-6</th>
+						<th class="text-center">8</th>
+						<th class="text-center">9=7x8</th>
+						<th class="text-center">10=7+9</th>
+					</tr>
+				</thead>
+				<tbody style="font-size:11px">
+					<tr class="boderleftrighyS">
+						<td class="text-center" width="30" align="center">
+							<p style="margin:2px 2px;">1</p>
+						</td>
+						<td class="tdFixBD">
+							<p style="margin:2px 2px;line-height:13px;">Điện Thoại Nokia 8.1 (Blue) - Hàng Chính Hãng --
+								IMEI: 356965090723648</p>
+						</td>
+						<td class="text-center">
+							<p style="margin:2px 2px;">CÁI</p>
+						</td>
+						<td class="text-center">
+							<p style="margin:2px 2px;">1</p>
+						</td>
+						<td class="text-right">
+							<p style="margin:2px 2px;">6.172.727</p>
+						</td>
+						<td class="text-right">
+							<p style="margin:2px 2px;">272.727</p>
+						</td>
+						<td class="text-right">
+							<p style="margin:2px 2px;">5.900.000</p>
+						</td>
+						<td class="text-center">
+							<p style="margin:2px 2px;">10%
+							</p>
+						</td>
+						<td class="text-right">
+							<p style="margin:2px 2px;">590.000</p>
+						</td>
+						<td class="text-right">
+							<p style="margin:2px 2px;">6.490.000</p>
+						</td>
+					</tr>
+					<tr class="boderleftrighyS">
+						<td class="text-center" width="30" align="center">
+							<p style="margin:2px 2px;">2</p>
+						</td>
+						<td class="tdFixBD">
+							<p style="margin:2px 2px;line-height:13px;">[Gift] Ốp Lưng Điện Thoại Nokia 8.1</p>
+						</td>
+						<td class="text-center">
+							<p style="margin:2px 2px;">QUYỂN</p>
+						</td>
+						<td class="text-center">
+							<p style="margin:2px 2px;">1</p>
+						</td>
+						<td class="text-right">
+							<p style="margin:2px 2px;">135.455</p>
+						</td>
+						<td class="text-right">
+							<p style="margin:2px 2px;">135.455</p>
+						</td>
+						<td class="text-right">
+							<p style="margin:2px 2px;">0</p>
+						</td>
+						<td class="text-center">
+							<p style="margin:2px 2px;">10%
+							</p>
+						</td>
+						<td class="text-right">
+							<p style="margin:2px 2px;">0</p>
+						</td>
+						<td class="text-right">
+							<p style="margin:2px 2px;">0</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div style="display:none">
+			<div class="row border2 footerInvoice">
+				<div>
+					<table class="fixTa" border="1px solid #000 !important" style="margin-right:2px; font-size:12px;">
+						<tbody>
+							<tr>
+								<td height="23" colspan="6" valign="middle">
+									<strong style="margin: 2px 2px">Tổng cộng <em class="em">(Total amount):
+										</em></strong>
+								</td>
+								<td width="92" align="right" nowrap="nowrap">
+									<p style="margin: 2px 2px">5.900.000</p>
+								</td>
+								<td width="82">
+									<strong> </strong>
+								</td>
+								<td width="82" align="right" nowrap="nowrap">
+									<p style="margin: 2px 2px">590.000</p>
+								</td>
+								<td width="97" align="right" nowrap="nowrap">
+									<p style="margin: 2px 2px">6.490.000</p>
+								</td>
+							</tr>
+							<tr>
+								<td height="23" colspan="10" valign="middle">
+									<strong style="margin-left:100px;">
+										<b>MDH:  </b>534697365</strong>
+								</td>
+							</tr>
+							<tr>
+								<td height="23" colspan="10" valign="middle" style="margin:2px 2px;">
+									<div id="barcodecontainer" style="width:3in">
+										<div id="barcode">534697365</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td height="23" colspan="10" style="margin:2px 2px;">
+									<strong>Số tiền viết bằng chữ : Sáu triệu bốn trăm chín mươi nghìn đồng.</strong>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div colspan="6" class="text-left" style="margin-left:px;height:150px;line-height:17px">
+					<div class="row-fluid">
+						<div class="span6">
+							<p class="text-center">
+								<b>Người mua hàng </b>
+								<i class="em">(Buyer)</i>
+								<br />
+								<i>(Ký, ghi rõ họ tên)</i>
+								<br />
+								<i class="em">(Sign &amp; full name)</i>
+							</p>
+							<br />
+						</div>
+						<div class="span6">
+							<p class="text-center">
+								<b>Người bán hàng </b>
+								<i class="em">(Seller)</i>
+								<br />
+								<i>(Ký, ghi rõ họ tên)</i>
+								<br />
+								<i class="em">(Sign &amp; full name)</i>
+							</p>
+							<a href="#" style="text-decoration:none;">
+								<div class="text-center" style="padding-top:10px">
+									<div id="kysoban"
+										style="margin: 0 auto; border: solid 1px #ff0000; padding: 3px; color: #ff0000; position: relative; z-index: 1; font-size:13px; max-width: 230px; text-align: left;line-height: 14px">
+										<img style="position: absolute; z-index: -1; right: 30px; top:8px"
+											src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA4CAYAAACyutuQAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAPQSURBVHja3JppSBVRFMev+TALK4LCQhOJNmiD+tJm2EZoFBUFBVFE0I6W0q5ZWNFGCpFFJZS0SJHQF0uLlg9RWB+LLNrpEWZBUdiq0//geTFcZubNe743c68Hfoze++a+fp2ZO+feMcEwDBFJpNUmCD8jmGvY/bsycejaRXSCgEw2DjnACHQCmXwcskA+shcMaCySgkM5GAPmkgy1BzSVycChCgwF2ZB5F+oLaCgzFoezYBCYApln5n7dhGaCMyAVLIDMffkDOs1yy0AN6AcKIVNj9SFdhFaDk6A7OAGZMrsPqi5ET/FtoAIkgTqwyekE1YV2gH0s9gasQna+6yq0E5Tyzy1gJXgb7iRVhbaC3abfS8ANNyeqKLSRL7NQnAdlbk9WTWg5OMj3DMVTUABadRSaD46bHvbfwFrwMZJBVBGaCE7TesbURpfdnUgHUkFoBDgHepvarkVy36gklMoymaa2JpAHfukmRGVMJRgttW8GL6Id1E+hQ2CW1FbN6xyhm9AansHMQVVAcUcH9kMoh581chR35FLzS2gwlf8gRWq/yhWB0EmoJ8tkSO304CwEbboJ7QJTLdoPgJex+hKvhBZz0SnHA3A0ll/khdBIcMSi/QfYDv7oJNQDHOONDTmoQrgd6y+MtxDtB2RZtDdLCzgthGbb3DcU+0FQJ6H+4DBItuh7xNO30EUokSuBIRZ9tPLcw5se8RFKq02I9RusJTxNW0U9VwUinhkaD6lpMRpvIGcg0aKvRdr8iJsQPaXnQaoMdOvgeHSzp9v00V70vbgLBXMNWiHuBdPBXUhNinKspWChTd9XljW8yBC9iP2AwwowitbzkCoByRGMk86Xml1cAE+8qLH+z3KQahDtO5YpXEjWQWqcy3EowwNs+ugKKPeqApan7QrTumQyqIVUUZhszQGLHPqpxHnuixCy9Fu0v65o5CbaWirly3CCxfl9eOZKshm/mf+ThF8ZCt1PG7gaDkU2Z2uL9PSn0ma4w/j0LvSVr0IsVccLL3P04pmKNgFp64le3q5zGJuyc8rrDQunl8ZUvtAW7QypnbJFrzY+s6RdXPTy3glbyyFLdMnl2VTFfcEwh3G/+JGdsMUppGhyKIjigXgZPFZOiKUu8arTbdCedKXwKdwuH4pAg8vPXuE1j7pCyBLVYuv53nCKvzxVt6qeIZJ6yLs0TkHV9E3hY0S6YqW/5qh26KeldZs2QshSK1cRjRbdVE1fFz5HNHsKTVwhyG/YqlzcY0oKUdySltOf+NkjdBUKlUb1puX1a92FfnJp9J7rNiXinwADAE4w55Whk0mGAAAAAElFTkSuQmCC"
+											kasperskylab_antibanner="on" />
+										Signature Valid <br />
+										Ký bởi: CÔNG TY TNHH MTV THƯƠNG MẠI TI KI<br />
+										Ký Ngày: 31 tháng 05 năm 2019</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="text-center">
+					<em>(Cần kiểm tra đối chiếu khi lập, giao, nhận hóa đơn)</em>
+					<br />
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+		function get_object(id) {
+			var object = null;
+			if (document.layers) {
+				object = document.layers[id];
+			}
+			else if (document.all) {
+				object = document.all[id];
+			}
+			else if (document.getElementById) {
+				object = document.getElementById(id);
+			}
+			return object;
+		}
+		get_object("barcode").innerHTML = DrawHTMLBarcode_EAN13(get_object("barcode").innerHTML, "no", "cm", 0, 2.5, 0, "bottom", "center", "", "black", "white");
+	</script>
+	<script
+		type="text/javascript">window.NREUM || (NREUM = {}); NREUM.info = { "beacon": "bam.nr-data.net", "licenseKey": "5e70a0d5a3", "applicationID": "78234830", "transactionName": "YlcDYktZWxdTUkFcXFsdIkNKTFoJHUJUWVZGHQ5EXV1HS0RYUEJaW0QOX1pd", "queueTime": 0, "applicationTime": 20, "atts": "ThAAFANDSBk=", "errorBeacon": "bam.nr-data.net", "agent": "" }</script>
+</body>
+
+</html>

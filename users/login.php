@@ -1,22 +1,27 @@
 <?php
-  if(isset($_POST['login']))
+  session_start();
+  include_once("users.php");
+  if (isset($_SESSION['username']))
   {
-    include_once("users.php");
+    echo "<script>window.location='../home/homepage.php';</script>";
+  }
+  if(isset($_POST['login']))
+  {   
     $username=$_POST['username'];
     $password=md5($_POST['password']);
-    if (user_exist($username, $password))
-    {
-      echo "<script>alert('Đăng nhập thành công!');</script>";
-      if (!isset($_SESSION))
-      {
-        session_start();
-        $_SESSION["username"]=$username;
-      }
-      echo "<script>window.location='user_list.php';</script>";
+    $user=logininfor_true($username, $password);
+    if ($user)
+    {    
+        $_SESSION['u_loginname']=$user['u_loginname'];
+        $_SESSION['u_id']=$user['u_id'];
+        $_SESSION['r_id']=$user['r_id'];
+        $_SESSION["r_name"]=$user['r_name'];
+        echo "<script>window.location='../home/homepage.php';</script>";
     }
     else
     {
-      echo "<script>alert('Sai tên tài khoản hoặc mật khẩu!');</script>";
+      echo "<script>alert('Username or password is incorrect!')</script>";
+      echo "<script>window.history.back();</script>";
     }
     disconnect_db();
   }
@@ -53,14 +58,12 @@
                   </div>
                   <form class="user" method="post">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" name="username" placeholder="Enter Username">
+                      <input type="text" class="form-control form-control-user" name="username" placeholder="Enter Username" required >
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" name="password" placeholder="Password" required>
                     </div>
-
                     <input type="submit" class="btn btn-primary btn-user btn-block" name="login" value="Log in">
-
                   </form>
                 </div>
               </div>

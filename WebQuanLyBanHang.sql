@@ -261,13 +261,43 @@ insert into PRODUCTS(PR_ID,CA_ID,PRO_NAME,PRO_PRICE,PRO_QUANTITY) values(7,10,'B
 insert into PRODUCTS(PR_ID,CA_ID,PRO_NAME,PRO_PRICE,PRO_QUANTITY) values(9,10,'Bàn phím cơ Fuhlen Destroyer (Full size/Optical Switch/7 màu)',900000,50);
 insert into PRODUCTS(PR_ID,CA_ID,PRO_NAME,PRO_PRICE,PRO_QUANTITY) values(21,10,'Bàn phím cơ Dareu DK1280 RGB (Full size/Brown D switch/RGB)',1000000,50);
 
-insert into ORDERS(CUS_ID,U_ID,OR_STATUS,OR_CREATEDDATE) values(1,1,1,'2019-2-3');
-insert into ORDERS(CUS_ID,U_ID,OR_STATUS,OR_CREATEDDATE) values(2,1,0,'2018-6-4');
-insert into ORDERS(CUS_ID,U_ID,OR_STATUS,OR_CREATEDDATE) values(3,1,1,'2017-6-6');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2019-1-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2019-2-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2019-3-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2019-4-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2019-5-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2019-6-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-1-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-2-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-3-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-4-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-5-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-6-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-7-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-8-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-9-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-10-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-11-3');
+insert into orders(cus_id, u_id, or_totalprice, or_createddate) values (1, 1, 1000, '2018-12-3');
 
-insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,1,2,5000);
-insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(2,2,3,10000);
-insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(3,3,4,15000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,1,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,2,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,3,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,4,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,5,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,6,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,7,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,8,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,9,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,10,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,11,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,12,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,13,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,14,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,15,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,16,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,17,1,1000);
+insert into ORDERDETAILS(PRO_ID,OR_ID,OD_QUANTITY,OD_PRICE) values(1,18,1,1000);
 
 
 

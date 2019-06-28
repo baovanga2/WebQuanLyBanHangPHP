@@ -64,8 +64,8 @@
         </a>
         <div id="collapseStatistical" class="collapse" aria-labelledby="headingStatistical" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Page1</a>
-                <a class="collapse-item" href="#">Page2</a>
+                <a class="collapse-item" href="../statistical/statistical-orders.php">Statistics by day</a>
+                <a class="collapse-item" href="#">statistics by month</a>
             </div>
         </div>
     </li>

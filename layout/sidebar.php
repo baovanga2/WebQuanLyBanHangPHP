@@ -20,7 +20,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="true" aria-controls="collapseOrders">
             <span>Orders</span>
         </a>
@@ -30,6 +30,9 @@
                 <a class="collapse-item" href="#">Page2</a>
             </div>
         </div>
+    </li> -->
+    <li class="nav-item">
+        <a class="nav-link" href="../orders/management.php"><span>Orders</span></a>
     </li>
 
     <!-- Divider -->
@@ -64,8 +67,8 @@
         </a>
         <div id="collapseStatistical" class="collapse" aria-labelledby="headingStatistical" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="../statistical/statistical-orders.php">Statistics by day</a>
-                <a class="collapse-item" href="#">statistics by month</a>
+                <a class="collapse-item" href="../statistical/statistical-orders.php">Statistics orders</a>
+                <a class="collapse-item" href="../statistical/statistical-products.php">Statistics products</a>
             </div>
         </div>
     </li>

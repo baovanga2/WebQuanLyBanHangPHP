@@ -30,7 +30,7 @@
 			}	
 
 				echo "<tr>";
-				echo "<td colspan='4' align='right'> Total Orders from " .$month." to ".$year."</td>";
+				echo "<td colspan='4' align='right'> Total Orders in " .$month." - ".$year."</td>";
 				echo "<td  align='right'>".$to." orders</td>";
 				echo "</tr>";
 

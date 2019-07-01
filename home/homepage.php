@@ -47,16 +47,13 @@
 	<!-- Scroll to Top Button-->
 	<?php
 		include_once("../layout/topbutton.php");
-	?>
-	<!-- Logout Modal-->
-	<?php
+
+		// Logout Modal
 		include_once("../layout/logout.php");
-	?>
-	<?php
+
 		include_once("../layout/script.php");
-	?>
-	<!-- Page level -->
-	<?php
+	
+		// Page level
 		include_once("../layout/scriptdatatables.php")
 	?>
 </body>

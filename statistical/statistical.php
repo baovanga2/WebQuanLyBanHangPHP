@@ -36,6 +36,23 @@
 		return $result;
 	}
 
-
-
+	function get_products_now()
+	{
+		global $conn;
+		connect_db();
+		$date = getdate();
+		
+		$sql = "SELECT DISTINCT products.PRO_ID, products.PRO_NAME, SUM(orderdetails.OD_QUANTITY) as TOTAL FROM products,`orderdetails`, orders WHERE orderdetails.`PRO_ID` = products.`PRO_ID` and orders.or_id = orderdetails.or_id and month(orders.or_createddate) = month(now()) and year(orders.or_createddate) = year(now()) GROUP BY products.PRO_ID";
+		// $sql="SELECT DISTINCT * FROM products,`orderdetails`, orders WHERE orderdetails.`PRO_ID` = products.`PRO_ID` and orders.or_id = orderdetails.or_id and month(orders.or_createddate) = month(now()) and year(orders.or_createddate) = year(now()) ";
+		$query=mysqli_query($conn, $sql);
+		$result=array();
+		if ($query)
+		{
+			while ($row=mysqli_fetch_assoc($query))
+			{
+				$result[]=$row;
+			}
+		}
+		return $result;
+	}
 ?>

@@ -68,12 +68,11 @@
 
                         <label>Month <select name="dataTable_length" aria-controls="dataTable"
                             class="custom-select custom-select-sm form-control form-control-sm" id="getmonth">
-									<option> Select month</option>
 									<option value="allmonth"> All months</option>
                             <?php for( $m=1; $m<=12; ++$m ) { 
                                     $month_label = date('F', mktime(0, 0, 0, $m, 1));
                                     ?>
-                                    <option value="<?php echo +$m; ?>"><?php echo $month_label; ?></option>
+                                    <option value="<?php echo +$m; ?>" <?php if ($m==date('m')) echo 'selected'; ?>><?php echo $month_label; ?></option>
                                     <?php } ?>
                           </select>
                           
@@ -85,7 +84,6 @@
                         
                         <label>Year <select name="dataTable_length" aria-controls="dataTable"
                             class="custom-select custom-select-sm form-control form-control-sm" id="getyear">
-                            	<option> Select Year</option>
                             <?php 
                                 $year = date('Y');
                                 $min = $year - 60;
@@ -208,7 +206,7 @@
             }
         });
 	});
-	$( "#getyear" ).change(function() {
+	$( "#getmonth" ).change(function() {
 	  	 
 	  	$.ajax({
             url : "so-month-year.php",
@@ -228,6 +226,26 @@
             }
         });
 	});
+  $( "#getyear" ).change(function() {
+       
+      $.ajax({
+            url : "so-month-year.php",
+            type : "post",
+            dataType:"text",
+            data : {
+                year : $('#getyear').val(),
+                month : $('#getmonth').val()
+            },
+            success : function (result){
+              if (result != "") {
+                  $('#ajax-clear').html(result);
+                }
+                else{
+                  $("#ajax-clear").html("<tr><td colspan='5'><h5 style='text-align:center;'>No data </h5></td></tr>")
+                }
+            }
+        });
+  });
 
 </script>
 <script>

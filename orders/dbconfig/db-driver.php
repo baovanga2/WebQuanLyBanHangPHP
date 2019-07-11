@@ -79,7 +79,7 @@ function insert_order_details_plus($productID, $customerName)
     global $conn;
     connect_db();
     $sqlOne = "ALTER TABLE `orderdetails` AUTO_INCREMENT = 1;";
-    $sqlTwo = "INSERT INTO `orderdetails`(`pro_id`,`or_id`,`od_quantity`,`od_price`) values('$productID',(SELECT or_id FROM orders WHERE cus_id = (SELECT `cus_id` FROM `customers` WHERE `cus_fullname` = '$customerName')),1,(SELECT `pro_price` FROM `products` WHERE `pro_id` = '$productID'));";
+    $sqlTwo = "INSERT INTO `orderdetails`(`pro_id`,`or_id`,`od_quantity`,`od_price`) values('$productID',(SELECT max(or_id) FROM orders WHERE cus_id = (SELECT `cus_id` FROM `customers` WHERE `cus_fullname` = '$customerName')),1,(SELECT `pro_price` FROM `products` WHERE `pro_id` = '$productID'));";
     $sqlThree = "UPDATE `products` SET `pro_quantity` = (SELECT `pro_quantity` FROM (SELECT * FROM products) as Price WHERE `pro_id` = '$productID') - 1 WHERE `pro_id` = '$productID'";
     mysqli_query($conn, $sqlOne);
     mysqli_query($conn, $sqlTwo);
@@ -105,6 +105,7 @@ function delete_product($productID, $ordersID, $quantity)
         echo "Error when deleting a product in orderdetails table!";
         echo "\n" . mysqli_error($conn);
     }
+    return $result;
 }
 
 // Show list orders 
@@ -112,7 +113,7 @@ function show_orders1()
 {
     global $conn;
     connect_db();
-    $sql = "SELECT o.or_id AS OrdersID, c.cus_fullname AS CustomerName, o.or_createddate AS CreateDate, u.u_fullname AS StaffCreated
+    $sql = "SELECT o.or_id AS OrdersID, c.cus_fullname AS CustomerName, o.or_createddate AS CreateDate, u.u_fullname AS StaffCreated, c.cus_address as CustomerAddress ,c.cus_phone as CustomerPhone
     FROM `orders` o, `customers` c, `users` u
     WHERE o.cus_id = c.cus_id AND o.u_id = u.u_id;";
     $result = mysqli_query($conn, $sql);
@@ -130,17 +131,34 @@ function show_orders()
 {
     global $conn;
     connect_db();
-    $sql = "SELECT o.or_id AS OrdersID, c.cus_fullname AS CustomerName, o.or_createddate AS CreateDate, u.u_fullname AS StaffCreated, c.cus_address as CustomerAddress ,c.cus_phone as CustomerPhone
-    FROM `orders` o, `customers` c, `users` u
-    WHERE o.cus_id = c.cus_id AND o.u_id = u.u_id;";
+    $sql = "SELECT o.or_id AS OrdersID, c.cus_fullname AS CustomerName, 
+    o.or_createddate AS CreateDate, u.u_fullname AS StaffCreated, 
+    c.cus_address as CustomerAddress ,c.cus_phone as CustomerPhone, 
+    SUM(od.od_quantity) as Quantity, o.or_totalprice as Total
+    FROM `orders` o, `customers` c, `users` u, `orderdetails` as od
+    WHERE o.cus_id = c.cus_id AND o.u_id = u.u_id AND od.or_id = o.or_id
+    GROUP BY o.or_id;";
     $result = mysqli_query($conn, $sql);
     $datas = array();
     if ($result) {
-        while ($rows = mysqli_fetch_assoc($result)) {   
+        while ($rows = mysqli_fetch_assoc($result)) {
             $datas[] = $rows;
         }
     }
     return $datas;
+}
+
+function update_orders_totalprice($ordersID, $totalPrice)
+{
+    global $conn;
+    connect_db();
+    $sqlOne = "UPDATE orders SET or_totalprice = '$totalPrice' WHERE or_id = '$ordersID';";
+    $result = mysqli_query($conn, $sqlOne);
+    if (!$result) {
+        // print_r("<pre>");
+        echo "Error when updating to total price!";
+        echo "<br>" . mysqli_error($conn);
+    }
 }
 
 // Get the quantity of the order 
@@ -166,7 +184,8 @@ function show_quantity($ordersID)
     return $datas;
 }
 
-function delete_foreign_key() {
+function delete_foreign_key()
+{
     global $conn;
     connect_db();
     $sqlOne     = "ALTER TABLE `orderdetails` DROP FOREIGN KEY fk_od_or;";
@@ -189,7 +208,7 @@ function delete_product_orderdetails($ordersID, $productID)
     connect_db();
     $sql = "DELETE FROM `orderdetails` WHERE `pro_id` = $productID AND `or_id` = $ordersID;";
     $result = mysqli_query($conn, $sql);
-    if(!$result) {
+    if (!$result) {
         echo "Error when deleting a product of the orderdetails!";
         echo "<br>" . mysqli_error($conn);
     }
@@ -273,17 +292,93 @@ function create_orders($customerName, $userID, $dateCreated)
 }
 
 // Update quantity products when adding to cart
-function update_quantity_add($productID)
+function update_quantity_add($ordersID, $productID, $quantityPresent)
 {
     global $conn;
     connect_db();
-    $sqlOne = "UPDATE `products` SET `pro_quantity` = (SELECT `pro_quantity` FROM (SELECT * FROM products) as Price WHERE `pro_id` = '$productID') - 1 WHERE `pro_id` = '$productID'";
+    $sqlOne = "UPDATE `products` SET `pro_quantity` = (SELECT `pro_quantity` FROM (SELECT * FROM products) as Price WHERE `pro_id` = '$productID') - 1 WHERE `pro_id` = '$productID';";
+    $sqlTwo = "UPDATE `orderdetails` SET `od_quantity` = '$quantityPresent' + 1 WHERE `pro_id` = $productID and `or_id` = '$ordersID';";
     $result = mysqli_query($conn, $sqlOne);
+    $result = mysqli_query($conn, $sqlTwo);
     if (!$result) {
         print_r("<pre>");
         echo "Error when inserting to orders table!";
         echo "\n" . mysqli_error($conn);
     }
+}
+
+function update_quantity_increase($ordersID, $productID, $quantityUpdate, $count)
+{
+    global $conn;
+    connect_db();
+    $sqlOne = "UPDATE `orderdetails` SET `od_quantity` = '$quantityUpdate' WHERE `pro_id` = '$productID' and `or_id` = '$ordersID';";
+    $sqlTwo = "UPDATE `products` 
+    SET `pro_quantity` = (SELECT `pro_quantity` FROM (SELECT * FROM products) as Price WHERE `pro_id` = '$productID') - $count 
+    WHERE `pro_id` = '$productID';";
+    $result = mysqli_query($conn, $sqlOne);
+    $result = mysqli_query($conn, $sqlTwo);
+    if (!$result) {
+        print_r("<pre>");
+        echo "Error when inserting to orders table!";
+        echo "\n" . mysqli_error($conn);
+    }
+}
+
+function update_quantity_decrease($ordersID, $productID, $quantityUpdate, $count)
+{
+    global $conn;
+    connect_db();
+    $sqlOne = "UPDATE `orderdetails` SET `od_quantity` = '$quantityUpdate' WHERE `pro_id` = '$productID' and `or_id` = '$ordersID';";
+    $sqlTwo = "UPDATE `products` 
+    SET `pro_quantity` = (SELECT `pro_quantity` FROM (SELECT * FROM products) as Price WHERE `pro_id` = '$productID') + $count 
+    WHERE `pro_id` = '$productID';";
+    $result = mysqli_query($conn, $sqlOne);
+    $result = mysqli_query($conn, $sqlTwo);
+    if (!$result) {
+        print_r("<pre>");
+        echo "Error when inserting to orders table!";
+        echo "\n" . mysqli_error($conn);
+    }
+}
+
+// Get the number of orderdetails
+function get_quantity($ordersID, $productID)
+{
+
+    global $conn;
+    connect_db();
+    $sqlOne = "SELECT SUM(od_quantity) as QuantityOld
+    FROM orderdetails 
+    WHERE or_id = $ordersID and pro_id = $productID;";
+    $result = mysqli_query($conn, $sqlOne);
+    if (!$result) {
+        print_r("<pre>");
+        echo "Error when inserting to orders table!";
+        echo "\n" . mysqli_error($conn);
+    } else if ($result) {
+        while ($rows = mysqli_fetch_assoc($result)) {
+            $datas[] = $rows;
+        }
+    }
+    return $datas;
+}
+
+function get_quantity_product($productID)
+{
+    global $conn;
+    connect_db();
+    $sqlOne = "SELECT SUM(pro_quantity) as QuantityProduct FROM products WHERE pro_id = '$productID';";
+    $result = mysqli_query($conn, $sqlOne);
+    if (!$result) {
+        print_r("<pre>");
+        echo "Error when inserting to orders table!";
+        echo "\n" . mysqli_error($conn);
+    } else if ($result) {
+        while ($rows = mysqli_fetch_assoc($result)) {
+            $datas[] = $rows;
+        }
+    }
+    return $datas;
 }
 
 function update_quantity_delete($productID, $quantity)

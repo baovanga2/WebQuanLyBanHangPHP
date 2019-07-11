@@ -36,9 +36,10 @@
       			<!-- End of Topbar -->
       			<!-- Begin Page Content -->
       			<?php
+
       				include("statistical.php");
 					  $statistical = get_all_order();
-					  
+					   
       				disconnect_db();
       			?>
       			
@@ -60,7 +61,11 @@
                                 class="custom-input custom-input-sm form-control form-control-sm" id="getday">                                
                         </label>
                         <label> To <input type="date" name="dataTable_length" aria-controls="dataTable"
-                                class="custom-input custom-input-sm form-control form-control-sm" id="getday1">                                
+                                class="custom-input custom-input-sm form-control form-control-sm" id="getday1" value="<?php echo date('Y-m-d'); ?>">                                
+                        </label>
+                        <br>
+                        <label> Orders In Today <input type="submit" name="dataTable_length" aria-controls="dataTable"
+                                class="custom-input custom-input-sm form-control form-control-sm" id="gettoday" value="From Today">                                
                         </label>
                    </div>
                         <br>
@@ -112,21 +117,36 @@
 				                <tbody id="ajax-clear">
 
 				                	<?php
+                          $i = 1;
+                          $to=0;
+
 				                		foreach ($statistical as $statistical)
 				                		{
+                              $total_price +=  $statistical['or_totalprice'];
+                              $to = $i++;
 				                	?>
 				                	<tr>
 				                		<td><?php echo $statistical['OR_ID']; ?></td>
 				                		<td><?php echo $statistical['CUS_FULLNAME']; ?></td>
 				                		<td><?php echo $statistical['U_FULLNAME']; ?></td>
-										<td><?php
-											/*$date=date_create($statistical['OR_CREATEDDATE']);
-											echo date_format($date,"s:i:H - d/m/Y");*/
-											 echo $statistical['OR_CREATEDDATE'];?></td>
-				                		<td align="right"><?php echo number_format($statistical['or_totalprice']);?> VND</td>
+										        <td><?php echo date($statistical['OR_CREATEDDATE']);?></td>
+				                		<td align="right"><?php echo number_format($statistical['or_totalprice']); ?> VND</td>
 				                	</tr>
+                          
 				                	<?php
+                           
 				                		}
+                            $month = date('m');
+                            echo "<tr>";
+                            echo "<td colspan='4' align='right'> Total Orders in " .$month." - ".$year."</td>";
+                            echo "<td  align='right'>".$to." orders</td>";
+                            echo "</tr>";
+
+                            echo "<tr>";
+                            echo "<td colspan='4' align='right'> Total Price in " .$month." - ".$year."</td>";
+                            echo "<td  align='right'>".number_format($total_price)." VND</td>";
+                            echo "</tr>";
+
 				                	?>
 				                </tbody>
       						</table>
@@ -206,6 +226,7 @@
             }
         });
 	});
+  
 	$( "#getmonth" ).change(function() {
 	  	 
 	  	$.ajax({
@@ -247,6 +268,26 @@
         });
   });
 
+  $( "#gettoday" ).click(function() {
+      today = new Date();
+      var dayday = today.getDate();
+      $.ajax({
+            url : "so-today.php",
+            type : "post",
+            dataType:"text",
+            data : {
+                day : dayday
+            },
+            success : function (result){
+              if (result != "") {
+                  $('#ajax-clear').html(result);
+                }
+                else{
+                  $("#ajax-clear").html("<tr><td colspan='5'><h5 style='text-align:center;'>No data </h5></td></tr>")
+                }
+            }
+        });
+  });
 </script>
 <script>
 function myFunction() {

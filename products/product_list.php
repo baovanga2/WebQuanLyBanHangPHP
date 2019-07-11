@@ -45,7 +45,7 @@
       							<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
       								<thead>
 				                    	<tr>
-					                      	<th>ID</th>
+					                      	<!-- <th>ID</th> -->
 					                      	<th class="w-25">Name</th>
 					                      	<th>Price</th>
 					                      	<th>Quantity</th>
@@ -56,7 +56,7 @@
 				                	</thead>
 					                <tfoot>
 					                    <tr>
-					                      	<th>ID</th>
+					                      	<!-- <th>ID</th> -->
 					                      	<th>Name</th>
 					                      	<th>Price</th>
 					                      	<th>Quantity</th>
@@ -71,9 +71,9 @@
 					                		{
 					                	?>
 					                	<tr>
-					                		<td><?php echo $product['pro_id']; ?></td>
+					                		<!-- <td><?php echo $product['pro_id']; ?></td> -->
 					                		<td><?php echo $product['pro_name']; ?></td>
-					                		<td><?php echo $product['pro_price']; ?></td>
+					                		<td><?php echo number_format($product['pro_price']); ?></td>
 					                		<td><?php echo $product['pro_quantity']; ?></td>
 					                		<td><?php echo $product['ca_name']; ?></td>
 					                		<td><?php echo $product['pr_name']; ?></td>

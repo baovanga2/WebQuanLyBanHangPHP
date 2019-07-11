@@ -106,7 +106,6 @@ global $productsName;
                                                         <img src="./imgs/plus.png">
                                                     </button>
                                                 </td>
-
                                             </tr>
                                         </table>
                                     </div>

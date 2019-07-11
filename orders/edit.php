@@ -1,15 +1,21 @@
 <?php
+// Code moi.
 session_start();
 include_once("dbconfig/db-driver.php");
-// Get data orders ID and Customer name from orders.php
+
+// Show list products
+$listProducts = show_products();
+
+$total = 0;
 
 if (isset($_GET['editOrders'])) {
-    echo "<script>window.location='edit.php';</script>";
+    header('Location: edit.php');
+
     $ordersID = $_GET['ordersID'];
-    setcookie("ordersID", "$ordersID", time() + 7200);
+    setcookie("ordersID", $ordersID, time() + 7200);
+
     $customerName = $_GET['customerName'];
     setcookie("customerName", "$customerName", time() + 7200);
-    $ordersID = $_COOKIE['ordersID'];
 
     $customerAddress = $_GET['customerAddress'];
     setcookie("customerAddress", "$customerAddress", time() + 7200);
@@ -24,124 +30,26 @@ if (isset($_GET['editOrders'])) {
     setcookie("staffCreate", "$staffCreate", time() + 7200);
 }
 
-if (isset($_POST['save'])) {
-    echo "<script>window.location='edit.php';</script>";
-    $customerName       = $_POST['customerName'];
-    $customerBirthday   = $_POST['customerBirthday'];
-    $customerAddress    = $_POST['customerAddress'];
-    $customerEmail      = $_POST['customerEmail'];
-    $customerPhone      = $_POST['customerPhone'];
-    $customerGender     = $_POST['customerGender'];
-    setcookie("customerName", "$customerName", time() + 72000);
-    if (empty($customerName && $customerAddress && $customerPhone)) {
-        echo "<script>alert('Couldn't customer!');</script>";
-    } else {
-        insert_customer($customerName, $customerEmail, $customerAddress, $customerGender, $customerPhone, $customerBirthday);
-    }
+if (isset($_COOKIE['ordersID'])) {
+    $idOrders = $_COOKIE['ordersID'];
+    $customerName = $_COOKIE['customerName'];
 
-    if (isset($_SESSION['u_id'])) {
-
-        $staffID = $_SESSION['u_id'];
-        $dateCreated = date("Y-m-d h:i");
-        create_orders($customerName, $staffID, $dateCreated);
-
-        $getID = get_orders_id($customerName);
-
-        foreach ($getID as $value) {
-            $id = $value['OrdersID'];
-            # code...
-            setcookie("ordersID", "$id", time() + 7200);
-            print_r("<pre>");
-            print_r(var_dump($id));
-        }
-    } else {
-        echo "<script>alert('Please login agian!');</script>";
-    }
-}
-
-// Check customer name and ordersID in cookie 
-if (isset($_COOKIE['customerName'])) {
-    if (isset($_COOKIE['ordersID'])) {
-        $customerName       = $_COOKIE['customerName'];
-        $ordersID           = $_COOKIE['ordersID'];
-        $customerAddress    = $_COOKIE['customerAddress'];
-        $customerPhone      = $_COOKIE['customerPhone'];
-        $createDate         = $_COOKIE['createDate'];
-        $staffCreate        = $_COOKIE['staffCreate'];
-        $listOrderDetails = show_order_details($ordersID);
-    } else {
-        echo "<script>alert('Couldn't order ID!');</script>";
-    }
-} else {
-    echo "<script>alert('Couldn't customer's name!');</script>";
-}
-
-
-// Delete an order
-if (isset($_GET['deleteOrders'])) {
-    // Delete a product in orders
-    $numProduct = get_num_products($ordersID);
-
-    if ($numProduct == '') {
-        delete_orders_empty($ordersID);
-        echo "<script>alert('Deleting the cart successful!');</script>";
-        echo "<script>window.location='management.php';</script>";
-    } else {
-        foreach ($numProduct as $key => $value) {
-            $ordersID   = $value['OrdersID'];
-            $productID  = $value['ProductID'];
-            $quantity   = $value['Quantity'];
-
-            if ($key == '0') {
-                delete_foreign_key();
-            }
-
-            // Deleting each product
-            delete_product_orderdetails($ordersID, $productID);
-            update_quantity_delete($productID, $quantity);
-        }
-
-        // Deleting a orders when it's empty
-        delete_orders_empty($ordersID);
-        echo "<script>alert('Deleting the cart successful!');</script>";
-        echo "<script>window.location='management.php';</script>";
-    }
-    disconnect_db();
-}
-
-// Insert the product into the orderdetails table
-if (isset($_GET['addProduct'])) {
-    $quantity = $_GET['quantity'];
-    if ($quantity == '0') {
-        echo "<script style=\"text/javascript\">";
-        echo "alert('In stock products is not enough')";
-        echo "</script>";
-    } else {
-        echo "<script>window.location='edit.php';</script>";
-        $productID = $_GET['productID'];
-        insert_order_details($productID, $ordersID);
-        // update_quantity_add($productID);
-    }
-}
-
-// Delete existing record in a orderdetails table
-if (isset($_GET['deleteProduct'])) {
-    $quantity = $_GET['quantity'];
-    $productID = $_GET['productID'];
-    delete_product($productID, $ordersID, $quantity);
-    echo "<script>window.location='edit.php';</script>";
+    $listOrderDetails = show_order_details($idOrders);
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <?php include_once("../layout/meta_link.php"); ?>
     <?php include_once("../layout/cssdatatables.php"); ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="./imgs/icon-page.png" />
-    <title>Edit orders | Order Management</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./vendor/js/jquery-3.4.1.js"></script>
+    <script src="./vendor/js/main.js"></script>
     <style>
         input[type=number] {
             width: 80px;
@@ -201,37 +109,28 @@ if (isset($_GET['deleteProduct'])) {
             background-color: #ff6600;
         }
     </style>
+    <title>Edit orders | Order Management</title>
 </head>
 
 <body id="page-top">
-    <!-- Eng modal -->
-    <!-- Page Wrapper -->
+
     <div id="wrapper">
-        <!-- Sidebar -->
+
         <?php include_once("../layout/sidebar.php"); ?>
-        <!-- End sidebar -->
+
         <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Main content -->
+
             <div id="content">
-                <!-- Topbar  -->
+
                 <?php include_once("../layout/topbar.php"); ?>
-                <!-- End of topbar -->
-                <!-- Begin page content -->
-                <?php
-                include_once("dbconfig/db-driver.php");
-                $listProducts = show_products();
-                // $listOrderDetails = ShowOrderDetails($ordersID);
-                disconnect_db();
-                ?>
+
                 <div class="container-fluid">
 
-                    <h1 class="h3 mb-2 text-gray-800"><img src="./imgs/edit.png"><strong> Edit orders </strong></h1>
+                    <h1 class="h3 mb-2 text-gray-800"><img src="./imgs/edit.png"><strong> Edit orders</strong></h1>
 
-                    <!-- List of products -->
                     <div class="card shadow mb-4" style="border-radius: 20px;">
 
                         <div class="card-body">
-
                             <a href="./management.php">
 
                                 <button type="submit" style="border-radius: 30px;" class="btn btn-light" name="back">
@@ -240,162 +139,57 @@ if (isset($_GET['deleteProduct'])) {
 
                             </a>
                             <hr>
-                            <div class="table-responsive">
-                                <!-- <form method="GET"> -->
-                                <table class="table table-hover table-sm" id="dataTable" width="100%" cellspacing="0">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>Action</th>
-                                            <th>ProductCode</th>
-                                            <th>ProductName</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                            <th>Details</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <?php
-                                        foreach ($listProducts as $product) {
-                                            ?>
-                                            <tr>
-                                                <form id="get-id-product" method="GET">
-                                                    <td>
-                                                        <!-- <input type="submit" class="btn btn-outline-primary btn-sm" name="addProduct" value="Add"> -->
-                                                        <button type="submit" class="btn-add" name="addProduct"><i class="fas fa-plus"></i> Add</button>
-                                                        <input type="hidden" name="productID" value="<?php echo $product['ProductCode']; ?>">
-                                                    </td>
-                                                    <td><?php echo $product['ProductCode']; ?></td>
-                                                    <td><?php echo $product['ProductName']; ?></td>
-                                                    <td>
-                                                        <?php echo $product['Quantity']; ?>
-                                                        <input type="hidden" name="quantity" value="<?php echo $product['Quantity']; ?>">
-                                                    </td>
-                                                    <td><?php echo $product['Price']; ?> VND</td>
-                                                    <td><?php echo $product['Details']; ?></td>
-
-                                                </form>
-                                            </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-                                <!-- </form> -->
-                            </div>
+                            <div class="table-responsive" id="load-products"></div>
                         </div>
-
+                        <!-- End of card-body -->
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
                                 <table>
                                     <tr>
-                                        <form action="#" method="GET">
-                                            <th>
-                                                <button type="submit" style="border-radius: 12px;" class="btn btn-delete-order btn-outline-danger btn-sm" name="deleteOrders">
-                                                    <img src="./imgs/trash.png"> Delete order
-                                                </button>
-                                            </th>
-                                        </form>
-                                        <th>&emsp;&emsp;Code Orders: <?php echo "#$ordersID" ?></th>
-                                        <th>&emsp;&emsp;Customer's Name: <?php echo $customerName ?></th>
+                                        <th><button type="button" style="border-radius: 12px;" class="btn btn-delete-order btn-outline-danger btn-sm" name="delete-order" id="btn-delete-order">
+                                                <img src="./imgs/trash.png" alt="delete-order"> Delete Orders
+                                            </button>
+                                        </th>
+                                        <th>
+
+                                        </th>
+                                        <th id="id-code-orders">&emsp;&emsp;Code orders: <?php echo $idOrders; ?></th>
+                                        <th id="id-customer-name">&emsp;&emsp;Customer's name: <?php echo $customerName; ?></th>
+                                        <input type="hidden" id="id-orders" value="<?php echo $idOrders; ?>">
                                     </tr>
                                 </table>
                             </h6>
-                        </div>
+                            <!-- End of h6 -->
 
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-sm" id="dataTable" width="100%" cellspacing="0">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>Action</th>
-                                            <th>NumericalOrder</th>
-                                            <th>ProductName</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                            <th>TotalPrice</th>
-                                            <th>UpdateQuantity</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if (empty($listOrderDetails)) { ?>
-                                            <div class="alert alert-warning">
-                                                <strong>The cart is empty</strong>
-                                            </div>
-                                        <?php
-                                        } else {
-                                            $total=0;
-                                            foreach ($listOrderDetails as $key => $orderDetails) {
-                                                ?>
-                                                <tr>
-                                                    <form method="GET">
-                                                        <td>
-                                                            <!-- <input type="submit" class="btn btn-outline-danger btn-sm" name="delProduct" value="Delete"> -->
-                                                            <button type="submit" class="btn-delete" name="deleteProduct"><i class="fa fa-trash"></i> Delete</button>
-                                                            <input type="hidden" name="productID" value="<?php echo $orderDetails['ProductCode']; ?>">
-                                                        </td>
-                                                        <td><?php echo $key + 1; ?></td>
-                                                        <td><?php echo $orderDetails['ProductName']; ?></td>
-                                                        <td><input value="<?php echo $orderDetails['Quantity']; ?>" type="number" class="btn" name="quantity" min="1" size="10px"></td>
-                                                        <td><?php echo number_format($orderDetails['Price']); ?> VND</td>
-                                                        <td><?php echo number_format($orderDetails['TotalPrice']); ?> VND</td>
-                                                        <td style="float: right;">
-                                                            <button type="submit" class="btn-update" name="updateQuantity">
-                                                                <i style='font-size:14px' class='fas'>&#xf044;</i> Update
-                                                            </button>
-                                                        </td>
-                                                        <?php $total += $orderDetails['TotalPrice']; ?>
-                                                    </form>
-                                                </tr>
-                                            <?php } ?>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-                                <!-- thanh toán tiền -->
-                                <table style="border:0px; float: right; margin-right: 10px">
-                                    <!-- <tr>
-                                        <th colspan="4">Money Received :</th>
-                                        <th colspan="3"><input style="text-align:right; width:100%" class="btn" type="number" name="" value="1,000,000"></th>
-                                    </tr> -->
-                                    <tr>
-                                        <th colspan="4">Total: </th>
-                                        <th style="text-align: right;" colspan="3"><?php echo number_format($total); ?> VND</th>
-                                    </tr>
-                                    <!-- <tr>
-                                        <th colspan="4">Excess Cash: </th>
-                                        <th style="text-align: right;" colspan="3">0 VND</th>
-                                    </tr> -->
-                                    <tr>
-                                        <th colspan="7"> <input style="float: right;" type="submit" class="btn btn-primary" onclick="pay()" name="pay" value="Thanh toán"></th>
-                                        <script>
-                                            function pay() {
-                                                if (window.confirm("Do you want print a the bill ?")) {
-                                                    window.open("inhd.php");
-                                                }
-                                            }
-                                        </script>
-                                    </tr>
-                                </table>
-                            </div>
                         </div>
+                        <!-- End of card-header, py-3 -->
+
+                        <div class="card-body" id="load-items-cart">
+
+                        </div>
+                        <!-- End of card-body 2 -->
+
                     </div>
-                </div>
-                <!-- End of list of products -->
-            </div>
-            <!-- End of main content -->
-            <!-- Footer -->
-            <?php include_once("../layout/footer.php"); ?>
-            <!-- End of footer -->
-        </div>
-        <!-- End of page wrapper -->
-        
-        <?php
-            include_once("../layout/topbutton.php");
-            include_once("../layout/script.php");
-            include_once("../layout/logout.php");
-            include_once("../layout/scriptdatatables.php");
-        ?>
+                    <!-- End of card, shadow, mb-4 -->
 
+                </div>
+                <!-- End of container-fluid -->
+
+            </div>
+            <!-- End of content -->
+
+            <?php include_once("../layout/footer.php"); ?>
+        </div>
+        <!-- End of content-wrapper -->
+
+        <?php
+        include_once("../layout/topbutton.php");
+        include_once("../layout/script.php");
+        include_once("../layout/logout.php");
+        include_once("../layout/scriptdatatables.php");
+        ?>
     </div>
+    <!-- End of wrapper -->
 </body>
 
 </html>

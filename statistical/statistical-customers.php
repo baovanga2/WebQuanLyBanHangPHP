@@ -16,7 +16,7 @@
 	<?php
 		include_once("../layout/cssdatatables.php")
 	?>
-	<title>Statistical Product</title>
+	<title>Statistical Customers</title>
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -38,8 +38,9 @@
 						<!-- Begin Page Content -->
 						<?php
 							include("statistical.php");
-						$statistical = get_products_now();
+						$statistical = get_customers_now();
 							disconnect_db();
+							$ngay = getdate();
 						?>
 						
 						<br>
@@ -54,7 +55,7 @@
 							<?php
 					$sql="SELECT * FROM ORDERS WHERE OR_CREATEDDATE >= CURDATE() AND OR_CREATEDDATE < CURDATE() + INTERVAL 1 DAY";
 							?>
-					<a onclick="myFunction()"  ><i class="fas fa-chevron-down"></i>  Products From Day To Day </a>
+					<a onclick="myFunction()"  ><i class="fas fa-chevron-down"></i>  Customers From Day To Day </a>
 									<div id="myDIV">
 												<label> From <input type="date" name="dataTable_length" aria-controls="dataTable"
 																class="custom-input custom-input-sm form-control form-control-sm" id="getday">                                
@@ -63,7 +64,7 @@
 																class="custom-input custom-input-sm form-control form-control-sm" id="getday1" value="<?php echo date('Y-m-d'); ?>">                                
 												</label>
 												<br>
-						                        <label> Products sold today <input type="submit" name="dataTable_length" aria-controls="dataTable"
+						                        <label> Customers sold today <input type="submit" name="dataTable_length" aria-controls="dataTable"
 						                                class="custom-input custom-input-sm form-control form-control-sm" id="gettoday" value="From Today">                                
 						                        </label>
 									 </div>
@@ -106,9 +107,9 @@
 									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 										<thead>
 														<tr>
-																<th>Product ID</th>
-																<th>Product Name</th>
-																<th>Total Quantity</th>
+																<th>Customers ID</th>
+																<th>Customers Name</th>
+																<th>Total Orders</th>
 																<th>Total Price</th>
 														</tr>
 												</thead>
@@ -120,9 +121,9 @@
 														{
 													?>
 													<tr>
-														<td><?php echo $statistical['PRO_ID']; ?></td>
-														<td><?php echo $statistical['PRO_NAME']; ?></td>
-														<td align="right"><?php echo $statistical['TOTAL']; ?></td>
+														<td><?php echo $statistical['CUS_ID']; ?></td>
+														<td><?php echo $statistical['CUS_FULLNAME']; ?></td>
+														<td align="right"><?php echo $statistical['TOTAL_ORDERS']; ?></td>
 														<td align="right"><?php echo number_format($statistical['TOTAL_PRICE'])."&nbspVNĐ"; ?></td>
 														
 													</tr>
@@ -169,7 +170,7 @@
 		var getday = $('#getday').val();
 		var getday1 = $('#getday1').val();
 			$.ajax({
-						url : "sp-date.php",
+						url : "sc-date.php",
 						type : "post",
 						dataType:"text",
 						data : {
@@ -190,7 +191,7 @@
 		var getday = $('#getday').val();
 		var getday1 = $('#getday1').val();
 			$.ajax({
-						url : "sp-date.php",
+						url : "sc-date.php",
 						type : "post",
 						dataType:"text",
 						data : {
@@ -210,7 +211,7 @@
 	$( "#getyear" ).change(function() {
 			 
 			$.ajax({
-						url : "sp-month-year.php",
+						url : "sc-month-year.php",
 						type : "post",
 						dataType:"text",
 						data : {
@@ -230,7 +231,7 @@
 		$( "#getmonth" ).change(function() {
 			 
 			$.ajax({
-						url : "sp-month-year.php",
+						url : "sc-month-year.php",
 						type : "post",
 						dataType:"text",
 						data : {
@@ -251,7 +252,7 @@ $( "#gettoday" ).click(function() {
       today = new Date();
       var dayday = today.getDate();
       $.ajax({
-            url : "sp-today.php",
+            url : "sc-today.php",
             type : "post",
             dataType:"text",
             data : {

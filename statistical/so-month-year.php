@@ -10,7 +10,7 @@
 		}else{
 			$scpt =  'AND  MONTH(orders.OR_CREATEDDATE) = '.$month;
 		}
-		$sql = "SELECT * FROM orderdetails INNER JOIN orders ON orderdetails.OR_ID = orders.OR_ID INNER JOIN users ON users.U_ID = orders.U_ID INNER JOIN customers ON customers.CUS_ID = orders.CUS_ID WHERE YEAR(orders.OR_CREATEDDATE) = '".$year."' $scpt" ;
+		$sql = "SELECT DISTINCT * FROM orders INNER JOIN customers ON customers.cus_id = orders.cus_id INNER JOIN users ON users.u_id = orders.u_id  WHERE YEAR(orders.OR_CREATEDDATE) = '".$year."' $scpt" ;
 		$query = mysqli_query($conn,$sql);
 		$i = 1;
 				while ($row = mysqli_fetch_assoc($query)) {

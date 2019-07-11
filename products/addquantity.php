@@ -34,10 +34,10 @@
                     <div class="modal-body">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tr>
-                                <td>ID</td>
-                                <td>
-                                    <input type="number" name="id" class="form-control" readonly value="<?php echo $product['pro_id']; ?>">
-                                </td>
+                                <!-- <td>ID</td> -->
+                                <!-- <td> -->
+                                    <input type="hidden" name="id" class="form-control" readonly value="<?php echo $product['pro_id']; ?>">
+                                <!-- </td> -->
                             </tr>
                             <tr>
                                 <td>Name</td>

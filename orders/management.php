@@ -1,4 +1,5 @@
 <?php
+// code moi.
 include_once("../session.php");
 
 // Query database
@@ -18,7 +19,7 @@ disconnect_db();
 		include_once("../layout/cssdatatables.php");
     ?>
     <link rel="shortcut icon" type="image/png" href="./imgs/icon-page.png" />
-    <title>Order Management</title>
+    <title>Orders Management</title>
     <style>
         input[type=number] {
             width: 80px;
@@ -97,7 +98,7 @@ disconnect_db();
 
                 <div class="container-fluid">
 
-                    <h2 class="h3 mb-2 text-gray-800"><img src="./imgs/management.png"> Order Management</h2>
+                    <h2 class="h3 mb-2 text-gray-800"><img src="./imgs/management.png"> Orders Management</h2>
 
                     <!-- Show list of products -->
                     <div class="card shadow mb-4" style="border-radius: 20px;">
@@ -125,6 +126,8 @@ disconnect_db();
                                             <th>CustomerName</th>
                                             <th>CreateDate</th>
                                             <th>StaffCreated</th>
+                                            <th>Quantity</th>
+                                            <th>TotalPrice</th>
                                         </tr>
                                     </thead>
 
@@ -163,6 +166,10 @@ disconnect_db();
                                                 <td><?php echo $order['CreateDate']; ?></td>
 
                                                 <td><?php echo $order['StaffCreated']; ?></td>
+
+                                                <td><?php echo $order['Quantity']; ?></td>
+
+                                                <td><?php echo number_format($order['Total']); ?> VND</td>
 
                                             </tr>
 

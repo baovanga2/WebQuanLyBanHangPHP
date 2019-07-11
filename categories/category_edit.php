@@ -78,10 +78,10 @@
       							<div class="table-responsive">     							
       								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       									<tr>
-				      						<td>ID</td>
-				      						<td>
-				      							<input type="text" class="form-control" readonly="readonly" name="id" value="<?php echo $category['ca_id']; ?>">
-				      						</td>
+				      						<!-- <td>ID</td> -->
+				      						<!-- <td> -->
+				      							<input type="hidden" class="form-control" readonly="readonly" name="id" value="<?php echo $category['ca_id']; ?>">
+				      						<!-- </td> -->
 		      							</tr>
 					      				<tr>
 						      				<td>Name</td>

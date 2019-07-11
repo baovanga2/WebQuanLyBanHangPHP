@@ -80,10 +80,10 @@
       							<div class="table-responsive">     							
       								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       									<tr>
-      										<td>ID</td>
-      										<td>
-      											<input type="text" name="id" class="form-control" readonly value="<?php echo $product['pro_id']; ?>">
-      										</td>
+      										<!-- <td>ID</td> -->
+      										<!-- <td> -->
+      											<input type="hidden" name="id" class="form-control" readonly value="<?php echo $product['pro_id']; ?>">
+      										<!-- </td> -->
       									</tr>
 					      				<tr>
 						      				<td>Name</td>
@@ -97,12 +97,12 @@
 					      						<input type="number" class="form-control" name="price" required value="<?php echo $product['pro_price']; ?>">
 					      					</td>
 					      				</tr>
-					      				<tr>
+					      				<!-- <tr>
 					      					<td>Quantity</td>
 					      					<td>
 					      						<input type="number" class="form-control" name="quantity" required value="<?php echo $product['pro_quantity']; ?>" readonly>
 					      					</td>
-					      				</tr>
+					      				</tr> -->
 					      				<tr>
 					      					<td>Category</td>
 					      					<td>

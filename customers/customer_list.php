@@ -46,7 +46,7 @@
 	      						<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
 	      							<thead>
 				                    	<tr>
-					                      	<th>ID</th>
+					                      	<!-- <th>ID</th> -->
 					                      	<th>Full name</th>
 					                      	<th>Email</th>
 					                      	<th>Phone</th>
@@ -56,7 +56,7 @@
 					                </thead>
 					                <tfoot>
 					                    <tr>
-					                      	<th>ID</th>
+					                      	<!-- <th>ID</th> -->
 					                      	<th>Full name</th>
 					                      	<th>Email</th>
 					                      	<th>Phone</th>
@@ -70,7 +70,7 @@
 					                		{
 					                	?>
 					                	<tr>
-					                		<td><?php echo $customer['cus_id']; ?></td>
+					                		<!-- <td><?php echo $customer['cus_id']; ?></td> -->
 					                		<td><?php echo $customer['cus_fullname']; ?></td>
 					                		<td><?php echo $customer['cus_email']; ?></td>
 					                		<td><?php echo $customer['cus_phone']; ?></td>

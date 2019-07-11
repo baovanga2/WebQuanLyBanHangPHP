@@ -48,7 +48,7 @@
       							<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
       								<thead>
 			                    		<tr>
-				                      		<th>ID</th>
+				                      		<!-- <th>ID</th> -->
 					                      	<th>User is changed</th>
 					                      	<th>User changed</th>
 					                      	<th>Change at</th>
@@ -56,7 +56,7 @@
 					                </thead>
 					                <tfoot>
 					                    <tr>
-					                      	<th>ID</th>
+					                      	<!-- <th>ID</th> -->
 					                      	<th>User is change</th>
 					                      	<th>User changed</th>
 					                      	<th>Change at</th>
@@ -68,7 +68,7 @@
 					                		{
 					                	?>
 					                	<tr>
-					                		<td><?php echo $item['id']; ?></td>
+					                		<!-- <td><?php echo $item['id']; ?></td> -->
 					                		<td><?php echo $item['user_is_changed']; ?></td>
 					                		<td><?php echo $item['user_changed']; ?></td>
 					                		<td><?php echo $item['change_at']; ?></td>

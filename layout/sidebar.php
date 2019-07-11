@@ -69,6 +69,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="../statistical/statistical-orders.php">Statistics orders</a>
                 <a class="collapse-item" href="../statistical/statistical-products.php">Statistics products</a>
+                <a class="collapse-item" href="../statistical/statistical-customers.php">Statistics customers</a>
             </div>
         </div>
     </li>
@@ -89,14 +90,13 @@
                 echo "</div>";
             echo "</li>";
         }
-  ?>
-  <!-- Divider -->
-  <hr class="sidebar-divider d-none d-md-block">
+    ?>
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
 
-  <!-- Sidebar Toggler (Sidebar) -->
-  <div class="text-center d-none d-md-inline">
-    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-  </div>
-
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 </ul>
 <!-- End of Sidebar -->

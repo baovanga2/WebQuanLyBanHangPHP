@@ -96,7 +96,7 @@ disconnect_db();
       <table class="table table-sm" style="width: 100%">
         <thead>
           <tr>
-            <th style="text-align: center;"><b>Product Code</b></th>
+            <th style="text-align: center;"><b>No.</b></th>
             <th style="text-align: center;"><b>Product Name</b></th>
             <th style="text-align: center;"><b>Quantity</b></th>
             <th style="text-align: center;"><b>Price</b></th>
@@ -112,13 +112,14 @@ disconnect_db();
           <?php
           } else {
             foreach ($listOrderDetails as $key => $orderDetails) {
+              $key += 1;
               ?>
               <tr>
-                <td style="text-align: center;"><?php echo $orderDetails['ProductCode'];  ?></td>
-                <td style="text-align: left;"><?php echo $orderDetails['ProductName']; ?></td>
+                <td style="text-align: center;"><?php echo $key;  ?></td>
+                <td style="text-align: center;"><?php echo $orderDetails['ProductName']; ?></td>
                 <td style="text-align: center;"><?php echo $orderDetails['Quantity']; ?></td>
                 <td style="text-align: center;"><?php echo number_format($orderDetails['Price']); ?> VND</td>
-                <td style="text-align: center;"><?php echo number_format($orderDetails['TotalPrice']); ?> VND</td>
+                <td style="text-align: right;"><?php echo number_format($orderDetails['TotalPrice']); ?> VND</td>
                 <?php $total += $orderDetails['TotalPrice']; ?>
               </tr>
 
@@ -133,14 +134,14 @@ disconnect_db();
     </div>
     <div id="details" class="clearfix">
       <div id="project">
-        <div class="arrow">Customer</div>
+        <div class="arrow">Customer's signature:</div>
         <br />
         <br />
         <br />
         <div class="arrow"><b><?php echo $customerName ?></b></div>
       </div>
       <div id="company">
-        <div class="arrow back">Salesman</div>
+        <div class="arrow back">Salesman's signature:</div>
         <br />
         <br />
         <br />

@@ -46,14 +46,14 @@
 	      						<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
 	      							<thead>
 				                    	<tr>
-					                      	<th>ID</th>
+					                      	<!-- <th>ID</th> -->
 					                      	<th>Name</th>
 					                      	<th>Actions</th>
 				                    	</tr>
 					                </thead>
 					                <tfoot>
 					                    <tr>
-					                      	<th>ID</th>
+					                      	<!-- <th>ID</th> -->
 					                      	<th>Name</th>
 					                      	<th>Actions</th>
 				                    	</tr>
@@ -64,7 +64,7 @@
 					                		{
 					                	?>
 					                	<tr>
-					                		<td><?php echo $category['ca_id']; ?></td>
+					                		<!-- <td><?php echo $category['ca_id']; ?></td> -->
 					                		<td><?php echo $category['ca_name']; ?></td>
 					                		<td>
 					                			<form method="post" action="category_delete.php">

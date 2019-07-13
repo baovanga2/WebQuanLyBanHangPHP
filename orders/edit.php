@@ -37,6 +37,41 @@ if (isset($_COOKIE['ordersID'])) {
     $listOrderDetails = show_order_details($idOrders);
 }
 
+if (isset($_POST['save'])) {
+    echo "<script>window.location='edit.php';</script>";
+    $customerName       = $_POST['customerName'];
+    $customerBirthday   = $_POST['customerBirthday'];
+    $customerAddress    = $_POST['customerAddress'];
+    $customerEmail      = $_POST['customerEmail'];
+    $customerPhone      = $_POST['customerPhone'];
+    $customerGender     = $_POST['customerGender'];
+    setcookie("customerName", "$customerName", time() + 72000);
+    if (empty($customerName && $customerAddress && $customerPhone)) {
+        echo "<script>alert('Couldn't customer!');</script>";
+    } else {
+        insert_customer($customerName, $customerEmail, $customerAddress, $customerGender, $customerPhone, $customerBirthday);
+    }
+
+    if (isset($_SESSION['u_id'])) {
+
+        $staffID = $_SESSION['u_id'];
+        $dateCreated = date("Y-m-d h:i");
+        create_orders($customerName, $staffID, $dateCreated);
+
+        $getID = get_orders_id($customerName);
+
+        foreach ($getID as $value) {
+            $id = $value['OrdersID'];
+            # code...
+            setcookie("ordersID", "$id", time() + 7200);
+            print_r("<pre>");
+            print_r(var_dump($id));
+        }
+    } else {
+        echo "<script>alert('Please login agian!');</script>";
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

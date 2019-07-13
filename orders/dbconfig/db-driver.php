@@ -247,6 +247,7 @@ function get_num_products($ordersID)
     WHERE od.`or_id` = '$ordersID' and o.`or_id` = '$ordersID'
     GROUP BY od.`pro_id`, od.`od_quantity`;";
     $result = mysqli_query($conn, $sql);
+    $datas=array();
     if ($result == false) {
         print_r("<pre>");
         echo "Error when do geting quantity a record orders!";

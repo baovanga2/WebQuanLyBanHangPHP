@@ -13,7 +13,7 @@
 		$sql = "SELECT DISTINCT customers.CUS_ID, customers.CUS_FULLNAME, COUNT(customers.CUS_ID) as TOTAL_ORDERS, SUM(orders.or_totalprice) AS TOTAL_PRICE FROM customers, orders WHERE orders.cus_id = customers.cus_id AND YEAR(orders.OR_CREATEDDATE) = '".$year."' $scpt GROUP BY customers.cus_id" ;
 		$query = mysqli_query($conn,$sql);
 		$i = 1;
-		echo $sql;
+		// echo $sql;
 				while ($row = mysqli_fetch_assoc($query)) {
 			echo "<tr>";
 			echo "<td>".$row['CUS_ID']."</td>";
